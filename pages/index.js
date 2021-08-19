@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import firebase from 'firebase/app';
@@ -6,9 +7,12 @@ import styles from '../styles/Index.module.css';
 
 export default function Index() {
   return (
-    <div>
-      <div>
-        <h1>Devcomms</h1>
+    <div className={styles.container}>
+      <div className={styles.center}>
+        <div className={styles.title}>
+          <h1>Devcomms</h1>
+          <Image src="/logo.png" width="48" height="48" alt="logo" />
+        </div>
         <p>Team communication and coordination all in one place.</p>
         <p>Devcomms is an open source, developer-focused team communication and
         coordination tool aiming to simplify and streamline group development.
