@@ -10,6 +10,7 @@ export default function Channels(props) {
   const { group } = props;
 
   const [currChannel, setCurrChannel] = useState(undefined);
+  const [name, setName] = useState('');
 
   // retrieve group channels
   const groupsRef = firebase.firestore().collection('groups');
@@ -17,20 +18,38 @@ export default function Channels(props) {
   const channelsRef = groupRef.collection('channels');
   const [channels] = useCollectionData(channelsRef, { idField: 'id' });
 
+  // creates new channel doc in firebase
+  async function createChannel() {
+    setName('');
+    await channelsRef.add({ name: name });
+  }
+
   // return if loading
   if (!channels) return <div>Loading...</div>;
 
   return (
     <div>
       <div className={styles.channels}>
-      {
-        channels.map(channel =>
-          <button onClick={setCurrChannel(channel.id)} key={channel.id}>
-            {channel.name}
-          </button>
-        )
-      }
+        {
+          channels.map(channel =>
+            <button onClick={setCurrChannel(channel.id)} key={channel.id}>
+              {channel.name}
+            </button>
+          )
+        }
       </div>
+      <form onSubmit={e => {
+        e.preventDefault();
+        createChannel();
+      }}>
+        <input
+          placeholder="name"
+          value={name}
+          onChange={e => setName(e.target.value)}
+          required
+        />
+        <button>New Channel</button>
+      </form>
       {
         currChannel &&
         <Channel group={props.group} channel={currChannel} />
