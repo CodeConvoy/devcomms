@@ -1,9 +1,34 @@
 import { useState } from 'react';
+import firebase from 'firebase/app';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
+  // attempts to sign in user
+  async function signIn() {
+    setError('');
+    // try to sign in with email and password
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+    // handle sign in error
+    } catch (e) {
+      if (e.code === 'auth/invalid-email') {
+        setError('Invalid email address.');
+      } else if (e.code === 'auth/user-not-found') {
+        setError('Unknown email address.');
+      } else if (e.code === 'auth/wrong-password') {
+        setError('Incorrect password. Please try again.');
+      } else if (e.code === 'auth/too-many-requests') {
+        setError('Too many sign in requests. Please try again later.')
+      } else if (e.code === 'auth/weak-password') {
+        setError('Password must be at least 6 characters.')
+      } else {
+        setError(e.message);
+      }
+    }
+  }
 
   return (
     <div>
