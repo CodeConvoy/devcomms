@@ -1,6 +1,10 @@
+import Link from 'next/link';
+
 import { useState } from 'react';
 import firebase from 'firebase/app';
 import getError from '../util/getError.js';
+
+import styles from '../styles/SignUp.module.css';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -45,53 +49,58 @@ export default function SignUp() {
   }
 
   return (
-    <div>
-      <form onSubmit={e => {
-        e.preventDefault();
-        signUp();
-      }}>
-        <h2>Sign Up</h2>
-        <label htmlFor="signup-email">Email</label>
-        <input
-          id="signup-email"
-          placeholder="email"
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          autoComplete="email"
-          required
-        />
-        <label htmlFor="signup-username">Username</label>
-        <input
-          id="signup-username"
-          placeholder="username"
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          autoComplete="username"
-          required
-        />
-        <label htmlFor="signup-password">Password</label>
-        <input
-          id="signup-password"
-          placeholder="password"
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          autoComplete="new-password"
-          required
-        />
-        <input
-          id="signup-confirmpassword"
-          placeholder="confirm password"
-          type="password"
-          value={confirmPassword}
-          onChange={e => setConfirmPassword(e.target.value)}
-          autoComplete="new-password"
-          required
-        />
-        <button>Sign Up</button>
-      </form>
-      {error && <p>{error}</p>}
+    <div className={styles.container}>
+      <div className={styles.center}>
+        <h1>Sign Up</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          signUp();
+        }}>
+          <label htmlFor="signup-email">Email</label>
+          <input
+            id="signup-email"
+            placeholder="email"
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            autoComplete="email"
+            required
+          />
+          <label htmlFor="signup-username">Username</label>
+          <input
+            id="signup-username"
+            placeholder="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+            autoComplete="username"
+            required
+          />
+          <label htmlFor="signup-password">Password</label>
+          <input
+            id="signup-password"
+            placeholder="password"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            autoComplete="new-password"
+            required
+          />
+          <input
+            id="signup-confirmpassword"
+            placeholder="confirm password"
+            type="password"
+            value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            autoComplete="new-password"
+            required
+          />
+          <button>Sign Up</button>
+        </form>
+        {error && <p>{error}</p>}
+        <Link href="/signin">
+          <a>Have an account? Sign in</a>
+        </Link>
+      </div>
     </div>
   );
 }
