@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import firebase from 'firebase/app';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -6,6 +7,41 @@ export default function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
+
+  // attempts to sign up user
+  async function signUp() {
+    setError('');
+    // verify password confirmation
+    if (password !== confirmPassword) {
+      setError("Passwords must match.");
+      return;
+    }
+    // verify username chars
+    if (!/^[A-Za-z0-9_]+$/.test(username)) {
+      setError("Username can only contain alphanumeric characters and underscore.");
+      return;
+    }
+    // verify username length
+    if (username.length < 2 || username.length > 16) {
+      setError("Username must be between 2 and 16 characters.");
+      return;
+    }
+    // create user account
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+    // fail create user
+    } catch (e) {
+      setError(e.code);
+      return;
+    };
+    // create user document
+    const uid = firebase.auth().currentUser.uid;
+    await firebase.firestore().collection('users').doc(uid).set({
+      username: username,
+      uid: uid,
+      joined: new Date()
+    });
+  }
 
   return (
     <div>
