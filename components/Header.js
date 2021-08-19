@@ -7,8 +7,10 @@ import styles from '../styles/Header.module.css';
 
 export default function Header() {
   return (
-    <div>
+    <div className={styles.container}>
+      <Image src="/logo.png" width="48" height="48" alt="logo" />
       <h1>Devcomms</h1>
+      <span className={styles.flexfill} />
       {
         firebase.auth().currentUser ?
         <button onClick={() => firebase.auth().signOut()}>Sign Out</button> :

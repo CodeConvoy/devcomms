@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+  background: #efefef;
+  height: 60px;
+}
+
+.container > h1 {
+  margin: 0 0 0 10px;
+}
+
+.container > div {
+  margin-left: 10px!important;
+}
+
+.flexfill {
+  flex-grow: 1;
+}
+
+.container > a {
+  margin-right: 20px;
+}
