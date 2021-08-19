@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import firebase from 'firebase/app';
+import getError from '../util/getError.js';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ export default function SignUp() {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
     // fail create user
     } catch (e) {
-      setError(e.code);
+      setError(getError(e));
       return;
     };
     // create user document
