@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import styles from '../styles/Channel.module.css';
+import styles from '../styles/components/Channel.module.css';
 
 export default function Channel(props) {
   const { group, channel } = props;

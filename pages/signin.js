@@ -4,7 +4,7 @@ import { useState } from 'react';
 import firebase from 'firebase/app';
 import getError from '../util/getError.js';
 
-import styles from '../styles/SignIn.module.css';
+import styles from '../styles/pages/SignIn.module.css';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');

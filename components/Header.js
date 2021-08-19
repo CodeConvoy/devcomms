@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import firebase from 'firebase/app';
 
-import styles from '../styles/Header.module.css';
+import styles from '../styles/components/Header.module.css';
 
 export default function Header() {
   return (

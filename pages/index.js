@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import firebase from 'firebase/app';
 
-import styles from '../styles/Index.module.css';
+import styles from '../styles/pages/Index.module.css';
 
 export default function Index() {
   return (

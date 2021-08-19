@@ -5,7 +5,7 @@ import firebase from 'firebase/app';
 import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import styles from '../styles/Home.module.css';
+import styles from '../styles/pages/Home.module.css';
 
 export default function Home() {
   const [currGroup, setCurrGroup] = useState(undefined);
