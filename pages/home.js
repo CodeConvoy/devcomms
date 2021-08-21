@@ -2,6 +2,7 @@ import Loading from '../components/Loading.js';
 import Router from 'next/router';
 import Header from '../components/Header.js';
 import Channels from '../components/Channels.js';
+import Modal from '@material-ui/core/Modal';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -12,11 +13,14 @@ import styles from '../styles/pages/Home.module.css';
 export default function Home(props) {
   const [currGroup, setCurrGroup] = useState(undefined);
   const [name, setName] = useState('');
+  const [open, setOpen] = useState(false);
 
   // retrieve user groups
   const uid = firebase.auth().currentUser?.uid;
   const groupsRef = firebase.firestore().collection('groups');
-  const groupsQuery = groupsRef.where('members', 'array-contains', uid ?? 'null');
+  const groupsQuery = groupsRef
+  .where('members', 'array-contains', uid ?? 'null')
+  .orderBy('name');
   const [groups] = useCollectionData(groupsQuery, { idField: 'id' });
 
   // listen for user auth
@@ -42,32 +46,43 @@ export default function Home(props) {
   return (
     <div className={styles.container}>
       <Header />
-      <div>
+      <div className={styles.page}>
         <div className={styles.groups}>
           {
             groups.map(group =>
-              <button onClick={() => setCurrGroup(group.id)} key={group.id}>
+              <button
+                className={currGroup === group.id ? styles.selected : undefined}
+                onClick={() => setCurrGroup(group.id)}
+                key={group.id}
+              >
                 {group.name}
               </button>
             )
           }
+          <button onClick={() => setOpen(true)}>+</button>
         </div>
-        <form onSubmit={e => {
-          e.preventDefault();
-          createGroup();
-        }}>
-          <input
-            placeholder="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            required
-          />
-          <button>New Group</button>
-        </form>
         {
           currGroup &&
           <Channels group={currGroup} />
         }
+        <Modal
+          className={styles.modal}
+          open={open}
+          onClose={() => setOpen(false)}
+        >
+          <form onSubmit={e => {
+            e.preventDefault();
+            createGroup();
+          }}>
+            <input
+              placeholder="name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+            />
+            <button>New Group</button>
+          </form>
+        </Modal>
       </div>
     </div>
   );
