@@ -1,3 +1,4 @@
+import Loading from '../components/Loading.js';
 import Router from 'next/router';
 import Link from 'next/link';
 
@@ -30,7 +31,7 @@ export default function SignIn(props) {
   }, [props.authed]);
 
   // return if loading
-  if (props.authed !== false) return <div>Loading...</div>;
+  if (props.authed !== false) return <Loading />;
 
   return (
     <div className={styles.container}>

@@ -1,3 +1,4 @@
+import Loading from '../components/Loading.js';
 import Router from 'next/router';
 import Header from '../components/Header.js';
 import Channels from '../components/Channels.js';
@@ -24,7 +25,7 @@ export default function Home(props) {
   }, [props.authed]);
 
   // return if loading
-  if (props.authed !== true || !groups) return <div>Loading...</div>;
+  if (props.authed !== true || !groups) return <Loading />;
 
   // creates new group doc in firebase
   async function createGroup() {

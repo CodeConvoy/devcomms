@@ -1,3 +1,4 @@
+import Loading from './Loading.js';
 import Channel from './Channel.js';
 
 import firebase from 'firebase/app';
@@ -25,7 +26,7 @@ export default function Channels(props) {
   }
 
   // return if loading
-  if (!channels) return <div>Loading...</div>;
+  if (!channels) return <Loading />;
 
   return (
     <div>

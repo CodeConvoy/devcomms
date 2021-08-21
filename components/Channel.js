@@ -1,3 +1,5 @@
+import Loading from './Loading.js';
+
 import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
@@ -29,7 +31,7 @@ export default function Channel(props) {
   }
 
   // return if loading
-  if (!messages) return <div>Loading...</div>;
+  if (!messages) return <Loading />;
 
   return (
     <div>
