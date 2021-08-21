@@ -11,18 +11,7 @@ export default function Header() {
       <Image src="/logo.png" width="48" height="48" alt="logo" />
       <h1>Devcomms</h1>
       <span className={styles.flexfill} />
-      {
-        firebase.auth().currentUser ?
-        <button onClick={() => firebase.auth().signOut()}>Sign Out</button> :
-        <>
-          <Link href="/signin">
-            <a>Sign In</a>
-          </Link>
-          <Link href="/signup">
-            <a>Sign Up</a>
-          </Link>
-        </>
-      }
+      <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
     </div>
   );
 }

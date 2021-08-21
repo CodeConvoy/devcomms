@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import firebase from 'firebase/app';
 
 import styles from '../styles/components/Channel.module.css';
 

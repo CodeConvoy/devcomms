@@ -32,7 +32,7 @@ export default function Channels(props) {
       <div className={styles.channels}>
         {
           channels.map(channel =>
-            <button onClick={setCurrChannel(channel.id)} key={channel.id}>
+            <button onClick={() => setCurrChannel(channel.id)} key={channel.id}>
               {channel.name}
             </button>
           )
