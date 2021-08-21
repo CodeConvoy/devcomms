@@ -20,3 +20,7 @@
 .container > a {
   margin-right: 20px;
 }
+
+.container > button {
+  margin-right: 20px;
+}

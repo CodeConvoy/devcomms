@@ -24,3 +24,7 @@
 .title > div {
   margin-left: 10px!important;
 }
+
+.center > a {
+  margin-right: 10px;
+}
