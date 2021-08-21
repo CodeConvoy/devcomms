@@ -1,12 +1,13 @@
+import Router from 'next/router';
 import Link from 'next/link';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import getError from '../util/getError.js';
 
 import styles from '../styles/pages/SignUp.module.css';
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -47,6 +48,14 @@ export default function SignUp() {
       joined: new Date()
     });
   }
+
+  // listen for user auth
+  useEffect(() => {
+    if (props.authed === true) Router.push('/home');
+  }, [props.authed]);
+
+  // return if loading
+  if (props.authed !== false) return <div>Loading...</div>;
 
   return (
     <div className={styles.container}>

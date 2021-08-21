@@ -1,12 +1,13 @@
+import Router from 'next/router';
 import Link from 'next/link';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import getError from '../util/getError.js';
 
 import styles from '../styles/pages/SignIn.module.css';
 
-export default function SignIn() {
+export default function SignIn(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -22,6 +23,14 @@ export default function SignIn() {
       setError(getError(e));
     }
   }
+
+  // listen for user auth
+  useEffect(() => {
+    if (props.authed === true) Router.push('/home');
+  }, [props.authed]);
+
+  // return if loading
+  if (props.authed !== false) return <div>Loading...</div>;
 
   return (
     <div className={styles.container}>

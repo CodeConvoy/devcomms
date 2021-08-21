@@ -1,13 +1,14 @@
+import Router from 'next/router';
 import Header from '../components/Header.js';
 import Channels from '../components/Channels.js';
 
 import firebase from 'firebase/app';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 import styles from '../styles/pages/Home.module.css';
 
-export default function Home() {
+export default function Home(props) {
   const [currGroup, setCurrGroup] = useState(undefined);
   const [name, setName] = useState('');
 
@@ -17,8 +18,13 @@ export default function Home() {
   const groupsQuery = groupsRef.where('members', 'array-contains', uid ?? 'null');
   const [groups] = useCollectionData(groupsQuery, { idField: 'id' });
 
+  // listen for user auth
+  useEffect(() => {
+    if (props.authed === false) Router.push('/signin');
+  }, [props.authed]);
+
   // return if loading
-  if (!groups) return <div>Loading...</div>;
+  if (props.authed !== true || !groups) return <div>Loading...</div>;
 
   // creates new group doc in firebase
   async function createGroup() {
