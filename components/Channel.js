@@ -17,7 +17,8 @@ export default function Channel(props) {
   const channelsRef = groupRef.collection('channels')
   const channelRef = channelsRef.doc(channel);
   const messagesRef = channelRef.collection('messages');
-  const [messages] = useCollectionData(messagesRef, { idField: 'id' });
+  const messagesQuery = messagesRef.orderBy('sent');
+  const [messages] = useCollectionData(messagesQuery, { idField: 'id' });
 
   // creates new message doc in firebase
   async function sendMessage() {
@@ -34,7 +35,7 @@ export default function Channel(props) {
   if (!messages) return <Loading />;
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.messages}>
         {
           messages.map(message =>

@@ -23,7 +23,7 @@ export default function Index() {
         to coordinate across several apps.</p>
         {
           firebase.auth().currentUser ?
-          <button onClick={() => firebase.auth().signOut()}>Sign Out</button> :
+          <Link href="/home">Home</Link> :
           <>
             <Link href="/signin">
               <a>Sign In</a>
