@@ -39,8 +39,9 @@ export default function Channels(props) {
             <button
               className={currChannel === channel.id ? styles.selected : undefined}
               onClick={() => setCurrChannel(channel.id)}
-              key={channel.id}>
-              {channel.name}
+              key={channel.id}
+            >
+              <div>{channel.name}</div>
             </button>
           )
         }
