@@ -55,7 +55,7 @@ export default function Home(props) {
                 onClick={() => setCurrGroup(group.id)}
                 key={group.id}
               >
-                {group.name}
+                <div>{group.name}</div>
               </button>
             )
           }
