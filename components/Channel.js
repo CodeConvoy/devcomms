@@ -1,3 +1,4 @@
+import Message from './Message.js';
 import Loading from './Loading.js';
 
 import { useState } from 'react';
@@ -39,7 +40,7 @@ export default function Channel(props) {
       <div className={styles.messages}>
         {
           messages.map(message =>
-            <p key={message.id}>{message.text}</p>
+            <Message {...message} key={message.id} />
           )
         }
       </div>
