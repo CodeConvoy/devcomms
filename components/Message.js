@@ -2,8 +2,9 @@ import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
+import getUsername from '../util/getUsername.js';
 
 import styles from '../styles/components/Message.module.css';
 
@@ -19,6 +20,7 @@ export default function Message(props) {
   const { text, sender, sent, id } = props.message;
 
   const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState('');
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -41,12 +43,22 @@ export default function Message(props) {
     else return dateTime.toLocaleDateString(); // past
   }
 
+  // get sender username
+  useEffect(async () => {
+    if (!showHeader) return;
+    const name = await getUsername(sender);
+    setUsername(name);
+  }, [sender])
+
   return (
     <div className={styles.container}>
       {
         showHeader &&
         <>
-          <span><b>@{sender} {getDateTimeString(sent.toDate())}</b></span>
+          <span>
+            {username && <span>@{username} </span>}
+            {getDateTimeString(sent.toDate())}
+          </span>
           <br />
         </>
       }
