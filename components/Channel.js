@@ -1,5 +1,8 @@
+import Modal from '@material-ui/core/Modal';
 import Message from './Message.js';
 import Loading from './Loading.js';
+import PublishIcon from '@material-ui/icons/Publish';
+import SendIcon from '@material-ui/icons/Send';
 
 import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -11,6 +14,9 @@ export default function Channel(props) {
   const { groupRef, channel } = props;
 
   const [text, setText] = useState('');
+  const [file, setFile] = useState(undefined);
+
+  const uid = firebase.auth().currentUser.uid;
 
   // retrieve channel messages
   const channelsRef = groupRef.collection('channels')
@@ -50,6 +56,15 @@ export default function Channel(props) {
         e.preventDefault();
         sendMessage();
       }}>
+        <label htmlFor="fileinput" className={styles.filebutton}>
+          <PublishIcon />
+        </label>
+        <input
+          type="file"
+          id="fileinput"
+          onChange={e => setFile(e.target.files[0])}
+          className={styles.fileinput}
+        />
         <input
           value={text}
           onChange={e => setText(e.target.value)}
@@ -57,6 +72,17 @@ export default function Channel(props) {
         />
         <button>Send</button>
       </form>
+      <Modal
+        open={!!file}
+        onClose={() => setFile(undefined)}
+      >
+        <div className="modal">
+          <p>{file?.name}</p>
+          <button onClick={sendFile}>
+            <SendIcon />
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
