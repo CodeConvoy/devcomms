@@ -34,3 +34,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.filler {
+  flex-grow: 1;
+}

@@ -66,6 +66,7 @@ export default function Home(props) {
           currGroup &&
           <Channels group={currGroup} />
         }
+        <span className={styles.filler} />
         <Widgets />
         <Modal
           open={open}

@@ -4,7 +4,7 @@ import Modal from '@material-ui/core/Modal';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '../styles/components/Channels.module.css';
 
@@ -28,6 +28,11 @@ export default function Channels(props) {
     await channelsRef.add({ name: name });
   }
 
+  // clear current channel when group changes
+  useEffect(() => {
+    setCurrChannel(undefined);
+  }, [group]);
+
   // return if loading
   if (!channels) return <Loading />;
 
@@ -49,7 +54,7 @@ export default function Channels(props) {
       </div>
       {
         currChannel &&
-        <Channel group={props.group} channel={currChannel} />
+        <Channel groupRef={groupRef} channel={currChannel} />
       }
       <Modal
         open={open}

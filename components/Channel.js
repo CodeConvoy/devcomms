@@ -8,13 +8,11 @@ import firebase from 'firebase/app';
 import styles from '../styles/components/Channel.module.css';
 
 export default function Channel(props) {
-  const { group, channel } = props;
+  const { groupRef, channel } = props;
 
   const [text, setText] = useState('');
 
   // retrieve channel messages
-  const groupsRef = firebase.firestore().collection('groups');
-  const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels')
   const channelRef = channelsRef.doc(channel);
   const messagesRef = channelRef.collection('messages');
@@ -40,7 +38,11 @@ export default function Channel(props) {
       <div className={styles.messages}>
         {
           messages.map(message =>
-            <Message {...message} key={message.id} />
+            <Message
+              message={message}
+              channelRef={channelRef}
+              key={message.id}
+            />
           )
         }
       </div>
