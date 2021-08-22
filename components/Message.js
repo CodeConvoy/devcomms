@@ -1,3 +1,8 @@
+import Modal from '@material-ui/core/Modal';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+import { useState } from 'react';
 import firebase from 'firebase/app';
 
 import styles from '../styles/Message.module.css';
@@ -5,6 +10,8 @@ import styles from '../styles/Message.module.css';
 export default function Message(props) {
   const { channelRef } = props;
   const { text, sender, id } = props.message;
+
+  const [open, setOpen] = useState(false);
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -14,7 +21,7 @@ export default function Message(props) {
 
   // deletes message
   async function deleteMessage() {
-    await messageRef.delete();
+    if (window.confirm('Really delete message?')) await messageRef.delete();
   }
 
   return (
@@ -22,8 +29,21 @@ export default function Message(props) {
       <span>{text}</span>
       {
         uid === sender &&
-        <button onClick={deleteMessage}>Delete</button>
+        <button onClick={() => setOpen(true)}>
+          <EditIcon />
+        </button>
       }
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <div>
+          <h1>Editing Message</h1>
+          <button onClick={deleteMessage}>
+            <DeleteIcon />
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
