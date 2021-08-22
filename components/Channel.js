@@ -89,11 +89,14 @@ export default function Channel(props) {
           className={styles.fileinput}
         />
         <input
+          className={styles.textinput}
           value={text}
           onChange={e => setText(e.target.value)}
           required
         />
-        <button>Send</button>
+        <button className={styles.sendbutton}>
+          <SendIcon />
+        </button>
       </form>
       <Modal
         open={!!file}

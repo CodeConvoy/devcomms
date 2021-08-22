@@ -1,3 +1,54 @@
 .container {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.messages {
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+.container > form {
+  display: flex;
+  min-height: 32px;
+  height: 32px;
+  margin-top: 10px;
+}
+
+.filebutton {
+  cursor: pointer;
+  background: #efefef;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #555;
+  border-radius: 3px;
+}
+
+.filebutton:hover {
+  background: #ddd;
+}
+
+.fileinput {
+  display: none;
+}
+
+.textinput {
+  flex-grow: 1;
+}
+
+.sendbutton {
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #555;
+  border-radius: 3px;
+}
+
+.sendbutton:hover {
+  background: #ddd;
 }
