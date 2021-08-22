@@ -4,9 +4,10 @@
 }
 
 .groups {
+  min-width: 60px;
+  width: 60px;
   display: flex;
   flex-direction: column;
-  width: 60px;
   overflow: scroll;
 }
 

@@ -1,0 +1,9 @@
+.container {
+  min-width: 360px;
+}
+
+@media (max-width: 767px) {
+  .container {
+    display: none;
+  }
+}

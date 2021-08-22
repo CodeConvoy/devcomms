@@ -1,7 +1,8 @@
-import Loading from '../components/Loading.js';
 import Router from 'next/router';
+import Loading from '../components/Loading.js';
 import Header from '../components/Header.js';
 import Channels from '../components/Channels.js';
+import Widgets from '../components/Widgets.js';
 import Modal from '@material-ui/core/Modal';
 
 import firebase from 'firebase/app';
@@ -65,6 +66,7 @@ export default function Home(props) {
           currGroup &&
           <Channels group={currGroup} />
         }
+        <Widgets />
         <Modal
           open={open}
           onClose={() => setOpen(false)}
