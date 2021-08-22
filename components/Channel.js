@@ -11,7 +11,7 @@ import firebase from 'firebase/app';
 import styles from '../styles/components/Channel.module.css';
 
 export default function Channel(props) {
-  const { groupRef, channel } = props;
+  const { group, channel } = props;
 
   const [text, setText] = useState('');
   const [file, setFile] = useState(undefined);
@@ -19,6 +19,8 @@ export default function Channel(props) {
   const uid = firebase.auth().currentUser.uid;
 
   // retrieve channel messages
+  const groupsRef = firebase.firestore().collection('groups');
+  const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels')
   const channelRef = channelsRef.doc(channel);
   const messagesRef = channelRef.collection('messages');
@@ -28,12 +30,33 @@ export default function Channel(props) {
   // creates new message doc in firebase
   async function sendMessage() {
     setText('');
-    const uid = firebase.auth().currentUser.uid;
     await messagesRef.add({
       text: text,
+      type: 'text',
       sender: uid,
       sent: new Date()
     });
+  }
+
+  // sends file as message
+  async function sendFile() {
+    // if no file, return
+    if (!file) return;
+    // put file in storage and get url
+    const filePath = `groups/${group}/${channel}/${file.name}`;
+    const fileRef = firebase.storage().ref(filePath);
+    const snapshot = await fileRef.put(file);
+    const url = await snapshot.ref.getDownloadURL();
+    // add file message
+    await messagesRef.add({
+      url: url,
+      type: file.type.startsWith('image/') ? 'image' : 'file',
+      filename: file.name,
+      sender: uid,
+      sent: new Date()
+    });
+    // clear file
+    setFile(undefined);
   }
 
   // return if loading
