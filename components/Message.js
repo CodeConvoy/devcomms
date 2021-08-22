@@ -25,12 +25,12 @@ export default function Message(props) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <span>{text}</span>
       {
         uid === sender &&
         <button onClick={() => setOpen(true)}>
-          <EditIcon />
+          <EditIcon fontSize="small" />
         </button>
       }
       <Modal

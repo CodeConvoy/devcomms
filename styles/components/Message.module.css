@@ -1,0 +1,29 @@
+.container {
+  position: relative;
+}
+
+.container > button {
+  border-radius: 5px;
+  width: 22px;
+  height: 18px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  background: transparent;
+  border: 0;
+}
+
+.container:hover {
+  background: #efefef;
+}
+
+.container:hover > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container > button:hover {
+  background: #bbb;
+}
