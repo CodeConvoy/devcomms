@@ -7,6 +7,13 @@ import firebase from 'firebase/app';
 
 import styles from '../styles/components/Message.module.css';
 
+const now = new Date();
+const nowDay = now.getDate();
+const nowMonth = now.getMonth();
+const nowYear = now.getFullYear();
+const today = new Date(nowYear, nowMonth, nowDay).setHours(0, 0, 0, 0);
+const yesterday = new Date(nowYear, nowMonth, nowDay - 1).setHours(0, 0, 0, 0);
+
 export default function Message(props) {
   const { showHeader, channelRef } = props;
   const { text, sender, sent, id } = props.message;
@@ -24,12 +31,22 @@ export default function Message(props) {
     if (window.confirm('Really delete message?')) await messageRef.delete();
   }
 
+  // returns a datetime string for given datetime
+  function getDateTimeString(dateTime) {
+    // separate time and date
+    const time = dateTime.toLocaleTimeString([], { timeStyle: 'short' });
+    const date = dateTime.setHours(0, 0, 0, 0);
+    if (date === today) return `${time} today`; // today
+    else if (date === yesterday) return `${time} yesterday`; // yesterday
+    else return dateTime.toLocaleDateString(); // past
+  }
+
   return (
     <div className={styles.container}>
       {
         showHeader &&
         <>
-          <span><b>@{sender}</b></span>
+          <span><b>@{sender} {getDateTimeString(sent.toDate())}</b></span>
           <br />
         </>
       }
