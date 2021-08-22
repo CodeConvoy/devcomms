@@ -5,7 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useState } from 'react';
 import firebase from 'firebase/app';
 
-import styles from '../styles/Message.module.css';
+import styles from '../styles/components/Message.module.css';
 
 export default function Message(props) {
   const { channelRef } = props;
