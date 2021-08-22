@@ -10,6 +10,9 @@ import firebase from 'firebase/app';
 
 import styles from '../styles/components/Channel.module.css';
 
+// delay in seconds before a new header
+const headerOffset = 60 * 5;
+
 export default function Channel(props) {
   const { group, channel } = props;
 
@@ -29,6 +32,8 @@ export default function Channel(props) {
 
   // creates new message doc in firebase
   async function sendMessage() {
+    // return if empty or whitespace
+    if (!text.trim()) return;
     setText('');
     await messagesRef.add({
       text: text,
@@ -66,8 +71,13 @@ export default function Channel(props) {
     <div className={styles.container}>
       <div className={styles.messages}>
         {
-          messages.map(message =>
+          messages.map((message, i) =>
             <Message
+              showHeader={
+                i === 0 ||
+                message.sender !== messages[i - 1].sender ||
+                message.sent - messages[i - 1].sent > headerOffset
+              }
               message={message}
               channelRef={channelRef}
               key={message.id}

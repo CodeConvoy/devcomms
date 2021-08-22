@@ -8,8 +8,8 @@ import firebase from 'firebase/app';
 import styles from '../styles/components/Message.module.css';
 
 export default function Message(props) {
-  const { channelRef } = props;
-  const { text, sender, id } = props.message;
+  const { showHeader, channelRef } = props;
+  const { text, sender, sent, id } = props.message;
 
   const [open, setOpen] = useState(false);
 
@@ -26,6 +26,13 @@ export default function Message(props) {
 
   return (
     <div className={styles.container}>
+      {
+        showHeader &&
+        <>
+          <span><b>@{sender}</b></span>
+          <br />
+        </>
+      }
       <span>{text}</span>
       {
         uid === sender &&
