@@ -53,8 +53,9 @@ export default function Channels(props) {
         <button onClick={() => setOpen(true)}>+</button>
       </div>
       {
-        currChannel &&
-        <Channel groupRef={groupRef} channel={currChannel} />
+        currChannel ?
+        <Channel group={group} channel={currChannel} /> :
+        <span className={styles.filler} />
       }
       <Modal
         open={open}

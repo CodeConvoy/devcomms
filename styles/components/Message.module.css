@@ -1,11 +1,13 @@
 .container {
   position: relative;
+  padding: 2px;
+  border-radius: 5px;
 }
 
 .container > button {
   border-radius: 5px;
   width: 22px;
-  height: 18px;
+  height: 22px;
   position: absolute;
   right: 0;
   top: 0;
@@ -25,5 +27,5 @@
 }
 
 .container > button:hover {
-  background: #bbb;
+  background: #ddd;
 }

@@ -63,10 +63,10 @@ export default function Home(props) {
           <button onClick={() => setOpen(true)}>+</button>
         </div>
         {
-          currGroup &&
-          <Channels group={currGroup} />
+          currGroup ?
+          <Channels group={currGroup} /> :
+          <span className={styles.filler} />
         }
-        <span className={styles.filler} />
         <Widgets />
         <Modal
           open={open}
