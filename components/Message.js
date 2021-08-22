@@ -37,7 +37,7 @@ export default function Message(props) {
         open={open}
         onClose={() => setOpen(false)}
       >
-        <div>
+        <div className="modal">
           <h1>Editing Message</h1>
           <button onClick={deleteMessage}>
             <DeleteIcon />

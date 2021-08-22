@@ -52,22 +52,24 @@ export default function Channels(props) {
         <Channel group={props.group} channel={currChannel} />
       }
       <Modal
-        className={styles.modal}
         open={open}
         onClose={() => setOpen(false)}
       >
-        <form onSubmit={e => {
-          e.preventDefault();
-          createChannel();
-        }}>
-          <input
-            placeholder="name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            required
-          />
-          <button>New Channel</button>
-        </form>
+        <div className="modal">
+          <h1>New Channel</h1>
+          <form onSubmit={e => {
+            e.preventDefault();
+            createChannel();
+          }}>
+            <input
+              placeholder="name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+            />
+            <button>Create</button>
+          </form>
+        </div>
       </Modal>
     </>
   );

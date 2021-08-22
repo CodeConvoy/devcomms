@@ -66,22 +66,24 @@ export default function Home(props) {
           <Channels group={currGroup} />
         }
         <Modal
-          className={styles.modal}
           open={open}
           onClose={() => setOpen(false)}
         >
-          <form onSubmit={e => {
-            e.preventDefault();
-            createGroup();
-          }}>
-            <input
-              placeholder="name"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              required
-            />
-            <button>New Group</button>
-          </form>
+          <div className="modal">
+            <h1>New Group</h1>
+            <form onSubmit={e => {
+              e.preventDefault();
+              createGroup();
+            }}>
+              <input
+                placeholder="name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required
+              />
+              <button>Create</button>
+            </form>
+          </div>
         </Modal>
       </div>
     </div>
