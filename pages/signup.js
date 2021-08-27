@@ -9,6 +9,8 @@ import getError from '../util/getError.js';
 import styles from '../styles/pages/SignUp.module.css';
 
 export default function SignUp(props) {
+  const { currentUser } = props;
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -52,11 +54,11 @@ export default function SignUp(props) {
 
   // listen for user auth
   useEffect(() => {
-    if (props.authed === true) Router.push('/home');
-  }, [props.authed]);
+    if (currentUser) Router.push('/home');
+  }, [currentUser]);
 
   // return if loading
-  if (props.authed !== false) return <Loading />;
+  if (currentUser) return <Loading />;
 
   return (
     <div className={styles.container}>

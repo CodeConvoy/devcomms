@@ -12,6 +12,8 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import styles from '../styles/pages/Home.module.css';
 
 export default function Home(props) {
+  const { currentUser } = props;
+
   const [currGroup, setCurrGroup] = useState(undefined);
   const [name, setName] = useState('');
   const [open, setOpen] = useState(false);
@@ -26,11 +28,11 @@ export default function Home(props) {
 
   // listen for user auth
   useEffect(() => {
-    if (props.authed === false) Router.push('/signin');
-  }, [props.authed]);
+    if (!currentUser) Router.push('/signin');
+  }, [currentUser]);
 
   // return if loading
-  if (props.authed !== true || !groups) return <Loading />;
+  if (!currentUser || !groups) return <Loading />;
 
   // creates new group doc in firebase
   async function createGroup() {
