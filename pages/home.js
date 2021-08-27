@@ -14,9 +14,13 @@ import styles from '../styles/pages/Home.module.css';
 export default function Home(props) {
   const { currentUser } = props;
 
-  const [currGroup, setCurrGroup] = useState(undefined);
   const [name, setName] = useState('');
   const [open, setOpen] = useState(false);
+
+  const [currGroup, setCurrGroup] = useState(undefined);
+
+  const [widgetGroup, setWidgetGroup] = useState(undefined);
+  const [widgetChannel, setWidgetChannel] = useState(undefined);
 
   // retrieve user groups
   const uid = firebase.auth().currentUser?.uid;
@@ -33,6 +37,19 @@ export default function Home(props) {
 
   // return if loading
   if (!currentUser || !groups) return <Loading />;
+
+  // opens widgets panel
+  function openWidgets(group, channel) {
+    // if already open, toggle to closed
+    if (group === widgetGroup && channel === widgetChannel) {
+      setWidgetGroup(undefined);
+      setWidgetChannel(undefined);
+    // if not open, toggle to open
+    } else {
+      setWidgetGroup(group);
+      setWidgetChannel(channel);
+    }
+  }
 
   // creates new group doc in firebase
   async function createGroup() {
@@ -66,10 +83,16 @@ export default function Home(props) {
         </div>
         {
           currGroup ?
-          <Channels group={currGroup} /> :
+          <Channels
+            group={currGroup}
+            openWidgets={openWidgets}
+          /> :
           <span className={styles.filler} />
         }
-        <Widgets />
+        {
+          (widgetGroup && widgetChannel) &&
+          <Widgets group={widgetGroup} channel={widgetChannel} />
+        }
         <Modal
           open={open}
           onClose={() => setOpen(false)}
