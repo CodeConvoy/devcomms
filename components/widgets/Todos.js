@@ -1,5 +1,6 @@
 import Todo from './Todo.js';
 import Loading from '../Loading.js';
+import Modal from '@material-ui/core/Modal';
 
 import firebase from 'firebase/app';
 import { useState } from 'react';
@@ -27,6 +28,49 @@ export default function Todos(props) {
           <Todo {...todo} todosRef={todosRef} key={todo.id} />
         )
       }
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+      >
+        <div className="modal">
+          <form onSubmit={createTodo}>
+            <h1>New Todo</h1>
+            <input
+              value={title}
+              onChange={e => setTitle(e.target.value)}
+              placeholder="title"
+              required
+            />
+            <input
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              placeholder="description"
+              required
+            />
+            <label htmlFor="todos-isdue">Due date?</label>
+            <input
+              id="todos-isdue"
+              type="checkbox"
+              checked={isDue}
+              onChange={e => {
+                const newIsDue = e.target.checked;
+                setIsDue(newIsDue);
+                setDue(newIsDue ? new Date() : null);
+              }}
+            />
+            {
+              isDue &&
+              <input
+                type="date"
+                value={due}
+                onChange={e => setDue(e.target.value)}
+                required
+              />
+            }
+            <button>Create</button>
+          </form>
+        </div>
+      </Modal>
     </div>
   );
 }
