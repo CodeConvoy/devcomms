@@ -1,5 +1,5 @@
 import styles from '../styles/components/Sketch.module.css';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // width and height of canvas
 const width = 256;
@@ -7,8 +7,16 @@ const height = 256;
 
 let canvas, ctx;
 
+let sketching = false;
+
+let prevX, prevY;
+let currX, currY;
+
 export default function Sketch(props) {
   const { group, channel } = props;
+
+  const [lineColor, setLineColor] = useState('black');
+  const [lineWidth, setLineWidth] = useState(2);
 
   const canvasRef = useRef();
 
@@ -19,6 +27,25 @@ export default function Sketch(props) {
   const channelRef = channelsRef.doc(channel);
   const widgetsRef = channelRef.colection('widgets');
   const sketchRef = widgetsRef.doc('sketch');
+
+  // sketches canvas with given mouse event data
+  function sketch(e) {
+    // get previous and current mouse positions
+    prevX = currX;
+    prevY = currY;
+    currX = e.clientX - canvas.offsetLeft + window.scrollX;
+    currY = e.clientY - canvas.offsetTop + window.scrollY;
+    // return if no previous data
+    if (prevX === undefined || prevY === undefined) return;
+    // draw stroke
+    ctx.beginPath();
+    ctx.moveTo(prevX, prevY);
+    ctx.lineTo(currX, currY);
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = lineWidth;
+    ctx.stroke();
+    ctx.closePath();
+  }
 
   // retrieve canvas context on start
   useEffect(() => {
@@ -32,6 +59,10 @@ export default function Sketch(props) {
         ref={canvasRef}
         width={width}
         height={height}
+        onMouseDown={e => { sketching = true; sketch(e); }}
+        onMouseMove={e => { if (sketching) sketch(e); }}
+        onMouseUp={e => { sketching = false; }}
+        onMouseLeave={e => { sketching = false; }}
       />
     </div>
   );
