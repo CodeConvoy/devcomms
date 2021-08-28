@@ -42,11 +42,13 @@ export default function Todos(props) {
 
   return (
     <div>
-      {
-        todos.map(todo =>
-          <Todo {...todo} todosRef={todosRef} key={todo.id} />
-        )
-      }
+      <div className={styles.todos}>
+        {
+          todos.map(todo =>
+            <Todo {...todo} todosRef={todosRef} key={todo.id} />
+          )
+        }
+      </div>
       <button onClick={() => setModalOpen(true)}>New Todo</button>
       <Modal
         open={modalOpen}

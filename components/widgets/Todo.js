@@ -19,7 +19,7 @@ export default function Todo(props) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>{title}</h1>
       <p>{description}</p>
       {due && <p>Due {new Date(due).toLocaleDateString()}</p>}
