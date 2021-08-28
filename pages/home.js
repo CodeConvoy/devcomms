@@ -78,7 +78,7 @@ export default function Home(props) {
               </button>
             )
           }
-          <button onClick={() => setOpen(true)}>+</button>
+          <button onClick={() => setModalOpen(true)}>+</button>
         </div>
         {
           currGroup ?

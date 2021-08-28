@@ -59,7 +59,7 @@ export default function Message(props) {
       <span>{text}</span>
       {
         uid === sender &&
-        <button onClick={() => setOpen(true)}>
+        <button onClick={() => setModalOpen(true)}>
           <EditIcon fontSize="small" />
         </button>
       }

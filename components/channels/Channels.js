@@ -54,7 +54,7 @@ export default function Channels(props) {
             </div>
           )
         }
-        <button onClick={() => setOpen(true)}>+</button>
+        <button onClick={() => setModalOpen(true)}>+</button>
       </div>
       {
         currChannel ?

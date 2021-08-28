@@ -22,8 +22,8 @@ export default function Todo(props) {
     <div>
       <h1>{title}</h1>
       <p>{description}</p>
-      {due && <p>Due {due.toDate().toLocaleDateString()}}</p>}
-      <button onClick={() => setOpen(true)}>
+      {due && <p>Due {new Date(due).toLocaleDateString()}</p>}
+      <button onClick={() => setModalOpen(true)}>
         <EditIcon fontSize="small" />
       </button>
       <Modal

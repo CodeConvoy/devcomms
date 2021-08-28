@@ -14,13 +14,14 @@
   min-height: 60px;
   border: 0;
   background: #ddd;
+  cursor: pointer;
 }
 
 .channels > div.selected {
   background: #efefef;
 }
 
-.channels > div > button:hover {
+.channels > div:hover {
   background: #efefef;
 }
 
