@@ -1,3 +1,5 @@
+import GetAppIcon from '@material-ui/icons/GetApp';
+
 import styles from '../styles/components/Sketch.module.css';
 import { useEffect, useRef, useState } from 'react';
 
@@ -47,6 +49,19 @@ export default function Sketch(props) {
     ctx.closePath();
   }
 
+  // downloads canvas as a png
+  function downloadCanvas() {
+    // get canvas object url
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      // download from link element
+      const link = document.createElement('a');
+      link.download = 'sketch.png';
+      link.href = url;
+      link.click();
+    });
+  }
+
   // retrieve canvas context on start
   useEffect(() => {
     canvas = canvasRef.current;
@@ -64,6 +79,9 @@ export default function Sketch(props) {
         onMouseUp={e => { sketching = false; }}
         onMouseLeave={e => { sketching = false; }}
       />
+      <button onClick={downloadCanvas}>
+        <GetAppIcon />
+      </button>
     </div>
   );
 }
