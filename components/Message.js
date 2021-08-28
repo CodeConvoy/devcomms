@@ -1,10 +1,10 @@
+import Link from 'next/link';
 import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
-import getUsername from '../util/getUsername.js';
 
 import styles from '../styles/components/Message.module.css';
 
@@ -17,10 +17,9 @@ const yesterday = new Date(nowYear, nowMonth, nowDay - 1).setHours(0, 0, 0, 0);
 
 export default function Message(props) {
   const { showHeader, channelRef } = props;
-  const { text, sender, sent, id } = props.message;
+  const { text, sender, username, sent, id } = props.message;
 
   const [open, setOpen] = useState(false);
-  const [username, setUsername] = useState('');
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -43,21 +42,16 @@ export default function Message(props) {
     else return dateTime.toLocaleDateString(); // past
   }
 
-  // get sender username
-  useEffect(async () => {
-    if (!showHeader) return;
-    const name = await getUsername(sender);
-    setUsername(name);
-  }, [sender])
-
   return (
     <div className={styles.container}>
       {
         showHeader &&
         <>
           <span>
-            {username && <span>@{username} </span>}
-            {getDateTimeString(sent.toDate())}
+            <Link href={`/users/${username}`}>
+              <a>@{username}</a>
+            </Link>
+            {' '}<b>{getDateTimeString(sent.toDate())}</b>
           </span>
           <br />
         </>
