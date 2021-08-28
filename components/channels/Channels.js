@@ -13,7 +13,7 @@ export default function Channels(props) {
 
   const [currChannel, setCurrChannel] = useState(undefined);
   const [name, setName] = useState('');
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // retrieve group channels
   const groupsRef = firebase.firestore().collection('groups');
@@ -62,8 +62,8 @@ export default function Channels(props) {
         <span className={styles.filler} />
       }
       <Modal
-        open={open}
-        onClose={() => setOpen(false)}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
       >
         <div className="modal">
           <h1>New Channel</h1>

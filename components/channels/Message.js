@@ -19,7 +19,7 @@ export default function Message(props) {
   const { showHeader, channelRef } = props;
   const { text, sender, username, sent, id } = props.message;
 
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -64,8 +64,8 @@ export default function Message(props) {
         </button>
       }
       <Modal
-        open={open}
-        onClose={() => setOpen(false)}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
       >
         <div className="modal">
           <h1>Editing Message</h1>

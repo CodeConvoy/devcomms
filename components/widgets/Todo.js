@@ -11,7 +11,7 @@ export default function Todo(props) {
 
   const todoRef = todosRef.doc(id);
 
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // deletes todo
   async function deleteTodo() {
@@ -27,8 +27,8 @@ export default function Todo(props) {
         <EditIcon fontSize="small" />
       </button>
       <Modal
-        open={open}
-        onClose={() => setOpen(false)}
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
       >
         <div className="modal">
           <h1>Editing Todo</h1>

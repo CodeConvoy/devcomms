@@ -15,7 +15,7 @@ export default function Home(props) {
   const { currentUser } = props;
 
   const [name, setName] = useState('');
-  const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [currGroup, setCurrGroup] = useState(undefined);
 
@@ -94,8 +94,8 @@ export default function Home(props) {
           <Widgets group={widgetGroup} channel={widgetChannel} />
         }
         <Modal
-          open={open}
-          onClose={() => setOpen(false)}
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
         >
           <div className="modal">
             <h1>New Group</h1>
