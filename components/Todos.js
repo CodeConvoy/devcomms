@@ -1,3 +1,5 @@
+import Todo from './Todo.js';
+
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
@@ -20,7 +22,7 @@ export default function Todos(props) {
     <div>
       {
         todos.map(todo =>
-          <div key={todo.id}>{todo.title}</div>
+          <Todo {...todo} key={todo.id} />
         )
       }
     </div>
