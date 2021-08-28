@@ -1,8 +1,8 @@
 import Router from 'next/router';
 import Loading from '../components/Loading.js';
 import Header from '../components/Header.js';
-import Channels from '../components/Channels.js';
-import Widgets from '../components/Widgets.js';
+import Channels from '../components/channels/Channels.js';
+import Widgets from '../components/widgets/Widgets.js';
 import Modal from '@material-ui/core/Modal';
 
 import firebase from 'firebase/app';
