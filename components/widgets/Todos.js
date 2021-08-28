@@ -11,15 +11,34 @@ import styles from '../../styles/components/widgets/Todos.module.css';
 export default function Todos(props) {
   const { group, channel } = props;
 
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [due, setDue] = useState(null);
+  const [isDue, setIsDue] = useState(null);
+
   // retrieve todos reference
   const groupsRef = firebase.firestore().collection('groups');
   const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels')
   const channelRef = channelsRef.doc(channel);
-  const widgetsRef = channelRef.colection('widgets');
+  const widgetsRef = channelRef.collection('widgets');
   const todosRef = widgetsRef.doc('todos').collection('todos');
 
   const [todos] = useCollectionData(todosRef, { idField: 'id' });
+
+  // creates a new todo
+  async function createTodo() {
+    setTitle('');
+    setDescription('');
+    setDue(null);
+    setModalOpen(false);
+    await todosRef.add({ title, description, due });
+  }
+
+  // return if loading
+  if (!todos) return <Loading />;
 
   return (
     <div>
@@ -28,6 +47,7 @@ export default function Todos(props) {
           <Todo {...todo} todosRef={todosRef} key={todo.id} />
         )
       }
+      <button onClick={() => setModalOpen(true)}>New Todo</button>
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
