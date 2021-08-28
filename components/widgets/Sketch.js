@@ -1,7 +1,9 @@
 import GetAppIcon from '@material-ui/icons/GetApp';
 
-import styles from '../styles/components/widgets/Sketch.module.css';
+import firebase from 'firebase/app';
 import { useEffect, useRef, useState } from 'react';
+
+import styles from '../../styles/components/widgets/Sketch.module.css';
 
 // width and height of canvas
 const width = 256;
@@ -27,7 +29,7 @@ export default function Sketch(props) {
   const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels')
   const channelRef = channelsRef.doc(channel);
-  const widgetsRef = channelRef.colection('widgets');
+  const widgetsRef = channelRef.collection('widgets');
   const sketchRef = widgetsRef.doc('sketch');
 
   // sketches canvas with given mouse event data

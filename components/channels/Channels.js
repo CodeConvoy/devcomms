@@ -1,4 +1,4 @@
-import Loading from './Loading.js';
+import Loading from '../Loading.js';
 import Channel from './Channel.js';
 import Modal from '@material-ui/core/Modal';
 
@@ -6,7 +6,7 @@ import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useState } from 'react';
 
-import styles from '../styles/components/channels/Channels.module.css';
+import styles from '../../styles/components/channels/Channels.module.css';
 
 export default function Channels(props) {
   const { group, currentUser, openWidgets } = props;
@@ -25,7 +25,7 @@ export default function Channels(props) {
   // creates new channel doc in firebase
   async function createChannel() {
     setName('');
-    await channelsRef.add({ name: name });
+    await channelsRef.add({ name });
   }
 
   // clear current channel when group changes

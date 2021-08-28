@@ -1,6 +1,6 @@
 import Modal from '@material-ui/core/Modal';
 import Message from './Message.js';
-import Loading from './Loading.js';
+import Loading from '../Loading.js';
 import PublishIcon from '@material-ui/icons/Publish';
 import SendIcon from '@material-ui/icons/Send';
 
@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
 
-import styles from '../styles/components/channels/Channel.module.css';
+import styles from '../../styles/components/channels/Channel.module.css';
 
 // delay in seconds before a new header
 const headerOffset = 60 * 5;
