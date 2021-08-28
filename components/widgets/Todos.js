@@ -3,7 +3,7 @@ import Todo from './Todo.js';
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-import styles from '../styles/components/Todos.module.css';
+import styles from '../styles/components/widgets/Todos.module.css';
 
 export default function Todos(props) {
   const { group, channel } = props;

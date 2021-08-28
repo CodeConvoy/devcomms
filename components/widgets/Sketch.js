@@ -1,6 +1,6 @@
 import GetAppIcon from '@material-ui/icons/GetApp';
 
-import styles from '../styles/components/Sketch.module.css';
+import styles from '../styles/components/widgets/Sketch.module.css';
 import { useEffect, useRef, useState } from 'react';
 
 // width and height of canvas

@@ -4,7 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import { useState } from 'react';
 
-import styles from '../styles/components/Todo.module.css';
+import styles from '../styles/components/widgets/Todo.module.css';
 
 export default function Todo(props) {
   const { title, description, due, id, todosRef } = props;

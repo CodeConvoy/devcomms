@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 
-import styles from '../styles/components/Message.module.css';
+import styles from '../styles/components/channels/Message.module.css';
 
 const now = new Date();
 const nowDay = now.getDate();
