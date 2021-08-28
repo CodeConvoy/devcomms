@@ -22,7 +22,7 @@ export default function Todos(props) {
     <div>
       {
         todos.map(todo =>
-          <Todo {...todo} key={todo.id} />
+          <Todo {...todo} todosRef={todosRef} key={todo.id} />
         )
       }
     </div>
