@@ -47,7 +47,6 @@ export default function SignUp(props) {
     const uid = firebase.auth().currentUser.uid;
     await firebase.firestore().collection('users').doc(uid).set({
       username: username,
-      uid: uid,
       joined: new Date()
     });
   }

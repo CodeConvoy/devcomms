@@ -54,7 +54,6 @@ export default function Home(props) {
   // creates new group doc in firebase
   async function createGroup() {
     setName('');
-    const uid = firebase.auth().currentUser.uid;
     await groupsRef.add({
       name: name,
       creator: uid,
@@ -65,7 +64,7 @@ export default function Home(props) {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header currentUser={currentUser} />
       <div className={styles.page}>
         <div className={styles.groups}>
           {
@@ -85,6 +84,7 @@ export default function Home(props) {
           currGroup ?
           <Channels
             group={currGroup}
+            currentUser={currentUser}
             openWidgets={openWidgets}
           /> :
           <span className={styles.filler} />

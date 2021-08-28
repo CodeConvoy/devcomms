@@ -14,7 +14,7 @@ import styles from '../styles/components/Channel.module.css';
 const headerOffset = 60 * 5;
 
 export default function Channel(props) {
-  const { group, channel } = props;
+  const { group, channel, currentUser } = props;
 
   const [text, setText] = useState('');
   const [file, setFile] = useState(undefined);
@@ -39,6 +39,7 @@ export default function Channel(props) {
       text: text,
       type: 'text',
       sender: uid,
+      username: currentUser.username,
       sent: new Date()
     });
   }
@@ -58,6 +59,7 @@ export default function Channel(props) {
       type: file.type.startsWith('image/') ? 'image' : 'file',
       filename: file.name,
       sender: uid,
+      username: currentUser.username,
       sent: new Date()
     });
     // clear file

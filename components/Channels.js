@@ -58,7 +58,7 @@ export default function Channels(props) {
       </div>
       {
         currChannel ?
-        <Channel group={group} channel={currChannel} /> :
+        <Channel group={group} channel={currChannel} currentUser={currentUser} /> :
         <span className={styles.filler} />
       }
       <Modal
