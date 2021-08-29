@@ -1,3 +1,4 @@
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -13,8 +14,14 @@ export default function Header(props) {
       <Image src="/logo.png" width="48" height="48" alt="logo" />
       <h1>Devcomms</h1>
       <span className={styles.flexfill} />
-      <p>Signed in as {currentUser.username}</p>
-      <button onClick={() => firebase.auth().signOut()}>Sign Out</button>
+      <p>Signed in as{' '}
+        <Link href={`/users/${currentUser.username}`}>
+          <a>@{currentUser.username}</a>
+        </Link>
+      </p>
+      <button onClick={() => firebase.auth().signOut()}>
+        <ExitToAppIcon />
+      </button>
     </div>
   );
 }
