@@ -1,6 +1,6 @@
 .channels {
-  min-width: 60px;
-  width: 60px;
+  min-width: 120px;
+  width: 120px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -11,10 +11,15 @@
 }
 
 .channels > div {
-  min-height: 60px;
+  width: 120px;
+  min-height: 30px;
+  height: 30px;
   border: 0;
   background: #ddd;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
 }
 
 .channels > div.selected {
@@ -25,7 +30,19 @@
   background: #efefef;
 }
 
-.channels > div > button > div {
-  overflow: hidden;
-  text-overflow: ellipsis;
+.channels > div > button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.channels > div > button:hover {
+  background: #ddd;
 }

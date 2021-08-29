@@ -1,6 +1,7 @@
 import Loading from '../Loading.js';
 import Channel from './Channel.js';
 import Modal from '@material-ui/core/Modal';
+import WidgetsIcon from '@material-ui/icons/Widgets';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -43,13 +44,12 @@ export default function Channels(props) {
           channels.map(channel =>
             <div
               className={currChannel === channel.id ? styles.selected : undefined}
+              onClick={() => setCurrChannel(channel.id)}
               key={channel.id}
             >
-              <button onClick={() => setCurrChannel(channel.id)}>
-                <div>{channel.name}</div>
-              </button>
+              {channel.name}
               <button onClick={() => openWidgets(group, channel.id)}>
-                Widgets
+                <WidgetsIcon />
               </button>
             </div>
           )
