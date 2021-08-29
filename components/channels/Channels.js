@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import styles from '../../styles/components/channels/Channels.module.css';
 
 export default function Channels(props) {
-  const { group, currentUser, openWidgets } = props;
+  const { group, currentUser } = props;
 
   const [currChannel, setCurrChannel] = useState(undefined);
   const [name, setName] = useState('');
@@ -42,16 +42,13 @@ export default function Channels(props) {
       <div className={styles.channels}>
         {
           channels.map(channel =>
-            <div
+            <button
               className={currChannel === channel.id ? styles.selected : undefined}
               onClick={() => setCurrChannel(channel.id)}
               key={channel.id}
             >
               {channel.name}
-              <button onClick={() => openWidgets(group, channel.id)}>
-                <WidgetsIcon />
-              </button>
-            </div>
+            </button>
           )
         }
         <button onClick={() => setModalOpen(true)}>+</button>

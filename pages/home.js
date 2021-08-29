@@ -2,7 +2,6 @@ import Router from 'next/router';
 import Loading from '../components/Loading.js';
 import Header from '../components/Header.js';
 import Channels from '../components/channels/Channels.js';
-import Widgets from '../components/widgets/Widgets.js';
 import Modal from '@material-ui/core/Modal';
 
 import firebase from 'firebase/app';
@@ -19,9 +18,6 @@ export default function Home(props) {
 
   const [currGroup, setCurrGroup] = useState(undefined);
 
-  const [widgetGroup, setWidgetGroup] = useState(undefined);
-  const [widgetChannel, setWidgetChannel] = useState(undefined);
-
   // retrieve user groups
   const uid = firebase.auth().currentUser?.uid;
   const groupsRef = firebase.firestore().collection('groups');
@@ -29,27 +25,6 @@ export default function Home(props) {
   .where('members', 'array-contains', uid ?? 'null')
   .orderBy('name');
   const [groups] = useCollectionData(groupsQuery, { idField: 'id' });
-
-  // listen for user auth
-  useEffect(() => {
-    if (!currentUser) Router.push('/signin');
-  }, [currentUser]);
-
-  // return if loading
-  if (!currentUser || !groups) return <Loading />;
-
-  // opens widgets panel
-  function openWidgets(group, channel) {
-    // if already open, toggle to closed
-    if (group === widgetGroup && channel === widgetChannel) {
-      setWidgetGroup(undefined);
-      setWidgetChannel(undefined);
-    // if not open, toggle to open
-    } else {
-      setWidgetGroup(group);
-      setWidgetChannel(channel);
-    }
-  }
 
   // creates new group doc in firebase
   async function createGroup() {
@@ -61,6 +36,14 @@ export default function Home(props) {
       created: new Date()
     });
   }
+
+  // listen for user auth
+  useEffect(() => {
+    if (!currentUser) Router.push('/signin');
+  }, [currentUser]);
+
+  // return if loading
+  if (!currentUser || !groups) return <Loading />;
 
   return (
     <div className={styles.container}>
@@ -82,16 +65,8 @@ export default function Home(props) {
         </div>
         {
           currGroup ?
-          <Channels
-            group={currGroup}
-            currentUser={currentUser}
-            openWidgets={openWidgets}
-          /> :
+          <Channels group={currGroup} currentUser={currentUser} /> :
           <span className={styles.filler} />
-        }
-        {
-          (widgetGroup && widgetChannel) &&
-          <Widgets group={widgetGroup} channel={widgetChannel} />
         }
         <Modal
           open={modalOpen}

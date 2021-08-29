@@ -1,6 +1,6 @@
 .channels {
-  min-width: 120px;
-  width: 120px;
+  min-width: 60px;
+  width: 60px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -10,10 +10,10 @@
   flex-grow: 1;
 }
 
-.channels > div {
-  width: 120px;
-  min-height: 30px;
-  height: 30px;
+.channels > button {
+  width: 60px;
+  min-height: 60px;
+  height: 60px;
   border: 0;
   background: #ddd;
   cursor: pointer;
@@ -22,27 +22,10 @@
   position: relative;
 }
 
-.channels > div.selected {
+.channels > button.selected {
   background: #efefef;
 }
 
-.channels > div:hover {
+.channels > button:hover {
   background: #efefef;
-}
-
-.channels > div > button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: transparent;
-  border: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.channels > div > button:hover {
-  background: #ddd;
 }
