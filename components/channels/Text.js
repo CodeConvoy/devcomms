@@ -8,12 +8,12 @@ import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
 
-import styles from '../../styles/components/channels/Channel.module.css';
+import styles from '../../styles/components/channels/Text.module.css';
 
 // delay in seconds before a new header
 const headerOffset = 60 * 5;
 
-export default function Channel(props) {
+export default function Text(props) {
   const { group, channel, currentUser } = props;
 
   const [text, setText] = useState('');
