@@ -1,5 +1,6 @@
 import Loading from '../Loading.js';
 import Text from './Text.js';
+import Widget from '../widgets/Widget.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
@@ -14,6 +15,7 @@ export default function Channels(props) {
   const { group, currentUser } = props;
 
   const [currChannel, setCurrChannel] = useState(undefined);
+  const [currWidget, setCurrWidget] = useState(undefined);
   const [name, setName] = useState('');
   const [type, setType] = useState('text');
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,20 +33,6 @@ export default function Channels(props) {
     await channelsRef.add({ name, type });
   }
 
-  // returns channel component for given channel type
-  function getChannelComponent(channelType) {
-    switch (channelType) {
-      case 'text': return Text;
-      default: return null;
-    }
-  }
-
-  // returns component for given channel
-  function getChannel(channel) {
-    const Component = getChannelComponent(channel.type);
-    return <Component group={group} channel={channel.id} currentUser={currentUser} />;
-  }
-
   // clear current channel when group changes
   useEffect(() => {
     setCurrChannel(undefined);
@@ -59,8 +47,17 @@ export default function Channels(props) {
         {
           channels.map(channel =>
             <button
-              className={currChannel?.id === channel.id ? styles.selected : undefined}
-              onClick={() => setCurrChannel(channel)}
+              className={
+                (
+                  currChannel?.id === channel.id ||
+                  currWidget?.id === channel.id
+                )
+                ? styles.selected : undefined
+              }
+              onClick={() => {
+                if (channel.type === 'text') setCurrChannel(channel);
+                else setCurrWidget(channel);
+              }}
               key={channel.id}
             >
               {channel.name}
@@ -71,8 +68,12 @@ export default function Channels(props) {
       </div>
       {
         currChannel ?
-        getChannel(currChannel) :
+        <Text group={group} channel={currChannel.id} currentUser={currentUser} /> :
         <span className={styles.filler} />
+      }
+      {
+        currWidget &&
+        <Widget group={group} widget={currWidget} />
       }
       <Modal
         open={modalOpen}
