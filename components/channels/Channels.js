@@ -14,6 +14,7 @@ export default function Channels(props) {
 
   const [currChannel, setCurrChannel] = useState(undefined);
   const [name, setName] = useState('');
+  const [type, setType] = useState('text');
   const [modalOpen, setModalOpen] = useState(false);
 
   // retrieve group channels
@@ -26,7 +27,7 @@ export default function Channels(props) {
   // creates new channel doc in firebase
   async function createChannel() {
     setName('');
-    await channelsRef.add({ name });
+    await channelsRef.add({ name, type });
   }
 
   // clear current channel when group changes
@@ -74,6 +75,12 @@ export default function Channels(props) {
               onChange={e => setName(e.target.value)}
               required
             />
+            <select value={type} onChange={e => setType(e.target.value)}>
+              <option value="text">Text</option>
+              <option value="sketch">Sketch</option>
+              <option value="notes">Notes</option>
+              <option value="todos">Todos</option>
+            </select>
             <button>Create</button>
           </form>
         </div>
