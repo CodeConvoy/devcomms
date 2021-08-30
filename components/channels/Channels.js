@@ -1,5 +1,5 @@
 import Loading from '../Loading.js';
-import Channel from './Channel.js';
+import Text from './Text.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 
@@ -30,6 +30,20 @@ export default function Channels(props) {
     await channelsRef.add({ name, type });
   }
 
+  // returns channel component for given channel type
+  function getChannelComponent(channelType) {
+    switch (channelType) {
+      case 'text': return Text;
+      default: return null;
+    }
+  }
+
+  // returns component for given channel
+  function getChannel(channel) {
+    const Component = getChannelComponent(channel.type);
+    return <Component group={group} channel={channel.id} currentUser={currentUser} />;
+  }
+
   // clear current channel when group changes
   useEffect(() => {
     setCurrChannel(undefined);
@@ -44,8 +58,8 @@ export default function Channels(props) {
         {
           channels.map(channel =>
             <button
-              className={currChannel === channel.id ? styles.selected : undefined}
-              onClick={() => setCurrChannel(channel.id)}
+              className={currChannel?.id === channel.id ? styles.selected : undefined}
+              onClick={() => setCurrChannel(channel)}
               key={channel.id}
             >
               {channel.name}
@@ -56,7 +70,7 @@ export default function Channels(props) {
       </div>
       {
         currChannel ?
-        <Channel group={group} channel={currChannel} currentUser={currentUser} /> :
+        getChannel(currChannel) :
         <span className={styles.filler} />
       }
       <Modal
