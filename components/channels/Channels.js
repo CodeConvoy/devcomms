@@ -33,6 +33,14 @@ export default function Channels(props) {
     await channelsRef.add({ name, type });
   }
 
+  // selects given channel
+  function selectChannel(channel) {
+    // toggle text channel
+    if (channel.type === 'text') setCurrChannel(channel);
+    // toggle widget
+    else setCurrWidget(currWidget?.id === channel.id ? undefined : channel);
+  }
+
   // clear current channel when group changes
   useEffect(() => {
     setCurrChannel(undefined);
@@ -54,10 +62,7 @@ export default function Channels(props) {
                 )
                 ? styles.selected : undefined
               }
-              onClick={() => {
-                if (channel.type === 'text') setCurrChannel(channel);
-                else setCurrWidget(channel);
-              }}
+              onClick={() => selectChannel(channel)}
               key={channel.id}
             >
               {channel.name}
