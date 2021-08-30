@@ -2,6 +2,7 @@ import Loading from '../Loading.js';
 import Text from './Text.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
+import AddIcon from '@material-ui/icons/Add';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -95,7 +96,9 @@ export default function Channels(props) {
               <option value="notes">Notes</option>
               <option value="todos">Todos</option>
             </select>
-            <button>Create</button>
+            <button>
+              <AddIcon />
+            </button>
           </form>
         </div>
       </Modal>

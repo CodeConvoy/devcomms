@@ -3,6 +3,7 @@ import Loading from '../components/Loading.js';
 import Header from '../components/Header.js';
 import Channels from '../components/channels/Channels.js';
 import Modal from '@material-ui/core/Modal';
+import AddIcon from '@material-ui/icons/Add';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -84,7 +85,9 @@ export default function Home(props) {
                 onChange={e => setName(e.target.value)}
                 required
               />
-              <button>Create</button>
+              <button>
+                <AddIcon />
+              </button>
             </form>
           </div>
         </Modal>

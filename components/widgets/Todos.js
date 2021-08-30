@@ -1,6 +1,7 @@
 import Todo from './Todo.js';
 import Loading from '../Loading.js';
 import Modal from '@material-ui/core/Modal';
+import AddIcon from '@material-ui/icons/Add';
 
 import firebase from 'firebase/app';
 import { useState } from 'react';
@@ -89,7 +90,9 @@ export default function Todos(props) {
                 required
               />
             }
-            <button>Create</button>
+            <button>
+              <AddIcon />
+            </button>
           </form>
         </div>
       </Modal>

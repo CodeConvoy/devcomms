@@ -3,23 +3,24 @@
   height: 100%;
 }
 
-.groups {
-  min-width: 60px;
-  width: 60px;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
-}
-
 .page {
   display: flex;
   height: calc(100% - 60px);
 }
 
+.groups {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  margin: 5px;
+}
+
 .groups > button {
-  min-height: 60px;
+  flex: 0 0 60px;
+  width: 60px;
   border: 0;
   background: #ddd;
+  margin: 5px;
 }
 
 .groups > button:hover {
