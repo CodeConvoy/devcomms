@@ -24,8 +24,7 @@ export default function Todos(props) {
   const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels')
   const channelRef = channelsRef.doc(channel);
-  const widgetsRef = channelRef.collection('widgets');
-  const todosRef = widgetsRef.doc('todos').collection('todos');
+  const todosRef = channelRef.collection('todos');
 
   const [todos] = useCollectionData(todosRef, { idField: 'id' });
 

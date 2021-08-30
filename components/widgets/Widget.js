@@ -22,7 +22,7 @@ export default function Widget(props) {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {getWidget()}
     </div>
   );

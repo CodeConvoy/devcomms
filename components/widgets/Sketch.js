@@ -29,8 +29,6 @@ export default function Sketch(props) {
   const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels')
   const channelRef = channelsRef.doc(channel);
-  const widgetsRef = channelRef.collection('widgets');
-  const sketchRef = widgetsRef.doc('sketch');
 
   // sketches canvas with given mouse event data
   function sketch(e) {
