@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  margin: 5px;
+  background: var(--dark3);
+  padding: 2px 0 2px 8px;
 }
 
 .filler {
@@ -10,21 +11,24 @@
 }
 
 .channels > button {
-  width: 60px;
-  flex: 0 0 60px;
+  width: 180px;
+  flex: 0 0 30px;
   border: 0;
-  background: #ddd;
-  cursor: pointer;
+  background: var(--dark3);
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
-  margin: 5px;
-}
-
-.channels > button.selected {
-  background: #efefef;
+  border-radius: 30px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  color: var(--gray0);
+  margin: 2px 0;
 }
 
 .channels > button:hover {
-  background: #efefef;
+  background: var(--dark4);
+}
+
+.channels > button.selected {
+  background: var(--dark4);
 }
