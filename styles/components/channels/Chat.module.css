@@ -2,34 +2,37 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 10px;
 }
 
 .messages {
   flex-grow: 1;
   overflow: scroll;
+  padding: 10px;
 }
 
 .container > form {
   display: flex;
-  min-height: 32px;
-  height: 32px;
-  margin-top: 10px;
+  flex: 0 0 52px;
+  padding: 10px;
+  background: var(--dark1);
 }
 
 .filebutton {
   cursor: pointer;
-  background: #efefef;
+  background: var(--dark4);
   width: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #555;
-  border-radius: 3px;
+  border: 0;
+  border-radius: 10px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  color: var(--gray0);
 }
 
 .filebutton:hover {
-  background: #ddd;
+  background: var(--dark3);
 }
 
 .fileinput {
@@ -38,17 +41,25 @@
 
 .textinput {
   flex-grow: 1;
+  border: 0;
+  background: var(--dark4);
+  color: var(--gray0);
+  outline: none;
 }
 
 .sendbutton {
   width: 32px;
+  background: var(--dark4);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #555;
-  border-radius: 3px;
+  border: 0;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  color: var(--gray0);
 }
 
 .sendbutton:hover {
-  background: #ddd;
+  background: var(--dark3);
 }

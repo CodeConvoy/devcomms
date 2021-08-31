@@ -74,7 +74,7 @@ export default function Message(props) {
       >
         <div className="modal">
           <h1>Editing Message</h1>
-          <button onClick={deleteMessage}>
+          <button className="iconbutton2" onClick={deleteMessage}>
             <DeleteIcon />
           </button>
         </div>
