@@ -1,5 +1,6 @@
 import Todos from './Todos.js';
 import Sketch from './Sketch.js';
+import Notes from './Notes.js';
 
 import styles from '../../styles/components/widgets/Widget.module.css';
 
@@ -11,6 +12,7 @@ export default function Widget(props) {
     switch (widget.type) {
       case 'todos': return Todos;
       case 'sketch': return Sketch;
+      case 'notes': return Notes;
       default: return null;
     }
   }
