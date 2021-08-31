@@ -27,4 +27,5 @@
 
 .users > button.selected {
   border: 2px solid var(--gray2);
+  background: var(--dark2);
 }

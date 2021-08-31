@@ -69,7 +69,7 @@ export default function Sketch(props) {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <canvas
         ref={canvasRef}
         width={width}

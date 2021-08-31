@@ -29,6 +29,10 @@ button {
   cursor: pointer;
 }
 
+textarea {
+  resize: none;
+}
+
 .modal {
   text-align: center;
   background: #fff;

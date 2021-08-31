@@ -13,7 +13,7 @@ export default function Notes(props) {
 
   return (
     <div>
-      <textarea />
+      <textarea rows={17} cols={30} />
     </div>
   );
 }
