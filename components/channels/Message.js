@@ -16,7 +16,7 @@ const today = new Date(nowYear, nowMonth, nowDay).setHours(0, 0, 0, 0);
 const yesterday = new Date(nowYear, nowMonth, nowDay - 1).setHours(0, 0, 0, 0);
 
 export default function Message(props) {
-  const { showHeader, channelRef } = props;
+  const { showHeader, messagesRef } = props;
   const { text, sender, username, sent, id } = props.message;
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -24,7 +24,6 @@ export default function Message(props) {
   const uid = firebase.auth().currentUser.uid;
 
   // retrieve message ref
-  const messagesRef = channelRef.collection('messages');
   const messageRef = messagesRef.doc(id);
 
   // deletes message

@@ -6,6 +6,7 @@ import SendIcon from '@material-ui/icons/Send';
 
 import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { v4 as uuid } from 'uuid';
 import firebase from 'firebase/app';
 
 import styles from '../../styles/components/channels/Chat.module.css';
@@ -44,7 +45,7 @@ export default function Text(props) {
     // if no file, return
     if (!file) return;
     // put file in storage and get url
-    const filePath = `groups/${group}/${channel}/${file.name}`;
+    const filePath = `chat/${uuid()}`;
     const fileRef = firebase.storage().ref(filePath);
     const snapshot = await fileRef.put(file);
     const url = await snapshot.ref.getDownloadURL();

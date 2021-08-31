@@ -76,7 +76,7 @@ export default function Home(props) {
         </div>
         {
           currGroup === 'home' ?
-          <Homescreen /> :
+          <Homescreen currentUser={currentUser} /> :
           currGroup ?
           <Channels group={currGroup} currentUser={currentUser} /> :
           <span className={styles.filler} />
