@@ -19,7 +19,10 @@ export default function Header(props) {
           <a>@{currentUser.username}</a>
         </Link>
       </p>
-      <button onClick={() => firebase.auth().signOut()}>
+      <button
+        onClick={() => firebase.auth().signOut()}
+        className="iconbutton"
+      >
         <ExitToAppIcon />
       </button>
     </div>

@@ -33,24 +33,61 @@ textarea {
   resize: none;
 }
 
+select {
+  background: var(--dark3);
+  color: var(--gray0);
+  border: 2px solid var(--dark2);
+  border-radius: 2px;
+}
+
 .modal {
   text-align: center;
-  background: #fff;
+  background: var(--dark4);
   color: #000;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 400px;
-  height: 200px;
-  border: 2px solid #000;
-  padding: 10px;
+  border: 2px solid var(--dark0);
+  border-radius: 10px;
+  padding: 20px 40px;
+  color: var(--gray0);
+}
+
+.modal > h1 {
+  margin: 0 0 10px 0;
 }
 
 .modal > form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.iconbutton, .iconbutton2 {
+  padding: 3px 3px 0 3px;
+  color: var(--gray0);
+  border: 0;
+  border-radius: 2px;
+}
+
+.iconbutton {
+  background: var(--dark4);
+}
+
+.iconbutton2 {
+  background: var(--dark2);
+}
+
+.iconbutton:hover, .iconbutton2:hover {
+  background: var(--dark3);
+}
+
+.darkinput {
+  background: var(--dark3);
+  border: 2px solid var(--dark2);
+  border-radius: 2px;
+  color: var(--gray0);
 }
 
 :root {
