@@ -34,9 +34,7 @@ export default function Channels(props) {
   // creates new channel doc in firebase
   async function createChannel() {
     const newChannel = { name, type };
-    setName('');
-    setType('text');
-    setModalOpen(false);
+    resetModal();
     const docRef = await channelsRef.add(newChannel);
     selectChannel({ id: docRef.id, ...newChannel });
   }
@@ -63,6 +61,13 @@ export default function Channels(props) {
       case 'todos': return <ListIcon />;
       default: return null;
     }
+  }
+
+  // resets modal
+  function resetModal() {
+    setName('');
+    setType('text');
+    setModalOpen(false);
   }
 
   // clear current channel when group changes
@@ -94,7 +99,7 @@ export default function Channels(props) {
             </button>
           )
         }
-        <button onClick={() => setModalOpen(true)}>
+        <button onClick={resetModal}>
           <AddIcon />
         </button>
       </div>
@@ -109,7 +114,7 @@ export default function Channels(props) {
       }
       <Modal
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={resetModal}
       >
         <div className="modal">
           <h1>New Channel</h1>

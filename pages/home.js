@@ -31,8 +31,7 @@ export default function Home(props) {
 
   // creates new group doc in firebase
   async function createGroup() {
-    setName('');
-    setModalOpen(false);
+    resetModal();
     const docRef = await groupsRef.add({
       name: name,
       creator: uid,
@@ -40,6 +39,12 @@ export default function Home(props) {
       created: new Date()
     });
     setCurrGroup(docRef.id);
+  }
+
+  // resets modal
+  function resetModal() {
+    setName('');
+    setModalOpen(false);
   }
 
   // listen for user auth
@@ -85,7 +90,7 @@ export default function Home(props) {
         }
         <Modal
           open={modalOpen}
-          onClose={() => setModalOpen(false)}
+          onClose={resetModal}
         >
           <div className="modal">
             <h1>New Group</h1>

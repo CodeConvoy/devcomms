@@ -15,7 +15,10 @@ export default function Todo(props) {
 
   // deletes todo
   async function deleteTodo() {
-    if (window.confirm('Really delete todo?')) await todoRef.delete();
+    if (window.confirm('Really delete todo?')) {
+      setModalOpen(false);
+      await todoRef.delete();
+    }
   }
 
   return (

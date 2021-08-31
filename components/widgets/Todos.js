@@ -30,11 +30,16 @@ export default function Todos(props) {
 
   // creates a new todo
   async function createTodo() {
+    resetModal();
+    await todosRef.add({ title, description, due });
+  }
+
+  // resets modal
+  function resetModal() {
     setTitle('');
     setDescription('');
     setDue(null);
     setModalOpen(false);
-    await todosRef.add({ title, description, due });
   }
 
   // return if loading
@@ -52,7 +57,7 @@ export default function Todos(props) {
       <button onClick={() => setModalOpen(true)}>New Todo</button>
       <Modal
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={resetModal}
       >
         <div className="modal">
           <h1>New Todo</h1>

@@ -28,7 +28,10 @@ export default function Message(props) {
 
   // deletes message
   async function deleteMessage() {
-    if (window.confirm('Really delete message?')) await messageRef.delete();
+    if (window.confirm('Really delete message?')) {
+      setModalOpen(false);
+      await messageRef.delete();
+    }
   }
 
   // returns a datetime string for given datetime
