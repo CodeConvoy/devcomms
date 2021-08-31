@@ -14,7 +14,7 @@ import styles from '../../styles/components/channels/Chat.module.css';
 const headerOffset = 60 * 5;
 
 export default function Text(props) {
-  const { group, channel, currentUser } = props;
+  const { messagesRef, currentUser } = props;
 
   const [text, setText] = useState('');
   const [file, setFile] = useState(undefined);
@@ -22,11 +22,6 @@ export default function Text(props) {
   const uid = firebase.auth().currentUser.uid;
 
   // retrieve channel messages
-  const groupsRef = firebase.firestore().collection('groups');
-  const groupRef = groupsRef.doc(group);
-  const channelsRef = groupRef.collection('channels')
-  const channelRef = channelsRef.doc(channel);
-  const messagesRef = channelRef.collection('messages');
   const messagesQuery = messagesRef.orderBy('sent');
   const [messages] = useCollectionData(messagesQuery, { idField: 'id' });
 
@@ -81,7 +76,7 @@ export default function Text(props) {
                 message.sent - messages[i - 1].sent > headerOffset
               }
               message={message}
-              channelRef={channelRef}
+              messagesRef={messagesRef}
               key={message.id}
             />
           )

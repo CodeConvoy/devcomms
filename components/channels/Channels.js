@@ -41,6 +41,11 @@ export default function Channels(props) {
     else setCurrWidget(currWidget?.id === channel.id ? undefined : channel);
   }
 
+  // returns messages ref for current channel
+  function getMessagesRef() {
+    return channelsRef.doc(currChannel.id).collection('messages');
+  }
+
   // clear current channel when group changes
   useEffect(() => {
     setCurrChannel(undefined);
@@ -75,7 +80,7 @@ export default function Channels(props) {
       </div>
       {
         currChannel ?
-        <Chat group={group} channel={currChannel.id} currentUser={currentUser} /> :
+        <Chat messagesRef={getMessagesRef()} currentUser={currentUser} /> :
         <span className={styles.filler} />
       }
       {
