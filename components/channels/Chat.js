@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
 
-import styles from '../../styles/components/channels/Text.module.css';
+import styles from '../../styles/components/channels/Chat.module.css';
 
 // delay in seconds before a new header
 const headerOffset = 60 * 5;

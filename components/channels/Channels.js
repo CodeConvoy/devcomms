@@ -1,5 +1,5 @@
 import Loading from '../Loading.js';
-import Text from './Text.js';
+import Chat from './Chat.js';
 import Widget from '../widgets/Widget.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
@@ -75,7 +75,7 @@ export default function Channels(props) {
       </div>
       {
         currChannel ?
-        <Text group={group} channel={currChannel.id} currentUser={currentUser} /> :
+        <Chat group={group} channel={currChannel.id} currentUser={currentUser} /> :
         <span className={styles.filler} />
       }
       {
