@@ -1,9 +1,11 @@
 import Router from 'next/router';
 import Loading from '../components/Loading.js';
 import Header from '../components/Header.js';
+import Homescreen from '../components/channels/Homescreen.js';
 import Channels from '../components/channels/Channels.js';
 import Modal from '@material-ui/core/Modal';
 import AddIcon from '@material-ui/icons/Add';
+import HomeIcon from '@material-ui/icons/Home';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -51,6 +53,12 @@ export default function Home(props) {
       <Header currentUser={currentUser} />
       <div className={styles.page}>
         <div className={styles.groups}>
+          <button
+            className={currGroup === 'home' ? styles.selected : undefined}
+            onClick={() => setCurrGroup('home')}
+          >
+            <HomeIcon />
+          </button>
           {
             groups.map(group =>
               <button
@@ -67,6 +75,8 @@ export default function Home(props) {
           </button>
         </div>
         {
+          currGroup === 'home' ?
+          <Homescreen /> :
           currGroup ?
           <Channels group={currGroup} currentUser={currentUser} /> :
           <span className={styles.filler} />
