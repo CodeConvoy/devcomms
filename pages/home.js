@@ -19,7 +19,7 @@ export default function Home(props) {
   const [name, setName] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
-  const [currGroup, setCurrGroup] = useState(undefined);
+  const [currGroup, setCurrGroup] = useState('home');
 
   // retrieve user groups
   const uid = firebase.auth().currentUser?.uid;
@@ -32,12 +32,14 @@ export default function Home(props) {
   // creates new group doc in firebase
   async function createGroup() {
     setName('');
-    await groupsRef.add({
+    setModalOpen(false);
+    const docRef = await groupsRef.add({
       name: name,
       creator: uid,
       members: [uid],
       created: new Date()
     });
+    setCurrGroup(docRef.id);
   }
 
   // listen for user auth

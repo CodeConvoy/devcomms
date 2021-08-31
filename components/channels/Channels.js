@@ -33,8 +33,12 @@ export default function Channels(props) {
 
   // creates new channel doc in firebase
   async function createChannel() {
+    const newChannel = { name, type };
     setName('');
-    await channelsRef.add({ name, type });
+    setType('text');
+    setModalOpen(false);
+    const docRef = await channelsRef.add(newChannel);
+    selectChannel({ id: docRef.id, ...newChannel });
   }
 
   // selects given channel
