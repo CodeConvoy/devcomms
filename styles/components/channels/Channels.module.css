@@ -12,12 +12,11 @@
 
 .channels > button {
   width: 180px;
+  display: flex;
+  align-items: center;
   flex: 0 0 30px;
   border: 0;
   background: var(--dark3);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
   border-radius: 30px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -31,4 +30,13 @@
 
 .channels > button.selected {
   background: var(--dark4);
+}
+
+.channels > button > svg {
+  margin-right: 2px;
+}
+
+.channels > button > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

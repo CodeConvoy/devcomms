@@ -4,6 +4,10 @@ import Widget from '../widgets/Widget.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
+import ChatIcon from '@material-ui/icons/Chat';
+import DescriptionIcon from '@material-ui/icons/Description';
+import ListIcon from '@material-ui/icons/List';
+import BrushIcon from '@material-ui/icons/Brush';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -46,6 +50,17 @@ export default function Channels(props) {
     return channelsRef.doc(currChannel.id).collection('messages');
   }
 
+  // returns channel icon for given channel type
+  function getChannelIcon(type) {
+    switch (type) {
+      case 'text': return <ChatIcon />;
+      case 'notes': return <DescriptionIcon />;
+      case 'sketch': return <BrushIcon />;
+      case 'todos': return <ListIcon />;
+      default: return null;
+    }
+  }
+
   // clear current channel when group changes
   useEffect(() => {
     setCurrChannel(undefined);
@@ -70,7 +85,8 @@ export default function Channels(props) {
               onClick={() => selectChannel(channel)}
               key={channel.id}
             >
-              {channel.name}
+              {getChannelIcon(channel.type)}
+              <span>{channel.name}</span>
             </button>
           )
         }
