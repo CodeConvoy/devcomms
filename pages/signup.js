@@ -1,4 +1,5 @@
 import Loading from '../components/Loading.js';
+import Background from '../components/Background.js';
 import Router from 'next/router';
 import Link from 'next/link';
 
@@ -61,6 +62,7 @@ export default function SignUp(props) {
 
   return (
     <div className={styles.container}>
+      <Background />
       <div className={styles.center}>
         <h1>Sign Up</h1>
         <form onSubmit={e => {

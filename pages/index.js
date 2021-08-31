@@ -1,3 +1,4 @@
+import Background from '../components/Background.js';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -8,10 +9,11 @@ import styles from '../styles/pages/Index.module.css';
 export default function Index() {
   return (
     <div className={styles.container}>
+      <Background />
       <div className={styles.center}>
         <div className={styles.title}>
           <h1>Devcomms</h1>
-          <Image src="/logo.png" width="48" height="48" alt="logo" />
+          <Image src="/img/logo.png" width="48" height="48" alt="logo" />
         </div>
         <p>Team communication and coordination all in one place.</p>
         <p>Devcomms is an open source, developer-focused team communication and
