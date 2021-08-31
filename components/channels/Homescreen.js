@@ -20,6 +20,7 @@ export default function Homescreen() {
         {
           users.map(user =>
             <button
+              className={currUser?.id === user.id ? styles.selected : undefined}
               onClick={() => setCurrUser(user)}
               key={user.id}
             >

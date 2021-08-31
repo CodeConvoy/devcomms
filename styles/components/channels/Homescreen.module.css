@@ -1,7 +1,30 @@
 .container {
   display: flex;
+  flex-grow: 1;
 }
 
 .users {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  padding: 5px;
   background: var(--dark3);
+}
+
+.users > button {
+  margin: 5px;
+  width: 60px;
+  flex: 0 0 60px;
+  border: 0;
+  background: var(--dark1);
+  border-radius: 30px;
+  color: var(--gray0);
+}
+
+.users > button:hover {
+  background: var(--dark2);
+}
+
+.users > button.selected {
+  border: 2px solid var(--gray2);
 }
