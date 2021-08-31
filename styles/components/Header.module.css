@@ -1,7 +1,8 @@
 .container {
   display: flex;
   align-items: center;
-  background: #efefef;
+  background: var(--dark0);
+  color: var(--gray0);
   height: 60px;
 }
 

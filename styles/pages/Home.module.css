@@ -12,23 +12,28 @@
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  margin: 5px;
+  padding: 10px 0 10px 10px;
+  background: var(--dark0);
 }
 
 .groups > button {
   flex: 0 0 60px;
   width: 60px;
   border: 0;
-  background: #ddd;
-  margin: 5px;
+  background: var(--dark1);
+  color: var(--gray0);
+  margin: 5px 0;
+  border-radius: 30px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .groups > button:hover {
-  background: #efefef;
+  background: var(--dark2);
 }
 
 .groups > button.selected {
-  background: #efefef;
+  background: var(--dark3);
 }
 
 .groups > button > div {
