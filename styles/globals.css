@@ -64,7 +64,7 @@ select {
   align-items: center;
 }
 
-.iconbutton, .iconbutton2 {
+.iconbutton, .iconbutton2, .iconbutton3 {
   padding: 3px 3px 0 3px;
   color: var(--gray0);
   border: 0;
@@ -79,8 +79,20 @@ select {
   background: var(--dark2);
 }
 
-.iconbutton:hover, .iconbutton2:hover {
+.iconbutton3 {
+  background: var(--dark1);
+}
+
+.iconbutton:hover {
   background: var(--dark3);
+}
+
+.iconbutton2:hover {
+  background: var(--dark3);
+}
+
+.iconbutton3:hover {
+  background: var(--dark2);
 }
 
 .darkinput {

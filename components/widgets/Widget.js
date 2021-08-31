@@ -20,7 +20,7 @@ export default function Widget(props) {
   // returns component for widget
   function getWidget() {
     const Component = getWidgetComponent();
-    return <Component group={group} channel={widget.id} />;
+    return <Component group={group} widget={widget} />;
   }
 
   return (

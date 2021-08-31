@@ -99,7 +99,7 @@ export default function Channels(props) {
             </button>
           )
         }
-        <button onClick={resetModal}>
+        <button onClick={() => setModalOpen(true)}>
           <AddIcon />
         </button>
       </div>
