@@ -51,7 +51,10 @@ export default function Message(props) {
             <Link href={`/users/${username}`}>
               <a>@{username}</a>
             </Link>
-            {' '}<b>{getDateTimeString(sent.toDate())}</b>
+            {' '}
+            <span className={styles.datetime}>
+              {getDateTimeString(sent.toDate())}
+            </span>
           </span>
           <br />
         </>
