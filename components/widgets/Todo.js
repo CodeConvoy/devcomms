@@ -32,7 +32,7 @@ export default function Todo(props) {
       >
         <div className="modal">
           <h1>Editing Todo</h1>
-          <button onClick={deleteTodo}>
+          <button className="iconbutton2" onClick={deleteTodo}>
             <DeleteIcon />
           </button>
         </div>

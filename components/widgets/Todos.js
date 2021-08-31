@@ -55,16 +55,18 @@ export default function Todos(props) {
         onClose={() => setModalOpen(false)}
       >
         <div className="modal">
+          <h1>New Todo</h1>
           <form onSubmit={createTodo}>
-            <h1>New Todo</h1>
             <input
               value={title}
+              className="darkinput"
               onChange={e => setTitle(e.target.value)}
               placeholder="title"
               required
             />
             <input
               value={description}
+              className={`${styles.descinput} darkinput`}
               onChange={e => setDescription(e.target.value)}
               placeholder="description"
               required
@@ -73,6 +75,7 @@ export default function Todos(props) {
             <input
               id="todos-isdue"
               type="checkbox"
+              className={styles.duecheck}
               checked={isDue}
               onChange={e => {
                 const newIsDue = e.target.checked;
@@ -83,13 +86,14 @@ export default function Todos(props) {
             {
               isDue &&
               <input
+                className={`${styles.dateinput} darkinput`}
                 type="date"
                 value={due}
                 onChange={e => setDue(e.target.value)}
                 required
               />
             }
-            <button>
+            <button className="iconbutton2">
               <AddIcon />
             </button>
           </form>
