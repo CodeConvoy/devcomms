@@ -40,3 +40,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.typeinput {
+  margin: 10px 0;
+}

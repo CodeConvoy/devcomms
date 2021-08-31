@@ -119,17 +119,22 @@ export default function Channels(props) {
           }}>
             <input
               placeholder="name"
+              className="darkinput"
               value={name}
               onChange={e => setName(e.target.value)}
               required
             />
-            <select value={type} onChange={e => setType(e.target.value)}>
+            <select
+              className={styles.typeinput}
+              value={type}
+              onChange={e => setType(e.target.value)}
+            >
               <option value="text">Text</option>
               <option value="sketch">Sketch</option>
               <option value="notes">Notes</option>
               <option value="todos">Todos</option>
             </select>
-            <button>
+            <button className="iconbutton2">
               <AddIcon />
             </button>
           </form>

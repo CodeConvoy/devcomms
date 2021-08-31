@@ -95,11 +95,12 @@ export default function Home(props) {
             }}>
               <input
                 placeholder="name"
+                className={`${styles.nameinput} darkinput`}
                 value={name}
                 onChange={e => setName(e.target.value)}
                 required
               />
-              <button>
+              <button className="iconbutton2">
                 <AddIcon />
               </button>
             </form>
