@@ -2,9 +2,14 @@ import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '../../styles/components/widgets/Todo.module.css';
+
+const SEC_MS = 1000;
+const MIN_MS = SEC_MS * 60;
+const HOUR_MS = MIN_MS * 60;
+const DAY_MS = HOUR_MS * 24;
 
 export default function Todo(props) {
   const { title, description, due, id, todosRef } = props;
@@ -13,6 +18,7 @@ export default function Todo(props) {
   const todoRef = todosRef.doc(id);
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(dueDate - new Date());
 
   // deletes todo
   async function deleteTodo() {
@@ -21,6 +27,15 @@ export default function Todo(props) {
       await todoRef.delete();
     }
   }
+
+  useEffect(() => {
+    // update time left every tenth of a second
+    setTimeLeft(dueDate - new Date());
+    const interval = setInterval(() => {
+      setTimeLeft(dueDate - new Date());
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -35,6 +50,24 @@ export default function Todo(props) {
               dueDate.toLocaleString('default', {
                 weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
               })
+            }
+          </p>
+          <p className={timeLeft >= 0 ? styles.timeleft : `${styles.timeleft} ${styles.overdue}`}>
+            {
+              timeLeft >= 0 ?
+              <>
+                {timeLeft > DAY_MS && <>{Math.floor(timeLeft / DAY_MS)}d</>}
+                {timeLeft > HOUR_MS && <>{Math.floor(timeLeft % DAY_MS / HOUR_MS)}h</>}
+                {timeLeft > MIN_MS && <>{Math.floor(timeLeft % DAY_MS % HOUR_MS / MIN_MS)}m</>}
+                {Math.floor(timeLeft % DAY_MS % HOUR_MS % MIN_MS / SEC_MS)}s
+              </> :
+              <>
+                {-timeLeft > DAY_MS && <>{Math.floor(-timeLeft / DAY_MS)}d</>}
+                {-timeLeft > HOUR_MS && <>{Math.floor(-timeLeft % DAY_MS / HOUR_MS)}h</>}
+                {-timeLeft > MIN_MS && <>{Math.floor(-timeLeft % DAY_MS % HOUR_MS / MIN_MS)}m</>}
+                {Math.floor(-timeLeft % DAY_MS % HOUR_MS % MIN_MS / SEC_MS)}s
+                ago
+              </>
             }
           </p>
         </>
