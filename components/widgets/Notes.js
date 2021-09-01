@@ -1,5 +1,6 @@
 import Loading from '../Loading.js';
 import DescriptionIcon from '@material-ui/icons/Description';
+import SaveIcon from '@material-ui/icons/Save';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -41,7 +42,9 @@ export default function Notes(props) {
     <div className={styles.container}>
       <h1><DescriptionIcon fontSize="large" /> <span>{widget.name}</span></h1>
       <textarea value={text} onChange={e => setText(e.target.value)} />
-      <button onClick={saveText}>Save</button>
+      <button className="iconbutton3" onClick={saveText}>
+        <SaveIcon />
+      </button>
     </div>
   );
 }

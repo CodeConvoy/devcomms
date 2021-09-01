@@ -1,6 +1,7 @@
 import Loading from '../Loading.js';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import BrushIcon from '@material-ui/icons/Brush';
+import SaveIcon from '@material-ui/icons/Save';
 
 import firebase from 'firebase/app';
 import { useEffect, useRef, useState } from 'react';
@@ -114,7 +115,9 @@ export default function Sketch(props) {
         <button className="iconbutton3" onClick={downloadCanvas}>
           <GetAppIcon />
         </button>
-        <button onClick={saveCanvas}>Save</button>
+        <button className="iconbutton3" onClick={saveCanvas}>
+          <SaveIcon />
+        </button>
       </div>
     </>
   );

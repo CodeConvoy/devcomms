@@ -6,3 +6,7 @@
 .container > canvas {
   background: #fff;
 }
+
+.container > button {
+  margin: 10px 5px;
+}

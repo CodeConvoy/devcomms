@@ -6,4 +6,7 @@
 
 .container > textarea {
   width: 100%;
+  background: var(--dark4);
+  border: 2px solid var(--dark2);
+  color: var(--gray0);
 }
