@@ -65,6 +65,7 @@ export default function SignUp(props) {
       <Background />
       <div className={styles.center}>
         <h1>Sign Up</h1>
+        <hr />
         <form onSubmit={e => {
           e.preventDefault();
           signUp();
@@ -72,6 +73,7 @@ export default function SignUp(props) {
           <label htmlFor="signup-email">Email</label>
           <input
             id="signup-email"
+            className="darkinput"
             placeholder="email"
             type="email"
             value={email}
@@ -82,6 +84,7 @@ export default function SignUp(props) {
           <label htmlFor="signup-username">Username</label>
           <input
             id="signup-username"
+            className="darkinput"
             placeholder="username"
             value={username}
             onChange={e => setUsername(e.target.value)}
@@ -91,6 +94,7 @@ export default function SignUp(props) {
           <label htmlFor="signup-password">Password</label>
           <input
             id="signup-password"
+            className="darkinput"
             placeholder="password"
             type="password"
             value={password}
@@ -100,6 +104,7 @@ export default function SignUp(props) {
           />
           <input
             id="signup-confirmpassword"
+            className="darkinput"
             placeholder="confirm password"
             type="password"
             value={confirmPassword}
