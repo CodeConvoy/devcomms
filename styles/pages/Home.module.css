@@ -2,6 +2,8 @@
   min-height: 100%;
   height: 100%;
   background: var(--dark4);
+  width: fit-content;
+  min-width: 100%;
 }
 
 .page {
@@ -10,6 +12,7 @@
 }
 
 .groups {
+  flex: 0 0 70px;
   display: flex;
   flex-direction: column;
   overflow: scroll;

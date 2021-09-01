@@ -1,5 +1,5 @@
 .container {
-  width: 300px;
+  flex: 0 0 300px;
   background: var(--dark3);
   color: var(--gray0);
   overflow: scroll;

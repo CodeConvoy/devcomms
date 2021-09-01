@@ -1,4 +1,4 @@
-import GithubIcon from '@material-ui/icons/Github';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import GroupIcon from '@material-ui/icons/Group';
 import AddIcon from '@material-ui/icons/Add';
 import Background from '../components/Background.js';
@@ -44,7 +44,7 @@ export default function Index() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <GithubIcon />
+            <GitHubIcon />
             Devcomms GitHub
           </a>
         </p>

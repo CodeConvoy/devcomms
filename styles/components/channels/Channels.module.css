@@ -1,4 +1,5 @@
 .channels {
+  flex: 0 0 188px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
