@@ -6,6 +6,7 @@ import Channels from '../components/channels/Channels.js';
 import Modal from '@material-ui/core/Modal';
 import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -60,26 +61,32 @@ export default function Home(props) {
       <Header currentUser={currentUser} />
       <div className={styles.page}>
         <div className={styles.groups}>
-          <button
+          <div
             className={currGroup === 'home' ? styles.selected : undefined}
             onClick={() => setCurrGroup('home')}
           >
             <HomeIcon />
-          </button>
+          </div>
           {
             groups.map(group =>
-              <button
+              <div
                 className={currGroup === group.id ? styles.selected : undefined}
                 onClick={() => setCurrGroup(group.id)}
                 key={group.id}
               >
                 <div>{group.name}</div>
-              </button>
+                {
+                  uid === group.creator &&
+                  <button onClick={e => e.stopPropagation()}>
+                    <SettingsIcon fontSize="small" />
+                  </button>
+                }
+              </div>
             )
           }
-          <button onClick={() => setModalOpen(true)}>
+          <div onClick={() => setModalOpen(true)}>
             <AddIcon />
-          </button>
+          </div>
         </div>
         {
           currGroup === 'home' ?

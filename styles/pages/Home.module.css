@@ -20,29 +20,56 @@
   background: var(--dark0);
 }
 
-.groups > button {
+.groups > div {
   flex: 0 0 60px;
   width: 60px;
-  border: 0;
   background: var(--dark1);
   color: var(--gray0);
   margin: 5px 0;
   border-radius: 30px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.groups > button:hover {
+.groups > div:hover {
   background: var(--dark2);
 }
 
-.groups > button.selected {
+.groups > div.selected {
   background: var(--dark3);
 }
 
-.groups > button > div {
+.groups > div > div {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.groups > div > button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--gray0);
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  border-radius: 12px;
+}
+
+.groups > div:hover > button {
+  display: flex;
+}
+
+.groups > div > button:hover {
+  background: var(--dark0);
 }
 
 .filler {
