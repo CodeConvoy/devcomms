@@ -17,7 +17,7 @@ export default function Todos(props) {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [due, setDue] = useState(null);
+  const [due, setDue] = useState(undefined);
   const [isDue, setIsDue] = useState(null);
 
   // retrieve todos reference
@@ -32,7 +32,11 @@ export default function Todos(props) {
   // creates a new todo
   async function createTodo() {
     resetModal();
-    await todosRef.add({ title, description, due });
+    await todosRef.add({
+      title: title,
+      description: description,
+      due: due.replaceAll('-', '/')
+    });
   }
 
   // resets modal
@@ -56,7 +60,9 @@ export default function Todos(props) {
           )
         }
       </div>
-      <button onClick={() => setModalOpen(true)}>New Todo</button>
+      <button className="iconbutton3" onClick={() => setModalOpen(true)}>
+        <AddIcon />
+      </button>
       <Modal
         open={modalOpen}
         onClose={resetModal}

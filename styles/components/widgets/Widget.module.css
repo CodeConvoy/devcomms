@@ -2,6 +2,7 @@
   width: 300px;
   background: var(--dark3);
   color: var(--gray0);
+  overflow: scroll;
 }
 
 .container > div > h1 {
