@@ -56,16 +56,16 @@ export default function Todo(props) {
             {
               timeLeft >= 0 ?
               <>
-                {timeLeft > DAY_MS && <>{Math.floor(timeLeft / DAY_MS)}d</>}
-                {timeLeft > HOUR_MS && <>{Math.floor(timeLeft % DAY_MS / HOUR_MS)}h</>}
-                {timeLeft > MIN_MS && <>{Math.floor(timeLeft % DAY_MS % HOUR_MS / MIN_MS)}m</>}
-                {Math.floor(timeLeft % DAY_MS % HOUR_MS % MIN_MS / SEC_MS)}s
+                {timeLeft > DAY_MS && <>{Math.floor(timeLeft / DAY_MS)}<span>d</span></>}
+                {timeLeft > HOUR_MS && <>{Math.floor(timeLeft % DAY_MS / HOUR_MS)}<span>h</span></>}
+                {timeLeft > MIN_MS && <>{Math.floor(timeLeft % DAY_MS % HOUR_MS / MIN_MS)}<span>m</span></>}
+                {Math.floor(timeLeft % DAY_MS % HOUR_MS % MIN_MS / SEC_MS)}<span>s</span>
               </> :
               <>
-                {-timeLeft > DAY_MS && <>{Math.floor(-timeLeft / DAY_MS)}d</>}
-                {-timeLeft > HOUR_MS && <>{Math.floor(-timeLeft % DAY_MS / HOUR_MS)}h</>}
-                {-timeLeft > MIN_MS && <>{Math.floor(-timeLeft % DAY_MS % HOUR_MS / MIN_MS)}m</>}
-                {Math.floor(-timeLeft % DAY_MS % HOUR_MS % MIN_MS / SEC_MS)}s
+                {-timeLeft > DAY_MS && <>{Math.floor(-timeLeft / DAY_MS)}<span>d</span></>}
+                {-timeLeft > HOUR_MS && <>{Math.floor(-timeLeft % DAY_MS / HOUR_MS)}<span>h</span></>}
+                {-timeLeft > MIN_MS && <>{Math.floor(-timeLeft % DAY_MS % HOUR_MS / MIN_MS)}<span>m</span></>}
+                {Math.floor(-timeLeft % DAY_MS % HOUR_MS % MIN_MS / SEC_MS)}<span>s</span>
                 ago
               </>
             }

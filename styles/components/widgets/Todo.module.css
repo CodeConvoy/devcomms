@@ -4,6 +4,7 @@
   margin: 10px;
   position: relative;
   border-radius: 2px;
+  text-align: left;
 }
 
 .container > h1 {
@@ -27,4 +28,17 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.container > hr {
+  border: 1px solid var(--dark4);
+}
+
+.timeleft > span {
+  font-size: 12px;
+  margin-right: 4px;
+}
+
+.overdue {
+  color: red;
 }
