@@ -41,6 +41,7 @@ export default function SignIn(props) {
       <Background />
       <div className={styles.center}>
         <h1>Sign In</h1>
+        <hr />
         <form onSubmit={e => {
           e.preventDefault();
           signIn();
@@ -48,6 +49,7 @@ export default function SignIn(props) {
           <label htmlFor="signin-email">Email</label>
           <input
             id="signin-email"
+            className="darkinput"
             placeholder="email"
             type="email"
             value={email}
@@ -58,6 +60,7 @@ export default function SignIn(props) {
           <label htmlFor="signin-password">Password</label>
           <input
             id="signin-password"
+            className="darkinput"
             placeholder="password"
             type="password"
             value={password}
