@@ -17,7 +17,7 @@ const yesterday = new Date(nowYear, nowMonth, nowDay - 1).setHours(0, 0, 0, 0);
 
 export default function Message(props) {
   const { showHeader, messagesRef } = props;
-  const { text, sender, username, sent, id } = props.message;
+  const { text, sender, username, sent, type, id } = props.message;
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -61,7 +61,23 @@ export default function Message(props) {
           <br />
         </>
       }
-      <span>{text}</span>
+      {
+        type === 'text' ?
+        <span>{text}</span> :
+        <a href={props.message.url} target="_blank" rel="noreferrer noopener">
+          {
+            type === 'image' ?
+            // using an img element here because of unknown size
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={props.message.url}
+              className={styles.image}
+              alt={props.message.filename}
+            /> :
+            props.message.filename
+          }
+        </a>
+      }
       {
         uid === sender &&
         <button onClick={() => setModalOpen(true)}>
