@@ -8,6 +8,7 @@ import styles from '../../styles/components/widgets/Todo.module.css';
 
 export default function Todo(props) {
   const { title, description, due, id, todosRef } = props;
+  const dueDate = due ? new Date(due) : undefined;
 
   const todoRef = todosRef.doc(id);
 
@@ -25,7 +26,19 @@ export default function Todo(props) {
     <div className={styles.container}>
       <h1>{title}</h1>
       <p>{description}</p>
-      {due && <p>Due {new Date(due).toLocaleDateString()}</p>}
+      {
+        due &&
+        <>
+          <hr />
+          <p>
+            {
+              dueDate.toLocaleString('default', {
+                weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+              })
+            }
+          </p>
+        </>
+      }
       <button className="iconbutton3" onClick={() => setModalOpen(true)}>
         <EditIcon fontSize="small" />
       </button>
