@@ -1,5 +1,6 @@
 import Loading from '../Loading.js';
 import GetAppIcon from '@material-ui/icons/GetApp';
+import BrushIcon from '@material-ui/icons/Brush';
 
 import firebase from 'firebase/app';
 import { useEffect, useRef, useState } from 'react';
@@ -100,6 +101,7 @@ export default function Sketch(props) {
         className={styles.container}
         style={ loaded ? undefined : { display: 'none'}}
       >
+        <h1><BrushIcon fontSize="large" /> <span>{widget.name}</span></h1>
         <canvas
           ref={canvasRef}
           width={width}
