@@ -95,6 +95,22 @@ select {
   background: var(--dark2);
 }
 
+.bluebutton {
+  background: var(--blue0);
+  padding: 10px 20px;
+  color: var(--gray0);
+  border: 0;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.25s;
+}
+
+.bluebutton:hover {
+  background: var(--blue1);
+  text-decoration: underline;
+}
+
 .darkinput {
   background: var(--dark3);
   border: 2px solid var(--dark2);

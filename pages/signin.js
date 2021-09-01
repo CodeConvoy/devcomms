@@ -68,7 +68,7 @@ export default function SignIn(props) {
             autoComplete="current-password"
             required
           />
-          <button>Sign In</button>
+          <button className="bluebutton">Sign In</button>
         </form>
         {error && <p>{error}</p>}
         <Link href="/signup">

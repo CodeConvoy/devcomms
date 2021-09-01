@@ -112,7 +112,7 @@ export default function SignUp(props) {
             autoComplete="new-password"
             required
           />
-          <button>Sign Up</button>
+          <button className="bluebutton">Sign Up</button>
         </form>
         {error && <p>{error}</p>}
         <Link href="/signin">
