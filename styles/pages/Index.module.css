@@ -3,23 +3,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .center {
-  max-width: 600px;
+  max-width: 500px;
   margin: 40px;
-  background: #efefef;
-  padding: 20px;
-  line-height: 28px;
+  background: var(--dark1);
+  color: var(--gray0);
+  padding: 20px 40px;
+  border-radius: 10px;
 }
 
-.title {
-  display: flex;
-  align-items: center;
+.center > div:first-of-type {
+  margin: -10px 0!important;
 }
 
-.title > h1 {
+.center > h1 {
   margin: 0;
+}
+
+.center > p {
+  margin: 0;
+  line-height: 22px;
+}
+
+.center > hr {
+  margin: 15px 0;
 }
 
 .title > div {
@@ -28,4 +38,37 @@
 
 .center > a {
   margin-right: 10px;
+}
+
+.iconlist {
+  margin: 10px;
+}
+
+.iconlist > svg {
+  margin: 0 2px;
+}
+
+.githublink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.githublink > svg {
+  margin-right: 4px;
+}
+
+.biglink {
+  background: var(--blue0);
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 10px;
+  color: var(--gray0);
+  font-weight: bold;
+}
+
+.biglink:hover {
+  background: var(--blue1);
+  color: var(--gray0);
 }
