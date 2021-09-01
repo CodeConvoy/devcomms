@@ -5,13 +5,16 @@ import styles from '../styles/Group.module.css';
 import firebase from 'firebase/app';
 
 export default function Group(props) {
-  const { group, currGroup, setCurrGroup } = props;
+  const { group, currGroup, setCurrGroup, selectStyle } = props;
 
   const uid = firebase.auth().currentUser.uid;
 
   return (
     <div
-      className={currGroup === group.id ? styles.selected : undefined}
+      className={
+        currGroup === group.id ?
+        `${styles.container} ${selectStyle}` : styles.container
+      }
       onClick={() => setCurrGroup(group.id)}
       key={group.id}
     >

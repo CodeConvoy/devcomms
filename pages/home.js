@@ -1,12 +1,12 @@
 import Router from 'next/router';
 import Loading from '../components/Loading.js';
 import Header from '../components/Header.js';
+import Group from '../components/Group.js';
 import Homescreen from '../components/channels/Homescreen.js';
 import Channels from '../components/channels/Channels.js';
 import Modal from '@material-ui/core/Modal';
 import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
-import SettingsIcon from '@material-ui/icons/Settings';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -69,19 +69,13 @@ export default function Home(props) {
           </div>
           {
             groups.map(group =>
-              <div
-                className={currGroup === group.id ? styles.selected : undefined}
-                onClick={() => setCurrGroup(group.id)}
+              <Group
+                group={group}
+                currGroup={currGroup}
+                setCurrGroup={setCurrGroup}
+                selectStyle={styles.selected}
                 key={group.id}
-              >
-                <div>{group.name}</div>
-                {
-                  uid === group.creator &&
-                  <button onClick={e => e.stopPropagation()}>
-                    <SettingsIcon fontSize="small" />
-                  </button>
-                }
-              </div>
+              />
             )
           }
           <div onClick={() => setModalOpen(true)}>
