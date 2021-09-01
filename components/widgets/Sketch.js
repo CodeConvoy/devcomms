@@ -62,10 +62,33 @@ export default function Sketch(props) {
     });
   }
 
+  // saves canvas to firebase
+  async function saveCanvas() {
+    const sketch = canvas.toDataURL();
+    await channelRef.update({ sketch });
+  }
+
+  // retrieve canvas from firebase
+  async function getCanvas() {
+    // get sketch
+    const channelDoc = await channelRef.get();
+    const sketch = channelDoc.data().sketch;
+    // load image if sketch
+    if (sketch) {
+      const image = new Image();
+      image.onload = () => {
+        ctx.drawImage(image, 0, 0);
+        setLoaded(true);
+      }
+      image.src = sketch;
+    } else setLoaded(true);
+  }
+
   // retrieve canvas context on start
   useEffect(() => {
     canvas = canvasRef.current;
     ctx = canvas.getContext('2d');
+    getCanvas();
   }, []);
 
   return (
