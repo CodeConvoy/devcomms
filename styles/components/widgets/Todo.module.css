@@ -1,5 +1,30 @@
 .container {
-  background: #ddd;
+  background: var(--dark1);
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
+  position: relative;
+  border-radius: 2px;
+}
+
+.container > h1 {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.container > p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.container > button {
+  display: none;
+}
+
+.container:hover > button {
+  display: inherit;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
