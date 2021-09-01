@@ -1,3 +1,4 @@
+import Loading from '../Loading.js';
 import GetAppIcon from '@material-ui/icons/GetApp';
 
 import firebase from 'firebase/app';
@@ -17,10 +18,11 @@ let prevX, prevY;
 let currX, currY;
 
 export default function Sketch(props) {
-  const { group, channel } = props;
+  const { group, widget } = props;
 
   const [lineColor, setLineColor] = useState('black');
   const [lineWidth, setLineWidth] = useState(2);
+  const [loaded, setLoaded] = useState(false);
 
   const canvasRef = useRef();
 
@@ -28,17 +30,17 @@ export default function Sketch(props) {
   const groupsRef = firebase.firestore().collection('groups');
   const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels')
-  const channelRef = channelsRef.doc(channel);
+  const channelRef = channelsRef.doc(widget.id);
 
   // sketches canvas with given mouse event data
-  function sketch(e) {
+  function sketch(e, doDraw) {
     // get previous and current mouse positions
     prevX = currX;
     prevY = currY;
     currX = e.clientX - canvas.offsetLeft + window.scrollX;
     currY = e.clientY - canvas.offsetTop + window.scrollY;
-    // return if no previous data
-    if (prevX === undefined || prevY === undefined) return;
+    // return if not drawing
+    if (!doDraw) return;
     // draw stroke
     ctx.beginPath();
     ctx.moveTo(prevX, prevY);
@@ -92,19 +94,26 @@ export default function Sketch(props) {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        onMouseDown={e => { sketching = true; sketch(e); }}
-        onMouseMove={e => { if (sketching) sketch(e); }}
-        onMouseUp={e => { sketching = false; }}
-        onMouseLeave={e => { sketching = false; }}
-      />
-      <button onClick={downloadCanvas}>
-        <GetAppIcon />
-      </button>
-    </div>
+    <>
+      {!loaded && <Loading />}
+      <div
+        className={styles.container}
+        style={ loaded ? undefined : { display: 'none'}}
+      >
+        <canvas
+          ref={canvasRef}
+          width={width}
+          height={height}
+          onMouseDown={e => { sketching = true; sketch(e, false); }}
+          onMouseMove={e => { if (sketching) sketch(e, true); }}
+          onMouseUp={e => { sketching = false; }}
+          onMouseLeave={e => { sketching = false; }}
+        />
+        <button className="iconbutton3" onClick={downloadCanvas}>
+          <GetAppIcon />
+        </button>
+        <button onClick={saveCanvas}>Save</button>
+      </div>
+    </>
   );
 }
