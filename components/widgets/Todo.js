@@ -152,7 +152,10 @@ export default function Todo(props) {
               <CheckIcon />
             </button>
           </form>
-          <button className="iconbutton2" onClick={deleteTodo}>
+          <button
+            className={`iconbutton2 ${styles.delbutton}`}
+            onClick={deleteTodo}
+          >
             <DeleteIcon />
           </button>
         </div>

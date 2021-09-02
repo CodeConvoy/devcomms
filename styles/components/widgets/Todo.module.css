@@ -42,3 +42,21 @@
 .overdue {
   color: red;
 }
+
+.descinput {
+  margin: 10px 0;
+}
+
+.duecheck {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.dateinput {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.delbutton {
+  margin-top: 10px;
+}
