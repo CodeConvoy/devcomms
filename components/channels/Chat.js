@@ -4,7 +4,7 @@ import Loading from '../Loading.js';
 import PublishIcon from '@material-ui/icons/Publish';
 import SendIcon from '@material-ui/icons/Send';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { v4 as uuid } from 'uuid';
 import firebase from 'firebase/app';
@@ -14,11 +14,13 @@ import styles from '../../styles/components/channels/Chat.module.css';
 // delay in seconds before a new header
 const headerOffset = 60 * 5;
 
-export default function Text(props) {
+export default function Chat(props) {
   const { messagesRef, currentUser } = props;
 
   const [text, setText] = useState('');
   const [file, setFile] = useState(undefined);
+
+  const messagesEnd = useRef();
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -62,6 +64,14 @@ export default function Text(props) {
     });
   }
 
+  // scroll to end of messages
+  function scroll() {
+    if (messagesEnd.current) messagesEnd.current.scrollIntoView();
+  }
+
+  // scroll page when messages update
+  useEffect(scroll, [messages]);
+
   // return if loading
   if (!messages) return <Loading />;
 
@@ -78,10 +88,12 @@ export default function Text(props) {
               }
               message={message}
               messagesRef={messagesRef}
+              scroll={scroll}
               key={message.id}
             />
           )
         }
+        <span ref={messagesEnd} />
       </div>
       <form onSubmit={e => {
         e.preventDefault();
