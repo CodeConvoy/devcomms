@@ -16,6 +16,11 @@ export default function Todo(props) {
   const { title, description, due, id, todosRef } = props;
   const dueDate = due ? new Date(due) : undefined;
 
+  const [newTitle, setNewTitle] = useState(title);
+  const [newDescription, setNewDescription] = useState(description);
+  const [newDue, setNewDue] = useState(due ? due.replaceAll('/', '-') : null);
+  const [isDue, setIsDue] = useState(!!due);
+
   const todoRef = todosRef.doc(id);
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -27,6 +32,16 @@ export default function Todo(props) {
       setModalOpen(false);
       await todoRef.delete();
     }
+  }
+
+  // updates todo
+  async function updateTodo() {
+    setModalOpen(false);
+    await todoRef.update({
+      title: newTitle,
+      description: newDescription,
+      due: newDue ? newDue.replaceAll('-', '/') : null
+    });
   }
 
   useEffect(() => {
