@@ -45,45 +45,42 @@ export default function Message(props) {
   }
 
   return (
-    <div className={styles.container}>
+    <>
       {
         showHeader &&
-        <>
-          <span>
-            <Link href={`/users/${username}`}>
-              <a>@{username}</a>
-            </Link>
-            {' '}
-            <span className={styles.datetime}>
-              {getDateTimeString(sent.toDate())}
-            </span>
+        <span className={styles.header}>
+          @{username}
+          {' '}
+          <span className={styles.datetime}>
+            {getDateTimeString(sent.toDate())}
           </span>
-          <br />
-        </>
+        </span>
       }
-      {
-        type === 'text' ?
-        <span>{text}</span> :
-        <a href={props.message.url} target="_blank" rel="noreferrer noopener">
-          {
-            type === 'image' ?
-            // using an img element here because of unknown size
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={props.message.url}
-              className={styles.image}
-              alt={props.message.filename}
-            /> :
-            props.message.filename
-          }
-        </a>
-      }
-      {
-        uid === sender &&
-        <button onClick={() => setModalOpen(true)}>
-          <EditIcon fontSize="small" />
-        </button>
-      }
+      <div className={styles.container}>
+        {
+          type === 'text' ?
+          <span>{text}</span> :
+          <a href={props.message.url} target="_blank" rel="noreferrer noopener">
+            {
+              type === 'image' ?
+              // using an img element here because of unknown size
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={props.message.url}
+                className={styles.image}
+                alt={props.message.filename}
+              /> :
+              props.message.filename
+            }
+          </a>
+        }
+        {
+          uid === sender &&
+          <button onClick={() => setModalOpen(true)}>
+            <EditIcon fontSize="small" />
+          </button>
+        }
+      </div>
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -95,6 +92,6 @@ export default function Message(props) {
           </button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 }
