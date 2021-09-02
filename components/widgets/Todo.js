@@ -1,6 +1,7 @@
 import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from '@material-ui/icons/Check';
 
 import { useEffect, useState } from 'react';
 
@@ -81,6 +82,50 @@ export default function Todo(props) {
       >
         <div className="modal">
           <h1>Editing Todo</h1>
+          <form onSubmit={e => {
+            e.preventDefault();
+            updateTodo();
+          }}>
+            <input
+              value={newTitle}
+              className="darkinput"
+              onChange={e => setNewTitle(e.target.value)}
+              placeholder="title"
+              required
+            />
+            <input
+              value={newDescription}
+              className={`${styles.descinput} darkinput`}
+              onChange={e => setNewDescription(e.target.value)}
+              placeholder="description"
+              required
+            />
+            <label htmlFor="todos-isdue">Due date?</label>
+            <input
+              id="todos-isdue"
+              type="checkbox"
+              className={styles.duecheck}
+              checked={isDue}
+              onChange={e => {
+                const newIsDue = e.target.checked;
+                setIsDue(newIsDue);
+                setNewDue(newIsDue ? new Date() : null);
+              }}
+            />
+            {
+              isDue &&
+              <input
+                className={`${styles.dateinput} darkinput`}
+                type="date"
+                value={newDue}
+                onChange={e => setNewDue(e.target.value)}
+                required
+              />
+            }
+            <button className="iconbutton2">
+              <CheckIcon />
+            </button>
+          </form>
           <button className="iconbutton2" onClick={deleteTodo}>
             <DeleteIcon />
           </button>
