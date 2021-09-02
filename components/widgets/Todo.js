@@ -44,6 +44,14 @@ export default function Todo(props) {
     });
   }
 
+  // resets modal
+  function resetModal() {
+    setNewTitle(title);
+    setNewDescription(description);
+    setNewDue(due ? due.replaceAll('/', '-') : null);
+    setIsDue(!!due);
+  }
+
   useEffect(() => {
     // update time left every tenth of a second
     setTimeLeft(dueDate - new Date());
@@ -51,7 +59,7 @@ export default function Todo(props) {
       setTimeLeft(dueDate - new Date());
     }, 100);
     return () => clearInterval(interval);
-  }, []);
+  }, [due]);
 
   return (
     <div className={styles.container}>
@@ -88,12 +96,15 @@ export default function Todo(props) {
           </p>
         </>
       }
-      <button className="iconbutton3" onClick={() => setModalOpen(true)}>
+      <button className="iconbutton3" onClick={() => {
+        resetModal();
+        setModalOpen(true);
+      }}>
         <EditIcon fontSize="small" />
       </button>
       <Modal
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={resetModal}
       >
         <div className="modal">
           <h1>Editing Todo</h1>

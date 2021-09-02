@@ -25,7 +25,7 @@ export default function Chat(props) {
   const uid = firebase.auth().currentUser.uid;
 
   // retrieve channel messages
-  const messagesQuery = messagesRef.orderBy('sent');
+  const messagesQuery = messagesRef.orderBy('sent').limitToLast(100);
   const [messages] = useCollectionData(messagesQuery, { idField: 'id' });
 
   // creates new message doc in firebase

@@ -35,7 +35,7 @@ export default function Todos(props) {
     await todosRef.add({
       title: title,
       description: description,
-      due: due.replaceAll('-', '/')
+      due: due ? due.replaceAll('-', '/') : null
     });
   }
 
