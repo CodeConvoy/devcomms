@@ -123,7 +123,7 @@ export default function Chat(props) {
         onClose={() => setFile(undefined)}
       >
         {
-          file &&
+          file ?
           <div className="modal">
             <h1>Send File</h1>
             <p>{file.name} ({file.type})</p>
@@ -141,7 +141,8 @@ export default function Chat(props) {
             <button className="iconbutton2" onClick={sendFile}>
               <SendIcon />
             </button>
-          </div>
+          </div> :
+          <div>Loading file...</div>
         }
       </Modal>
     </div>

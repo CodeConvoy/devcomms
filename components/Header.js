@@ -15,9 +15,7 @@ export default function Header(props) {
       <h1>Devcomms</h1>
       <span className={styles.flexfill} />
       <p>Signed in as{' '}
-        <Link href={`/users/${currentUser.username}`}>
-          <a>@{currentUser.username}</a>
-        </Link>
+        <span className={styles.username}>@{currentUser.username}</span>
       </p>
       <button
         onClick={() => firebase.auth().signOut()}

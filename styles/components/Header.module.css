@@ -29,3 +29,7 @@
 .container > button {
   margin-right: 20px;
 }
+
+.username {
+  font-weight: bold;
+}
