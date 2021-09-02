@@ -44,6 +44,8 @@ export default function Text(props) {
   async function sendFile() {
     // if no file, return
     if (!file) return;
+    // clear file
+    setFile(undefined);
     // put file in storage and get url
     const filePath = `chat/${uuid()}`;
     const fileRef = firebase.storage().ref(filePath);
@@ -58,8 +60,6 @@ export default function Text(props) {
       username: currentUser.username,
       sent: new Date()
     });
-    // clear file
-    setFile(undefined);
   }
 
   // return if loading
@@ -110,12 +110,27 @@ export default function Text(props) {
         open={!!file}
         onClose={() => setFile(undefined)}
       >
-        <div className="modal">
-          <p>{file?.name}</p>
-          <button onClick={sendFile}>
-            <SendIcon />
-          </button>
-        </div>
+        {
+          file &&
+          <div className="modal">
+            <h1>Send File</h1>
+            <p>{file.name} ({file.type})</p>
+            <div>
+              {
+                file.type.startsWith('image/') &&
+                // using an img element here because of unknown size
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={URL.createObjectURL(file)}
+                  className={styles.image}
+                />
+              }
+            </div>
+            <button className="iconbutton2" onClick={sendFile}>
+              <SendIcon />
+            </button>
+          </div>
+        }
       </Modal>
     </div>
   );
