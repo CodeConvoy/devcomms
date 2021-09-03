@@ -13,7 +13,8 @@ const HOUR_MS = MIN_MS * 60;
 const DAY_MS = HOUR_MS * 24;
 
 export default function Todo(props) {
-  const { title, description, due, id, todosRef } = props;
+  const { todosRef, deleteOrder } = props;
+  const { title, description, due, order, id } = props.todo;
   const dueDate = due ? new Date(due) : undefined;
 
   const [newTitle, setNewTitle] = useState(title);
@@ -30,6 +31,7 @@ export default function Todo(props) {
   async function deleteTodo() {
     if (window.confirm('Really delete todo?')) {
       setModalOpen(false);
+      await deleteOrder(order);
       await todoRef.delete();
     }
   }
@@ -104,7 +106,7 @@ export default function Todo(props) {
       </button>
       <Modal
         open={modalOpen}
-        onClose={resetModal}
+        onClose={() => setModalOpen(false)}
       >
         <div className="modal">
           <h1>Editing Todo</h1>

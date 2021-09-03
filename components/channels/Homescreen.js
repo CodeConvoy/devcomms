@@ -39,7 +39,7 @@ export default function Homescreen(props) {
               onClick={() => setCurrUser(user)}
               key={user.id}
             >
-              {user.username}
+              <div>{user.username}</div>
             </button>
           )
         }

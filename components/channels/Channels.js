@@ -1,5 +1,6 @@
 import Loading from '../Loading.js';
 import Chat from './Chat.js';
+import Channel from './Channel.js';
 import Widget from '../widgets/Widget.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
@@ -56,9 +57,10 @@ export default function Channels(props) {
     setModalOpen(false);
   }
 
-  // clear current channel when group changes
+  // clear current channel and widget when group changes
   useEffect(() => {
     setCurrChannel(undefined);
+    setCurrWidget(undefined);
   }, [group]);
 
   // return if loading
