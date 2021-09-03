@@ -1,6 +1,7 @@
 import Modal from '@material-ui/core/Modal';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from '@material-ui/icons/Check';
 
 import { useState } from 'react';
 
@@ -12,14 +13,29 @@ export default function Group(props) {
   const { group, currGroup, setCurrGroup, selectStyle } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [name, setName] = useState(group.name);
 
   const uid = firebase.auth().currentUser.uid;
 
+  // get group ref
+  const groupsRef = firebase.firestore().collection('groups');
+  const groupRef = groupsRef.doc(group.id);
+
+  // resets modal
+  function resetModal() {
+    setName(group.name);
+  }
+
   // deletes group
   async function deleteGroup() {
-    if (window.confirm('Really delete group?')) {
-      await firebase.firestore().collection('groups').doc(group.id).delete();
-    }
+    if (window.confirm('Really delete group?')) await groupRef.delete();
+  }
+
+  // updates group
+  async function updateGroup() {
+    resetModal();
+    setModalOpen(false);
+    await groupRef.update({ name });
   }
 
   return (
@@ -34,7 +50,10 @@ export default function Group(props) {
       <div>{group.name}</div>
       {
         uid === group.creator &&
-        <button onClick={() => setModalOpen(true)}>
+        <button onClick={() => {
+          resetModal();
+          setModalOpen(true);
+        }}>
           <SettingsIcon fontSize="small" />
         </button>
       }
@@ -44,6 +63,21 @@ export default function Group(props) {
       >
         <div className="modal">
           <h1>Editing Group</h1>
+          <form onSubmit={e => {
+            e.preventDefault();
+            updateGroup();
+          }}>
+            <input
+              value={name}
+              className={`${styles.descinput} darkinput`}
+              onChange={e => setName(e.target.value)}
+              placeholder="name"
+              required
+            />
+            <button>
+              <CheckIcon />
+            </button>
+          </form>
           <button className="iconbutton2" onClick={deleteGroup}>
             <DeleteIcon />
           </button>
