@@ -4,8 +4,12 @@ import SaveIcon from '@material-ui/icons/Save';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 import styles from '../../styles/components/widgets/Notes.module.css';
+
+// save timeout in milliseconds
+const saveDelay = 250;
 
 export default function Notes(props) {
   const { group, widget } = props;
@@ -17,23 +21,23 @@ export default function Notes(props) {
   const groupRef = groupsRef.doc(group);
   const widgetsRef = groupRef.collection('widgets')
   const widgetRef = widgetsRef.doc(widget.id);
-
-  // gets existing text from firebase
-  async function getText() {
-    const widgetDoc = await widgetRef.get();
-    const data = widgetDoc.data();
-    setText(data.text ?? '');
-  }
+  const [widgetData] = useDocumentData(widgetRef);
 
   // saves text to firebase
   async function saveText() {
     await widgetRef.update({ text });
   }
 
-  // get text on start
+  // save text on update
   useEffect(() => {
-    getText();
-  }, []);
+    const saveTimeout = setTimeout(saveText, saveDelay);
+    return () => clearTimeout(saveTimeout);
+  }, [text]);
+
+  // set text when widget data changes
+  useEffect(() => {
+    setText(widgetData?.text ?? '');
+  }, [widgetData]);
 
   // return if loading
   if (text === undefined) return <Loading />;
@@ -42,9 +46,6 @@ export default function Notes(props) {
     <div className={styles.container}>
       <h1><DescriptionIcon fontSize="large" /> <span>{widget.name}</span></h1>
       <textarea value={text} onChange={e => setText(e.target.value)} />
-      <button className="iconbutton3" onClick={saveText}>
-        <SaveIcon />
-      </button>
     </div>
   );
 }
