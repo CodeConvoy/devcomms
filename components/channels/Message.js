@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CheckIcon from '@material-ui/icons/Check';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -20,6 +21,7 @@ export default function Message(props) {
   const { text, sender, username, sent, type, id } = props.message;
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [newText, setNewText] = useState(text);
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -32,6 +34,17 @@ export default function Message(props) {
       setModalOpen(false);
       await messageRef.delete();
     }
+  }
+
+  // updates message in firebase
+  async function updateMessage() {
+    setModalOpen(false);
+    await messageRef.update({ text: newText });
+  }
+
+  // resets modal
+  function resetModal() {
+    setNewText(text);
   }
 
   // returns a datetime string for given datetime
@@ -77,7 +90,10 @@ export default function Message(props) {
         }
         {
           uid === sender &&
-          <button onClick={() => setModalOpen(true)}>
+          <button onClick={() => {
+            resetModal();
+            setModalOpen(true);
+          }}>
             <EditIcon fontSize="small" />
           </button>
         }
@@ -88,6 +104,23 @@ export default function Message(props) {
       >
         <div className="modal">
           <h1>Editing Message</h1>
+          {
+            type === 'text' &&
+            <form onSubmit={e => {
+              e.preventDefault();
+              updateMessage();
+            }}>
+              <input
+                value={newText}
+                onChange={e => setNewText(e.target.value)}
+                className="darkinput"
+                required
+              />
+              <button className="iconbutton2">
+                <CheckIcon />
+              </button>
+            </form>
+          }
           <button className="iconbutton2" onClick={deleteMessage}>
             <DeleteIcon />
           </button>
