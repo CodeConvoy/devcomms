@@ -72,6 +72,18 @@ export default function Channels(props) {
     batch.commit(); // commit batch
   }
 
+  // updates widget orders in firebase
+  async function updateWidgetOrder() {
+    const batch = firebase.firestore().batch(); // create batch
+    // for each widget
+    await widgets.forEach((widget, i) => {
+      // update widget doc at id with order
+      const widgetDoc = widgetsRef.doc(widget.id);
+      batch.update(widgetDoc, { order: i });
+    });
+    batch.commit(); // commit batch
+  }
+
   // called after channel drag ends
   function onChannelDragEnd(result) {
     if (!result.destination) return; // out of bounds
@@ -79,6 +91,15 @@ export default function Channels(props) {
     const [removed] = channels.splice(result.source.index, 1);
     channels.splice(result.destination.index, 0, removed);
     updateChannelOrder();
+  }
+
+  // called after widget drag ends
+  function onWidgetDragEnd(result) {
+    if (!result.destination) return; // out of bounds
+    if (result.source.index === result.destination.index) return; // same spot
+    const [removed] = widgets.splice(result.source.index, 1);
+    widgets.splice(result.destination.index, 0, removed);
+    updateWidgetOrder();
   }
 
   // clear current channel and widget when group changes
