@@ -80,6 +80,27 @@ export default function Channels(props) {
           <AddIcon />
         </button>
       </div>
+      <div className={styles.widgets}>
+        {
+          widgets.map(widget =>
+            <button
+              className={
+                currWidget?.id === widget.id ? styles.selected : undefined
+              }
+              onClick={() => setCurrWidget(
+                currWidget?.id === widget.id ? undefined : currWidget
+              )}
+              key={widget.id}
+            >
+              {getChannelIcon(widget.type)}
+              <span>{widget.name}</span>
+            </button>
+          )
+        }
+        <button onClick={() => setModalOpen(true)}>
+          <AddIcon />
+        </button>
+      </div>
       {
         currChannel ?
         <Chat messagesRef={getMessagesRef()} currentUser={currentUser} /> :
