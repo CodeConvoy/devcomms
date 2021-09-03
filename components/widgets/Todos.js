@@ -3,6 +3,7 @@ import Loading from '../Loading.js';
 import Modal from '@material-ui/core/Modal';
 import AddIcon from '@material-ui/icons/Add';
 import ListIcon from '@material-ui/icons/List';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import firebase from 'firebase/app';
 import { useState } from 'react';
@@ -53,13 +54,16 @@ export default function Todos(props) {
   return (
     <div className={styles.container}>
       <h1><ListIcon fontSize="large" /><span>{widget.name}</span></h1>
-      <div className={styles.todos}>
-        {
-          todos.map(todo =>
-            <Todo {...todo} todosRef={todosRef} key={todo.id} />
-          )
-        }
-      </div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable-todos">
+          {
+            (provided, snapshot) =>
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              {provided.placeholder}
+            </div>
+          }
+        </Droppable>
+      </DragDropContext>
       <button className="iconbutton3" onClick={() => setModalOpen(true)}>
         <AddIcon />
       </button>
