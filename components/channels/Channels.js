@@ -60,6 +60,27 @@ export default function Channels(props) {
     setWidgetModalOpen(false);
   }
 
+  // updates channel orders in firebase
+  async function updateChannelOrder() {
+    const batch = firebase.firestore().batch(); // create batch
+    // for each channel
+    await channels.forEach((channel, i) => {
+      // update channel doc at id with order
+      const channelDoc = channelsRef.doc(channel.id);
+      batch.update(channelDoc, { order: i });
+    });
+    batch.commit(); // commit batch
+  }
+
+  // called after channel drag ends
+  function onChannelDragEnd(result) {
+    if (!result.destination) return; // out of bounds
+    if (result.source.index === result.destination.index) return; // same spot
+    const [removed] = channels.splice(result.source.index, 1);
+    channels.splice(result.destination.index, 0, removed);
+    updateChannelOrder();
+  }
+
   // clear current channel and widget when group changes
   useEffect(() => {
     setCurrChannel(undefined);
