@@ -33,10 +33,18 @@ export default function Channels(props) {
 
   // creates new channel doc in firebase
   async function createChannel() {
-    const newChannel = { name, type };
+    const channelName = name;
     resetModal();
-    const docRef = await channelsRef.add(newChannel);
-    selectChannel({ id: docRef.id, ...newChannel });
+    const docRef = await channelsRef.add({ name: channelName });
+    setCurrChannel({ id: docRef.id, name: channelName });
+  }
+
+  // creates new widget doc in firebase
+  async function createWidget() {
+    const widget = { name, type };
+    resetModal();
+    const docRef = await widgetsRef.add(widget);
+    setCurrWidget({ id: docRef.id, ...widget });
   }
 
   // returns messages ref for current channel
@@ -143,6 +151,7 @@ export default function Channels(props) {
           <h1>New Widget</h1>
           <form onSubmit={e => {
             e.preventDefault();
+            createWidget();
           }}>
             <input
               placeholder="name"
