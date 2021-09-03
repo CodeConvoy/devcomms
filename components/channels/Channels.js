@@ -19,8 +19,9 @@ export default function Channels(props) {
   const [currChannel, setCurrChannel] = useState(undefined);
   const [currWidget, setCurrWidget] = useState(undefined);
   const [name, setName] = useState('');
-  const [type, setType] = useState('text');
-  const [modalOpen, setModalOpen] = useState(false);
+  const [type, setType] = useState('sketch');
+  const [channelModalOpen, setChannelModalOpen] = useState(false);
+  const [widgetModalOpen, setWidgetModalOpen] = useState(false);
 
   // retrieve group channels and widgets
   const groupsRef = firebase.firestore().collection('groups');
@@ -46,8 +47,9 @@ export default function Channels(props) {
   // resets modal
   function resetModal() {
     setName('');
-    setType('text');
-    setModalOpen(false);
+    setType('sketch');
+    setChannelModalOpen(false);
+    setWidgetModalOpen(false);
   }
 
   // clear current channel and widget when group changes
@@ -76,7 +78,7 @@ export default function Channels(props) {
             </button>
           )
         }
-        <button onClick={() => setModalOpen(true)}>
+        <button onClick={() => setChannelModalOpen(true)}>
           <AddIcon />
         </button>
       </div>
@@ -97,7 +99,7 @@ export default function Channels(props) {
             </button>
           )
         }
-        <button onClick={() => setModalOpen(true)}>
+        <button onClick={() => setWidgetModalOpen(true)}>
           <AddIcon />
         </button>
       </div>
@@ -111,7 +113,7 @@ export default function Channels(props) {
         <Widget group={group} widget={currWidget} />
       }
       <Modal
-        open={modalOpen}
+        open={channelModalOpen}
         onClose={resetModal}
       >
         <div className="modal">
@@ -127,12 +129,33 @@ export default function Channels(props) {
               onChange={e => setName(e.target.value)}
               required
             />
+            <button className="iconbutton2">
+              <AddIcon />
+            </button>
+          </form>
+        </div>
+      </Modal>
+      <Modal
+        open={widgetModalOpen}
+        onClose={resetModal}
+      >
+        <div className="modal">
+          <h1>New Widget</h1>
+          <form onSubmit={e => {
+            e.preventDefault();
+          }}>
+            <input
+              placeholder="name"
+              className="darkinput"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+            />
             <select
               className={styles.typeinput}
               value={type}
               onChange={e => setType(e.target.value)}
             >
-              <option value="text">Text</option>
               <option value="sketch">Sketch</option>
               <option value="notes">Notes</option>
               <option value="todos">Todos</option>
