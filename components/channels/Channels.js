@@ -22,12 +22,13 @@ export default function Channels(props) {
   const [type, setType] = useState('text');
   const [modalOpen, setModalOpen] = useState(false);
 
-  // retrieve group channels
+  // retrieve group channels and widgets
   const groupsRef = firebase.firestore().collection('groups');
   const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels');
-  const channelsQuery = channelsRef.orderBy('name');
-  const [channels] = useCollectionData(channelsQuery, { idField: 'id' });
+  const widgetsRef = groupRef.collection('widgets');
+  const [channels] = useCollectionData(channelsRef, { idField: 'id' });
+  const [widgets] = useCollectionData(widgetsRef, { idField: 'id' });
 
   // creates new channel doc in firebase
   async function createChannel() {
@@ -35,14 +36,6 @@ export default function Channels(props) {
     resetModal();
     const docRef = await channelsRef.add(newChannel);
     selectChannel({ id: docRef.id, ...newChannel });
-  }
-
-  // selects given channel
-  function selectChannel(channel) {
-    // toggle text channel
-    if (channel.type === 'text') setCurrChannel(channel);
-    // toggle widget
-    else setCurrWidget(currWidget?.id === channel.id ? undefined : channel);
   }
 
   // returns messages ref for current channel
@@ -64,7 +57,7 @@ export default function Channels(props) {
   }, [group]);
 
   // return if loading
-  if (!channels) return <Loading />;
+  if (!channels || !widgets) return <Loading />;
 
   return (
     <>
@@ -73,16 +66,12 @@ export default function Channels(props) {
           channels.map(channel =>
             <button
               className={
-                (
-                  currChannel?.id === channel.id ||
-                  currWidget?.id === channel.id
-                )
-                ? styles.selected : undefined
+                currChannel?.id === channel.id ? styles.selected : undefined
               }
-              onClick={() => selectChannel(channel)}
+              onClick={() => setCurrChannel(channel)}
               key={channel.id}
             >
-              {getChannelIcon(channel.type)}
+              {getChannelIcon('text')}
               <span>{channel.name}</span>
             </button>
           )
