@@ -5,6 +5,7 @@ import Widget from '../widgets/Widget.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -72,21 +73,19 @@ export default function Channels(props) {
     <>
       <div className={styles.container}>
         <div className={styles.selectors}>
-          {
-            channels.map(channel =>
-              <Channel
-                className={
-                  currChannel?.id === channel.id ?
-                  `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
-                }
-                onClick={() => setCurrChannel(channel)}
-                channel={channel}
-                type="text"
-                docRef={channelsRef.doc(channel.id)}
-                key={channel.id}
-              />
-            )
-          }
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="droppable-todos">
+              {
+                (provided, snapshot) =>
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {provided.placeholder}
+                </div>
+              }
+            </Droppable>
+          </DragDropContext>
           <button
             className={styles.addbtn}
             onClick={() => setChannelModalOpen(true)}
