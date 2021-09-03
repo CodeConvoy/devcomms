@@ -59,6 +59,31 @@ export default function Todos(props) {
           {
             (provided, snapshot) =>
             <div ref={provided.innerRef} {...provided.droppableProps}>
+              {
+                todos.map((todo, i) =>
+                  <Draggable
+                    key={todo.id}
+                    draggableId={todo.id}
+                    index={i}
+                  >
+                    {
+                      (provided, snapshot) =>
+                      <div
+                        className={styles.todocontainer}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <Todo
+                          todo={todo}
+                          todosRef={todosRef}
+                          deleteOrder={deleteOrder}
+                        />
+                      </div>
+                    }
+                  </Draggable>
+                )
+              }
               {provided.placeholder}
             </div>
           }
