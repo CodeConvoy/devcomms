@@ -28,7 +28,9 @@ export default function Todos(props) {
   const channelRef = channelsRef.doc(widget.id);
   const todosRef = channelRef.collection('todos');
 
-  const [todos] = useCollectionData(todosRef, { idField: 'id' });
+  const [todos] = useCollectionData(
+    todosRef.orderBy('order'), { idField: 'id' }
+  );
 
   // creates a new todo
   async function createTodo() {
@@ -36,8 +38,21 @@ export default function Todos(props) {
     await todosRef.add({
       title: title,
       description: description,
-      due: due ? due.replaceAll('-', '/') : null
+      due: due ? due.replaceAll('-', '/') : null,
+      order: todos.length
     });
+  }
+
+  // updates todo orders in firebase
+  async function updateOrder() {
+    const batch = firebase.firestore().batch(); // create batch
+    // for each todo
+    await todos.forEach((todo, i) => {
+      // update todo doc at id with order
+      const todoDoc = todosRef.doc(todo.id);
+      batch.update(todoDoc, { order: i });
+    });
+    batch.commit(); // commit batch
   }
 
   // swaps todo orders
@@ -60,6 +75,12 @@ export default function Todos(props) {
     setDescription('');
     setDue(null);
     setModalOpen(false);
+  }
+
+  // splices todo at given order
+  async function deleteOrder(order) {
+    todos.splice(order, 1);
+    await updateOrder();
   }
 
   // return if loading
