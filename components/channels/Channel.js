@@ -32,22 +32,24 @@ export default function Channel(props) {
   }
 
   return (
-    <div
-      className={`${styles.container} ${className}`}
-      onClick={onClick}
-    >
-      {getIcon(type)}
-      <span>{channel.name}</span>
-      <button
-        className={styles.editbutton}
-        onClick={e => {
-          e.stopPropagation();
-          resetModal();
-          setModalOpen(true);
-        }}
+    <>
+      <div
+        className={`${styles.container} ${className}`}
+        onClick={onClick}
       >
-        <SettingsIcon />
-      </button>
+        {getIcon(type)}
+        <span>{channel.name}</span>
+        <button
+          className={styles.editbutton}
+          onClick={e => {
+            e.stopPropagation();
+            resetModal();
+            setModalOpen(true);
+          }}
+        >
+          <SettingsIcon />
+        </button>
+      </div>
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -77,6 +79,6 @@ export default function Channel(props) {
           </button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 }
