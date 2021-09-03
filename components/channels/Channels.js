@@ -133,6 +133,38 @@ export default function Channels(props) {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
+                  {
+                    widgets.map((widget, i) =>
+                      <Draggable
+                        draggableId={widget.id}
+                        index={i}
+                        key={widget.id}
+                      >
+                        {
+                          (provided, snapshot) =>
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <Channel
+                              className={
+                                currWidget?.id === widget.id ?
+                                `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
+                              }
+                              onClick={() => setCurrWidget(
+                                currWidget?.id === widget.id ? undefined : widget
+                              )}
+                              channel={widget}
+                              type={widget.type}
+                              docRef={widgetsRef.doc(widget.id)}
+                              key={widget.id}
+                            />
+                          </div>
+                        }
+                      </Draggable>
+                    )
+                  }
                   {provided.placeholder}
                 </div>
               }
