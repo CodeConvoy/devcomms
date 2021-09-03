@@ -5,6 +5,7 @@ import SaveIcon from '@material-ui/icons/Save';
 
 import firebase from 'firebase/app';
 import { useEffect, useRef, useState } from 'react';
+import { useDocumentData } from 'react-firebase-hooks/firestore';
 
 import styles from '../../styles/components/widgets/Sketch.module.css';
 
@@ -33,6 +34,7 @@ export default function Sketch(props) {
   const groupRef = groupsRef.doc(group);
   const widgetsRef = groupRef.collection('widgets')
   const widgetRef = widgetsRef.doc(widget.id);
+  const [widgetData] = useDocumentData(widgetRef);
 
   // sketches canvas with given mouse event data
   function sketch(e, doDraw) {
@@ -75,8 +77,7 @@ export default function Sketch(props) {
   // retrieve canvas from firebase
   async function getCanvas() {
     // get sketch
-    const widgetDoc = await widgetRef.get();
-    const sketch = widgetDoc.data().sketch;
+    const sketch = widgetData.sketch;
     // load image if sketch
     if (sketch) {
       const image = new Image();
@@ -92,8 +93,12 @@ export default function Sketch(props) {
   useEffect(() => {
     canvas = canvasRef.current;
     ctx = canvas.getContext('2d');
-    getCanvas();
   }, []);
+
+  // set text when widget data changes
+  useEffect(() => {
+    if (widgetData) getCanvas();
+  }, [widgetData]);
 
   return (
     <>
@@ -109,14 +114,11 @@ export default function Sketch(props) {
           height={height}
           onMouseDown={e => { sketching = true; sketch(e, false); }}
           onMouseMove={e => { if (sketching) sketch(e, true); }}
-          onMouseUp={e => { sketching = false; }}
-          onMouseLeave={e => { sketching = false; }}
+          onMouseUp={e => { sketching = false; saveCanvas(); }}
+          onMouseLeave={e => { sketching = false; saveCanvas(); }}
         />
         <button className="iconbutton3" onClick={downloadCanvas}>
           <GetAppIcon />
-        </button>
-        <button className="iconbutton3" onClick={saveCanvas}>
-          <SaveIcon />
         </button>
       </div>
     </>
