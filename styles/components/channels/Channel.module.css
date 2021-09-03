@@ -1,0 +1,21 @@
+.editbutton {
+  position: absolute;
+  right: 0;
+  border: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--gray0);
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  display: none;
+  border-radius: 12px;
+}
+
+.container:hover > .editbutton {
+  display: flex;
+}
+
+.container > button:hover {
+  background: var(--dark0);
+}
