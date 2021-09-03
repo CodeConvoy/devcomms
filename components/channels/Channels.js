@@ -7,7 +7,6 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
 
 import firebase from 'firebase/app';
-import getIcon from '../../util/getIcon.js';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useState } from 'react';
 
@@ -75,17 +74,16 @@ export default function Channels(props) {
         <div className={styles.selectors}>
           {
             channels.map(channel =>
-              <button
+              <Channel
                 className={
                   currChannel?.id === channel.id ?
                   `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
                 }
                 onClick={() => setCurrChannel(channel)}
+                channel={channel}
+                type="text"
                 key={channel.id}
-              >
-                {getIcon('text')}
-                <span>{channel.name}</span>
-              </button>
+              />
             )
           }
           <button
@@ -98,19 +96,18 @@ export default function Channels(props) {
         <div className={styles.selectors}>
           {
             widgets.map(widget =>
-              <button
+              <Channel
                 className={
                   currWidget?.id === widget.id ?
                   `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
                 }
                 onClick={() => setCurrWidget(
-                  currWidget?.id === widget.id ? undefined : currWidget
+                  currWidget?.id === widget.id ? undefined : widget
                 )}
+                channel={widget}
+                type={widget.type}
                 key={widget.id}
-              >
-                {getIcon(widget.type)}
-                <span>{widget.name}</span>
-              </button>
+              />
             )
           }
           <button
