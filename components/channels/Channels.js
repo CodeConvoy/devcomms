@@ -72,12 +72,13 @@ export default function Channels(props) {
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.channels}>
+        <div className={styles.selectors}>
           {
             channels.map(channel =>
               <button
                 className={
-                  currChannel?.id === channel.id ? styles.selected : undefined
+                  currChannel?.id === channel.id ?
+                  `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
                 }
                 onClick={() => setCurrChannel(channel)}
                 key={channel.id}
@@ -87,16 +88,20 @@ export default function Channels(props) {
               </button>
             )
           }
-          <button onClick={() => setChannelModalOpen(true)}>
+          <button
+            className={styles.addbtn}
+            onClick={() => setChannelModalOpen(true)}
+          >
             <AddIcon />
           </button>
         </div>
-        <div className={styles.channels}>
+        <div className={styles.selectors}>
           {
             widgets.map(widget =>
               <button
                 className={
-                  currWidget?.id === widget.id ? styles.selected : undefined
+                  currWidget?.id === widget.id ?
+                  `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
                 }
                 onClick={() => setCurrWidget(
                   currWidget?.id === widget.id ? undefined : currWidget
@@ -108,7 +113,10 @@ export default function Channels(props) {
               </button>
             )
           }
-          <button onClick={() => setWidgetModalOpen(true)}>
+          <button
+            className={styles.addbtn}
+            onClick={() => setWidgetModalOpen(true)}
+          >
             <AddIcon />
           </button>
         </div>
