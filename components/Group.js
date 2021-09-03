@@ -69,16 +69,19 @@ export default function Group(props) {
           }}>
             <input
               value={name}
-              className={`${styles.descinput} darkinput`}
+              className={`${styles.nameinput} darkinput`}
               onChange={e => setName(e.target.value)}
               placeholder="name"
               required
             />
-            <button>
+            <button className="iconbutton2">
               <CheckIcon />
             </button>
           </form>
-          <button className="iconbutton2" onClick={deleteGroup}>
+          <button
+            className={`${styles.delbutton} iconbutton2`}
+            onClick={deleteGroup}
+          >
             <DeleteIcon />
           </button>
         </div>

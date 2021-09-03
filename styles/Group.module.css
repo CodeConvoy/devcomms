@@ -25,3 +25,11 @@
 .container > button:hover {
   background: var(--dark0);
 }
+
+.nameinput {
+  margin-bottom: 10px;
+}
+
+.delbutton {
+  margin-top: 10px;
+}
