@@ -39,24 +39,27 @@ export default function Group(props) {
   }
 
   return (
-    <div
-      className={
-        currGroup === group.id ?
-        `${styles.container} ${selectStyle}` : styles.container
-      }
-      onClick={() => setCurrGroup(group.id)}
-      key={group.id}
-    >
-      <div>{group.name}</div>
-      {
-        uid === group.creator &&
-        <button onClick={() => {
-          resetModal();
-          setModalOpen(true);
-        }}>
-          <SettingsIcon fontSize="small" />
-        </button>
-      }
+    <>
+      <div
+        className={
+          currGroup === group.id ?
+          `${styles.container} ${selectStyle}` : styles.container
+        }
+        onClick={() => setCurrGroup(group.id)}
+        key={group.id}
+      >
+        <div>{group.name}</div>
+        {
+          uid === group.creator &&
+          <button onClick={e => {
+            resetModal();
+            e.stopPropagation();
+            setModalOpen(true);
+          }}>
+            <SettingsIcon fontSize="small" />
+          </button>
+        }
+      </div>
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -86,6 +89,6 @@ export default function Group(props) {
           </button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 }
