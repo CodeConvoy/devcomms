@@ -125,23 +125,19 @@ export default function Channels(props) {
           </button>
         </div>
         <div className={styles.selectors}>
-          {
-            widgets.map(widget =>
-              <Channel
-                className={
-                  currWidget?.id === widget.id ?
-                  `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
-                }
-                onClick={() => setCurrWidget(
-                  currWidget?.id === widget.id ? undefined : widget
-                )}
-                channel={widget}
-                type={widget.type}
-                docRef={widgetsRef.doc(widget.id)}
-                key={widget.id}
-              />
-            )
-          }
+          <DragDropContext onDragEnd={onWidgetDragEnd}>
+            <Droppable droppableId="droppable-widgets">
+              {
+                (provided, snapshot) =>
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {provided.placeholder}
+                </div>
+              }
+            </Droppable>
+          </DragDropContext>
           <button
             className={styles.addbtn}
             onClick={() => setWidgetModalOpen(true)}
