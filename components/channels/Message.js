@@ -17,16 +17,15 @@ const today = new Date(nowYear, nowMonth, nowDay).setHours(0, 0, 0, 0);
 const yesterday = new Date(nowYear, nowMonth, nowDay - 1).setHours(0, 0, 0, 0);
 
 export default function Message(props) {
-  const { showHeader, messagesRef, scroll } = props;
-  const { text, sender, username, sent, type, id } = props.message;
+  const { showHeader, messagesRef, scroll, message } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [newText, setNewText] = useState(text);
+  const [newText, setNewText] = useState(message.text);
 
   const uid = firebase.auth().currentUser.uid;
 
   // retrieve message ref
-  const messageRef = messagesRef.doc(id);
+  const messageRef = messagesRef.doc(message.id);
 
   // deletes message
   async function deleteMessage() {
@@ -39,12 +38,16 @@ export default function Message(props) {
   // updates message in firebase
   async function updateMessage() {
     setModalOpen(false);
-    await messageRef.update({ text: newText });
+    if (message.text === newText) return;
+    await messageRef.update({
+      text: newText,
+      edited: true
+    });
   }
 
   // resets modal
   function resetModal() {
-    setNewText(text);
+    setNewText(message.text);
   }
 
   // returns a datetime string for given datetime
@@ -62,20 +65,23 @@ export default function Message(props) {
       {
         showHeader &&
         <span className={styles.header}>
-          @{username}
+          @{message.username}
           {' '}
           <span className={styles.datetime}>
-            {getDateTimeString(sent.toDate())}
+            {getDateTimeString(message.sent.toDate())}
           </span>
         </span>
       }
       <div className={styles.container}>
         {
-          type === 'text' ?
-          <span>{text}</span> :
+          message.type === 'text' ?
+          <span>
+            {message.text}
+            {message.edited && <span className={styles.edited}> (edited)</span>}
+          </span> :
           <a href={props.message.url} target="_blank" rel="noreferrer noopener">
             {
-              type === 'image' ?
+              message.type === 'image' ?
               // using an img element here because of unknown size
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -89,7 +95,7 @@ export default function Message(props) {
           </a>
         }
         {
-          uid === sender &&
+          uid === message.sender &&
           <button onClick={() => {
             resetModal();
             setModalOpen(true);
@@ -105,7 +111,7 @@ export default function Message(props) {
         <div className="modal">
           <h1>Editing Message</h1>
           {
-            type === 'text' &&
+            message.type === 'text' &&
             <form onSubmit={e => {
               e.preventDefault();
               updateMessage();

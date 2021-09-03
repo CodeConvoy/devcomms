@@ -50,6 +50,11 @@
   background: var(--dark2);
 }
 
+.edited {
+  color: var(--gray2);
+  font-size: 12px;
+}
+
 .image {
   margin: 0 0 -3px 0;
   max-width: 200px;
