@@ -5,7 +5,7 @@ import Background from '../components/Background.js';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import getChannelIcon from '../util/getChannelIcon.js';
+import getIcon from '../util/getIcon.js';
 import firebase from 'firebase/app';
 
 import styles from '../styles/pages/Index.module.css';
@@ -24,10 +24,10 @@ export default function Index() {
         </p>
         <div className={styles.iconlist}>
           <GroupIcon />
-          {getChannelIcon('text')}
-          {getChannelIcon('sketch')}
-          {getChannelIcon('notes')}
-          {getChannelIcon('todos')}
+          {getIcon('text')}
+          {getIcon('sketch')}
+          {getIcon('notes')}
+          {getIcon('todos')}
           <AddIcon />
         </div>
         <p>Instead of having one tool for chatting, one tool for arranging

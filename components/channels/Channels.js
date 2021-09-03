@@ -7,7 +7,7 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
 
 import firebase from 'firebase/app';
-import getChannelIcon from '../../util/getChannelIcon.js';
+import getIcon from '../../util/getIcon.js';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useState } from 'react';
 
@@ -71,7 +71,7 @@ export default function Channels(props) {
               onClick={() => setCurrChannel(channel)}
               key={channel.id}
             >
-              {getChannelIcon('text')}
+              {getIcon('text')}
               <span>{channel.name}</span>
             </button>
           )
@@ -92,7 +92,7 @@ export default function Channels(props) {
               )}
               key={widget.id}
             >
-              {getChannelIcon(widget.type)}
+              {getIcon(widget.type)}
               <span>{widget.name}</span>
             </button>
           )

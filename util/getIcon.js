@@ -3,8 +3,8 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import ListIcon from '@material-ui/icons/List';
 import BrushIcon from '@material-ui/icons/Brush';
 
-// returns channel icon for given channel type
-export default function getChannelIcon(type) {
+// returns icon for given type
+export default function getIcon(type) {
   switch (type) {
     case 'text': return <ChatIcon />;
     case 'notes': return <DescriptionIcon />;
