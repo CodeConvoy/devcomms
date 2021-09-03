@@ -1,12 +1,35 @@
 import Modal from '@material-ui/core/Modal';
 import SettingsIcon from '@material-ui/icons/Settings';
+import CheckIcon from '@material-ui/icons/Check';
+import DeleteIcon from '@material-ui/icons/Delete';
 
+import { useState } from 'react';
 import getIcon from '../../util/getIcon.js';
 
 import styles from '../../styles/components/channels/Channel.module.css';
 
 export default function Channel(props) {
-  const { channel, type, className, onClick, Icon } = props;
+  const { channel, type, className, onClick, docRef } = props;
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [name, setName] = useState(channel.name);
+
+  // updates channel
+  async function updateChannel() {
+    setModalOpen(false);
+    await docRef.update({ name });
+  }
+
+  // deletes channel
+  async function deleteChannel() {
+    setModalOpen(false);
+    await docRef.delete();
+  }
+
+  // resets modal
+  function resetModal() {
+    setName(channel.name);
+  }
 
   return (
     <div
