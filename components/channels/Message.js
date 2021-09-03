@@ -113,10 +113,10 @@ export default function Message(props) {
               <input
                 value={newText}
                 onChange={e => setNewText(e.target.value)}
-                className="darkinput"
+                className={`${styles.textinput} darkinput`}
                 required
               />
-              <button className="iconbutton2">
+              <button className={`${styles.checkbutton} iconbutton2`}>
                 <CheckIcon />
               </button>
             </form>

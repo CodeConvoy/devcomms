@@ -22,8 +22,10 @@ export default function Channel(props) {
 
   // deletes channel
   async function deleteChannel() {
-    setModalOpen(false);
-    await docRef.delete();
+    if (window.confirm('Really delete channel?')) {
+      setModalOpen(false);
+      await docRef.delete();
+    }
   }
 
   // resets modal

@@ -30,7 +30,7 @@ button {
 }
 
 textarea {
-  resize: none;
+  resize: vertical;
 }
 
 select {

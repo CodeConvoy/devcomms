@@ -55,3 +55,11 @@
   max-width: 200px;
   max-height: 200px;
 }
+
+.textinput {
+  margin-bottom: 10px;
+}
+
+.checkbutton {
+  margin-bottom: 10px;
+}
