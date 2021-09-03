@@ -24,9 +24,9 @@ export default function Todos(props) {
   // retrieve todos reference
   const groupsRef = firebase.firestore().collection('groups');
   const groupRef = groupsRef.doc(group);
-  const channelsRef = groupRef.collection('channels')
-  const channelRef = channelsRef.doc(widget.id);
-  const todosRef = channelRef.collection('todos');
+  const widgetsRef = groupRef.collection('widgets')
+  const widgetRef = widgetsRef.doc(widget.id);
+  const todosRef = widgetRef.collection('todos');
 
   const [todos] = useCollectionData(
     todosRef.orderBy('order'), { idField: 'id' }

@@ -15,19 +15,19 @@ export default function Notes(props) {
   // retrieve notes reference
   const groupsRef = firebase.firestore().collection('groups');
   const groupRef = groupsRef.doc(group);
-  const channelsRef = groupRef.collection('channels')
-  const channelRef = channelsRef.doc(widget.id);
+  const widgetsRef = groupRef.collection('widgets')
+  const widgetRef = widgetsRef.doc(widget.id);
 
   // gets existing text from firebase
   async function getText() {
-    const channelDoc = await channelRef.get();
-    const data = channelDoc.data();
+    const widgetDoc = await widgetRef.get();
+    const data = widgetDoc.data();
     setText(data.text ?? '');
   }
 
   // saves text to firebase
   async function saveText() {
-    await channelRef.update({ text });
+    await widgetRef.update({ text });
   }
 
   // get text on start

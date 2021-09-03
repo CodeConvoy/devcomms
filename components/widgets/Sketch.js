@@ -31,8 +31,8 @@ export default function Sketch(props) {
   // retrieve sketch reference
   const groupsRef = firebase.firestore().collection('groups');
   const groupRef = groupsRef.doc(group);
-  const channelsRef = groupRef.collection('channels')
-  const channelRef = channelsRef.doc(widget.id);
+  const widgetsRef = groupRef.collection('widgets')
+  const widgetRef = widgetsRef.doc(widget.id);
 
   // sketches canvas with given mouse event data
   function sketch(e, doDraw) {
@@ -69,14 +69,14 @@ export default function Sketch(props) {
   // saves canvas to firebase
   async function saveCanvas() {
     const sketch = canvas.toDataURL();
-    await channelRef.update({ sketch });
+    await widgetRef.update({ sketch });
   }
 
   // retrieve canvas from firebase
   async function getCanvas() {
     // get sketch
-    const channelDoc = await channelRef.get();
-    const sketch = channelDoc.data().sketch;
+    const widgetDoc = await widgetRef.get();
+    const sketch = widgetDoc.data().sketch;
     // load image if sketch
     if (sketch) {
       const image = new Image();
