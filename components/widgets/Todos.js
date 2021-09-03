@@ -40,6 +40,20 @@ export default function Todos(props) {
     });
   }
 
+  // swaps todo orders
+  function reorderTodos(indexA, indexB) {
+    const [removed] = todos.splice(indexA, 1);
+    todos.splice(indexB, 0, removed);
+    updateOrder();
+  }
+
+  // called after todo drag ends
+  function onDragEnd(result) {
+    if (!result.destination) return; // out of bounds
+    if (result.source.index === result.destination.index) return; // same spot
+    reorderTodos(result.source.index, result.destination.index);
+  }
+
   // resets modal
   function resetModal() {
     setTitle('');
