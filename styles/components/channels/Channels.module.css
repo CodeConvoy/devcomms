@@ -55,5 +55,9 @@
 }
 
 .typeinput {
-  margin: 10px 0;
+  margin-bottom: 10px;
+}
+
+.nameinput {
+  margin-bottom: 10px;
 }

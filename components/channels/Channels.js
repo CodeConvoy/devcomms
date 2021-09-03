@@ -82,6 +82,7 @@ export default function Channels(props) {
                 onClick={() => setCurrChannel(channel)}
                 channel={channel}
                 type="text"
+                docRef={channelsRef.doc(channel.id)}
                 key={channel.id}
               />
             )
@@ -106,6 +107,7 @@ export default function Channels(props) {
                 )}
                 channel={widget}
                 type={widget.type}
+                docRef={widgetsRef.doc(widget.id)}
                 key={widget.id}
               />
             )
@@ -139,7 +141,7 @@ export default function Channels(props) {
           }}>
             <input
               placeholder="name"
-              className="darkinput"
+              className={`${styles.nameinput} darkinput`}
               value={name}
               onChange={e => setName(e.target.value)}
               required
@@ -162,7 +164,7 @@ export default function Channels(props) {
           }}>
             <input
               placeholder="name"
-              className="darkinput"
+              className={`${styles.nameinput} darkinput`}
               value={name}
               onChange={e => setName(e.target.value)}
               required

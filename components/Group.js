@@ -65,7 +65,7 @@ export default function Group(props) {
         onClose={() => setModalOpen(false)}
       >
         <div className="modal">
-          <h1>Editing Group</h1>
+          <h1>Editing {group.name}</h1>
           <form onSubmit={e => {
             e.preventDefault();
             updateGroup();
