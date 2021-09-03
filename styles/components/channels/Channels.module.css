@@ -18,8 +18,11 @@
   flex-grow: 1;
 }
 
+.selectcontainer {
+  margin-bottom: 2px;
+}
+
 .selectbtn, .addbtn {
-  margin: 2px 0;
   background: var(--dark3);
   border-radius: 30px;
   border-top-right-radius: 0;

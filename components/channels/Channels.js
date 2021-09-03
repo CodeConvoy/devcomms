@@ -28,22 +28,26 @@ export default function Channels(props) {
   const groupRef = groupsRef.doc(group);
   const channelsRef = groupRef.collection('channels');
   const widgetsRef = groupRef.collection('widgets');
-  const [channels] = useCollectionData(channelsRef, { idField: 'id' });
-  const [widgets] = useCollectionData(widgetsRef, { idField: 'id' });
+  const [channels] = useCollectionData(
+    channelsRef.orderBy('order'), { idField: 'id' }
+  );
+  const [widgets] = useCollectionData(
+    widgetsRef.orderBy('order'), { idField: 'id' }
+  );
 
   // creates new channel doc in firebase
   async function createChannel() {
-    const channelName = name;
+    const channel = { name };
     resetModal();
-    const docRef = await channelsRef.add({ name: channelName });
-    setCurrChannel({ id: docRef.id, name: channelName });
+    const docRef = await channelsRef.add({ order: channels.length, ...channel });
+    setCurrChannel({ id: docRef.id, ...channel });
   }
 
   // creates new widget doc in firebase
   async function createWidget() {
     const widget = { name, type };
     resetModal();
-    const docRef = await widgetsRef.add(widget);
+    const docRef = await widgetsRef.add({ order: widgets.length, ...widget });
     setCurrWidget({ id: docRef.id, ...widget });
   }
 
@@ -115,8 +119,8 @@ export default function Channels(props) {
     <>
       <div className={styles.container}>
         <div className={styles.selectors}>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable-todos">
+          <DragDropContext onDragEnd={onChannelDragEnd}>
+            <Droppable droppableId="droppable-channels">
               {
                 (provided, snapshot) =>
                 <div
@@ -133,6 +137,7 @@ export default function Channels(props) {
                         {
                           (provided, snapshot) =>
                           <div
+                            className={styles.selectcontainer}
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
@@ -185,6 +190,7 @@ export default function Channels(props) {
                         {
                           (provided, snapshot) =>
                           <div
+                            className={styles.selectcontainer}
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
