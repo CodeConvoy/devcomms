@@ -81,6 +81,37 @@ export default function Channels(props) {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
+                  {
+                    channels.map((channel, i) =>
+                      <Draggable
+                        draggableId={channel.id}
+                        index={i}
+                        key={channel.id}
+                      >
+                        {
+                          (provided, snapshot) =>
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <Channel
+                              className={
+                                currChannel?.id === channel.id ?
+                                `${styles.selectbtn} ${styles.selected}` :
+                                styles.selectbtn
+                              }
+                              onClick={() => setCurrChannel(channel)}
+                              channel={channel}
+                              type="text"
+                              docRef={channelsRef.doc(channel.id)}
+                              key={channel.id}
+                            />
+                          </div>
+                        }
+                      </Draggable>
+                    )
+                  }
                   {provided.placeholder}
                 </div>
               }
