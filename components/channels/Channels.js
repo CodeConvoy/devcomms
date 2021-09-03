@@ -71,45 +71,47 @@ export default function Channels(props) {
 
   return (
     <>
-      <div className={styles.channels}>
-        {
-          channels.map(channel =>
-            <button
-              className={
-                currChannel?.id === channel.id ? styles.selected : undefined
-              }
-              onClick={() => setCurrChannel(channel)}
-              key={channel.id}
-            >
-              {getIcon('text')}
-              <span>{channel.name}</span>
-            </button>
-          )
-        }
-        <button onClick={() => setChannelModalOpen(true)}>
-          <AddIcon />
-        </button>
-      </div>
-      <div className={styles.widgets}>
-        {
-          widgets.map(widget =>
-            <button
-              className={
-                currWidget?.id === widget.id ? styles.selected : undefined
-              }
-              onClick={() => setCurrWidget(
-                currWidget?.id === widget.id ? undefined : currWidget
-              )}
-              key={widget.id}
-            >
-              {getIcon(widget.type)}
-              <span>{widget.name}</span>
-            </button>
-          )
-        }
-        <button onClick={() => setWidgetModalOpen(true)}>
-          <AddIcon />
-        </button>
+      <div className={styles.container}>
+        <div className={styles.channels}>
+          {
+            channels.map(channel =>
+              <button
+                className={
+                  currChannel?.id === channel.id ? styles.selected : undefined
+                }
+                onClick={() => setCurrChannel(channel)}
+                key={channel.id}
+              >
+                {getIcon('text')}
+                <span>{channel.name}</span>
+              </button>
+            )
+          }
+          <button onClick={() => setChannelModalOpen(true)}>
+            <AddIcon />
+          </button>
+        </div>
+        <div className={styles.channels}>
+          {
+            widgets.map(widget =>
+              <button
+                className={
+                  currWidget?.id === widget.id ? styles.selected : undefined
+                }
+                onClick={() => setCurrWidget(
+                  currWidget?.id === widget.id ? undefined : currWidget
+                )}
+                key={widget.id}
+              >
+                {getIcon(widget.type)}
+                <span>{widget.name}</span>
+              </button>
+            )
+          }
+          <button onClick={() => setWidgetModalOpen(true)}>
+            <AddIcon />
+          </button>
+        </div>
       </div>
       {
         currChannel ?
