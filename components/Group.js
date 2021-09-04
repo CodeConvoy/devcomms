@@ -2,6 +2,7 @@ import Modal from '@material-ui/core/Modal';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
+import AddIcon from '@material-ui/icons/Add';
 
 import { useState } from 'react';
 
@@ -14,6 +15,7 @@ export default function Group(props) {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState(group.name);
+  const [username, setUsername] = useState('');
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -28,7 +30,10 @@ export default function Group(props) {
 
   // deletes group
   async function deleteGroup() {
-    if (window.confirm('Really delete group?')) await groupRef.delete();
+    if (window.confirm('Really delete group?')) {
+      setCurrGroup('home');
+      await groupRef.delete();
+    }
   }
 
   // updates group
@@ -36,6 +41,24 @@ export default function Group(props) {
     resetModal();
     setModalOpen(false);
     await groupRef.update({ name });
+  }
+
+  // adds user to group
+  async function addUser() {
+    // get user doc
+    setUsername('');
+    const usernamesRef = firebase.firestore().collection('usernames');
+    const usernameRef = usernamesRef.doc(username);
+    const usernameDoc = await usernameRef.get();
+    // if user exists
+    if (usernameDoc.exists) {
+      const userId = usernameDoc.data().uid;
+      await groupRef.update({
+        members: firebase.firestore.FieldValue.arrayUnion(userId),
+        usernames: firebase.firestore.FieldValue.arrayUnion(username)
+      });
+      // if user does not exist
+    }
   }
 
   return (
@@ -79,6 +102,25 @@ export default function Group(props) {
             />
             <button className="iconbutton2">
               <CheckIcon />
+            </button>
+          </form>
+          {
+            group.usernames.map((username, i) =>
+              <div key={i}>{username}</div>
+            )
+          }
+          <form onSubmit={e => {
+            e.preventDefault();
+            addUser();
+          }}>
+            <input
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              className="darkinput"
+              required
+            />
+            <button className="iconbutton2">
+              <AddIcon />
             </button>
           </form>
           <button
