@@ -36,20 +36,25 @@ export default function SignUp(props) {
       setError("Username must be between 2 and 16 characters.");
       return;
     }
+    // verify username availability
+    const usernameRef = firebase.firestore().collection('usernames').doc(username);
+    const usernameDoc = await usernameRef.get();
+    if (usernameDoc.exists) {
+      setError("Username is taken. Please try another.");
+    }
     // create user account
     try {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
-    // fail create user
+    // fail to create user
     } catch (e) {
       setError(getError(e));
       return;
     };
-    // create user document
+    // create user documents
     const uid = firebase.auth().currentUser.uid;
-    await firebase.firestore().collection('users').doc(uid).set({
-      username: username,
-      joined: new Date()
-    });
+    const userRef = firebase.firestore().collection('users').doc(uid);
+    await userRef.set({ username });
+    await usernameRef.set({ username, uid, joined: new Date() });
   }
 
   // listen for user auth
