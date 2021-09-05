@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import GroupIcon from '@material-ui/icons/Group';
 import ClearIcon from '@material-ui/icons/Clear';
+import SearchIcon from '@material-ui/icons/Search';
 
 import { useState } from 'react';
 
@@ -20,8 +21,10 @@ export default function Group(props) {
   const [tab, setTab] = useState(0);
   const [name, setName] = useState(group.name);
   const [username, setUsername] = useState('');
+  const [foundUsers, setFoundUsers] = useState(undefined);
 
   const uid = firebase.auth().currentUser.uid;
+  const usernamesRef = firebase.firestore().collection('usernames');
 
   // get group ref
   const groupsRef = firebase.firestore().collection('groups');
@@ -46,6 +49,20 @@ export default function Group(props) {
     resetModal();
     setModalOpen(false);
     await groupRef.update({ name });
+  }
+
+  // searches users with given username
+  async function searchUsers() {
+    // clear found users
+    setFoundUsers(undefined);
+    // query users
+    const usersQuery = usernamesRef
+    .where('username', '>=', username)
+    .where('username', '<', `${username}~`)
+    .limit(10);
+    const users = await usersQuery.get();
+    // set found users
+    setFoundUsers(users.docs.map(doc => doc.data()));
   }
 
   // adds user to group
@@ -163,18 +180,20 @@ export default function Group(props) {
               }
               <form onSubmit={e => {
                 e.preventDefault();
-                addUser();
+                searchUsers();
               }}>
-                <input
-                  value={username}
-                  onChange={e => setUsername(e.target.value)}
-                  className={`${styles.usernameinput} darkinput`}
-                  placeholder="username"
-                  required
-                />
-                <button className="iconbutton2">
-                  <AddIcon />
-                </button>
+                <div className="input-button">
+                  <input
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    className={`${styles.usernameinput} darkinput`}
+                    placeholder="username"
+                    required
+                  />
+                  <button className="iconbutton2">
+                    <SearchIcon />
+                  </button>
+                </div>
               </form>
             </div>
           }
