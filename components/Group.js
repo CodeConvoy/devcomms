@@ -66,23 +66,13 @@ export default function Group(props) {
   }
 
   // adds user to group
-  async function addUser() {
-    // get user doc
-    setUsername('');
-    const usernamesRef = firebase.firestore().collection('usernames');
-    const usernameRef = usernamesRef.doc(username);
-    const usernameDoc = await usernameRef.get();
-    // if user exists
-    if (usernameDoc.exists) {
-      const userId = usernameDoc.data().uid;
-      await groupRef.update({
-        members: firebase.firestore.FieldValue.arrayUnion(userId),
-        users: firebase.firestore.FieldValue.arrayUnion({
-          username, uid: userId
-        })
-      });
-      // if user does not exist
-    }
+  async function addUser(user) {
+    await groupRef.update({
+      members: firebase.firestore.FieldValue.arrayUnion(user.uid),
+      users: firebase.firestore.FieldValue.arrayUnion({
+        username: user.username, uid: user.uid
+      })
+    });
   }
 
   // removes user from group
@@ -195,6 +185,24 @@ export default function Group(props) {
                   </button>
                 </div>
               </form>
+              {
+                foundUsers &&
+                (
+                  !foundUsers.length ?
+                  <div>No users found</div> :
+                  foundUsers.map(user =>
+                    <div className={styles.member} key={user.uid}>
+                      {user.username}
+                      {
+                        !group.members.includes(user.uid) &&
+                        <button onClick={() => addUser(user)}>
+                          <AddIcon />
+                        </button>
+                      }
+                    </div>
+                  )
+                )
+              }
             </div>
           }
         </div>
