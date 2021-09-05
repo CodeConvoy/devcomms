@@ -14,15 +14,15 @@ export default function Homescreen(props) {
 
   // get user data
   const uid = firebase.auth().currentUser.uid;
-  const usersRef = firebase.firestore().collection('users');
+  const usersRef = firebase.firestore().collection('usernames');
   const chatsRef = firebase.firestore().collection('chats');
-  const [users] = useCollectionData(usersRef, { idField: 'id' });
+  const [users] = useCollectionData(usersRef);
 
   // returns message ref based on current user
   function getMessagesRef() {
     // get chat id
-    const chatId = uid < currUser.id ?
-    `${uid}-${currUser.id}` : `${currUser.id}-${uid}`;
+    const chatId = uid < currUser.uid ?
+    `${uid}-${currUser.uid}` : `${currUser.uid}-${uid}`;
     return chatsRef.doc(chatId).collection('messages');
   }
 
@@ -35,9 +35,9 @@ export default function Homescreen(props) {
         {
           users.map(user =>
             <button
-              className={currUser?.id === user.id ? styles.selected : undefined}
+              className={currUser?.uid === user.uid ? styles.selected : undefined}
               onClick={() => setCurrUser(user)}
-              key={user.id}
+              key={user.uid}
             >
               <div>{user.username}</div>
             </button>
