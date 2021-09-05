@@ -68,6 +68,17 @@ export default function Group(props) {
     }
   }
 
+  // removes user from group
+  async function removeUser(user) {
+    const index = group.users.indexOf(user);
+    if (index === -1) return;
+    if (!window.confirm(`Remove @${user.username} from ${group.name}?`)) return;
+    await groupRef.update({
+      members: firebase.firestore.FieldValue.arrayRemove(user.uid),
+      users: firebase.firestore.FieldValue.arrayRemove(user)
+    });
+  }
+
   return (
     <>
       <div
@@ -141,6 +152,12 @@ export default function Group(props) {
                 group.users.map((user, i) =>
                   <div className={styles.member} key={i}>
                     {user.username}
+                    {
+                      user.uid !== group.creator &&
+                      <button onClick={() => removeUser(user)}>
+                        <ClearIcon fontSize="small" />
+                      </button>
+                    }
                   </div>
                 )
               }
