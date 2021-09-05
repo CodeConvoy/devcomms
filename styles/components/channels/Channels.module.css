@@ -10,7 +10,7 @@
   flex-direction: column;
   overflow: scroll;
   background: var(--dark3);
-  padding: 2px 0 2px 8px;
+  padding: 8px 0 0 8px;
   flex-grow: 1;
 }
 
@@ -19,7 +19,11 @@
 }
 
 .selectcontainer {
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+}
+
+.divider {
+  border: 1px solid var(--dark0);
 }
 
 .selectbtn, .addbtn {
@@ -29,7 +33,6 @@
   border-bottom-right-radius: 0;
   color: var(--gray0);
   border: 0;
-  flex: 0 0 30px;
   width: 180px;
 }
 
@@ -38,7 +41,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding-left: 5px;
+  padding: 2px 0 2px 5px;
 }
 
 .selectbtn:hover, .addbtn:hover {

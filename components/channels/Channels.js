@@ -171,6 +171,7 @@ export default function Channels(props) {
             <AddIcon />
           </button>
         </div>
+        <span className={styles.divider} />
         <div className={styles.selectors}>
           <DragDropContext onDragEnd={onWidgetDragEnd}>
             <Droppable droppableId="droppable-widgets">
