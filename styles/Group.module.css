@@ -33,3 +33,19 @@
 .delbutton {
   margin-top: 10px;
 }
+
+.select {
+  margin-bottom: 10px;
+}
+
+.select > button {
+  margin: 0 5px;
+}
+
+.select > button.selected {
+  background: var(--dark0);
+}
+
+.usernameinput {
+  margin: 10px 0;
+}

@@ -54,11 +54,11 @@ select {
   color: var(--gray0);
 }
 
-.modal > h1 {
+.modal h1 {
   margin: 0 0 10px 0;
 }
 
-.modal > form {
+.modal form {
   display: flex;
   flex-direction: column;
   align-items: center;

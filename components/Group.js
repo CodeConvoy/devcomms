@@ -29,6 +29,7 @@ export default function Group(props) {
   // resets modal
   function resetModal() {
     setName(group.name);
+    setTab(0);
   }
 
   // deletes group
@@ -92,11 +93,17 @@ export default function Group(props) {
       >
         <div className="modal">
           <h1>Editing {group.name}</h1>
-          <div>
-            <button className="iconbutton2" onClick={() => setTab(0)}>
+          <div className={styles.select}>
+            <button
+              className={`${tab === 0 && styles.selected} iconbutton2`}
+              onClick={() => setTab(0)}
+            >
               <EditIcon />
             </button>
-            <button className="iconbutton2" onClick={() => setTab(1)}>
+            <button
+              className={`${tab === 1 && styles.selected} iconbutton2`}
+              onClick={() => setTab(1)}
+            >
               <GroupIcon />
             </button>
             <button
@@ -139,7 +146,8 @@ export default function Group(props) {
                 <input
                   value={username}
                   onChange={e => setUsername(e.target.value)}
-                  className="darkinput"
+                  className={`${styles.usernameinput} darkinput`}
+                  placeholder="username"
                   required
                 />
                 <button className="iconbutton2">
