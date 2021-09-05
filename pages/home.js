@@ -37,7 +37,7 @@ export default function Home(props) {
       name: name,
       creator: uid,
       members: [uid],
-      usernames: [currentUser.username],
+      users: [{ username: currentUser.username, uid }],
       created: new Date()
     });
     setCurrGroup(docRef.id);

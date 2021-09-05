@@ -5,6 +5,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import GroupIcon from '@material-ui/icons/Group';
+import ClearIcon from '@material-ui/icons/Clear';
 
 import { useState } from 'react';
 
@@ -59,7 +60,9 @@ export default function Group(props) {
       const userId = usernameDoc.data().uid;
       await groupRef.update({
         members: firebase.firestore.FieldValue.arrayUnion(userId),
-        usernames: firebase.firestore.FieldValue.arrayUnion(username)
+        users: firebase.firestore.FieldValue.arrayUnion({
+          username, uid: userId
+        })
       });
       // if user does not exist
     }
@@ -135,8 +138,10 @@ export default function Group(props) {
             tab === 1 &&
             <div>
               {
-                group.usernames.map((username, i) =>
-                  <div key={i}>{username}</div>
+                group.users.map((user, i) =>
+                  <div className={styles.member} key={i}>
+                    {user.username}
+                  </div>
                 )
               }
               <form onSubmit={e => {
