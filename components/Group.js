@@ -3,6 +3,8 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
+import GroupIcon from '@material-ui/icons/Group';
 
 import { useState } from 'react';
 
@@ -14,6 +16,7 @@ export default function Group(props) {
   const { group, currGroup, setCurrGroup, selectStyle } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [tab, setTab] = useState(0);
   const [name, setName] = useState(group.name);
   const [username, setUsername] = useState('');
 
@@ -89,46 +92,62 @@ export default function Group(props) {
       >
         <div className="modal">
           <h1>Editing {group.name}</h1>
-          <form onSubmit={e => {
-            e.preventDefault();
-            updateGroup();
-          }}>
-            <input
-              value={name}
-              className={`${styles.nameinput} darkinput`}
-              onChange={e => setName(e.target.value)}
-              placeholder="name"
-              required
-            />
-            <button className="iconbutton2">
-              <CheckIcon />
+          <div>
+            <button className="iconbutton2" onClick={() => setTab(0)}>
+              <EditIcon />
             </button>
-          </form>
+            <button className="iconbutton2" onClick={() => setTab(1)}>
+              <GroupIcon />
+            </button>
+            <button
+              className="iconbutton2"
+              onClick={deleteGroup}
+            >
+              <DeleteIcon />
+            </button>
+          </div>
           {
-            group.usernames.map((username, i) =>
-              <div key={i}>{username}</div>
-            )
+            tab === 0 &&
+            <form onSubmit={e => {
+              e.preventDefault();
+              updateGroup();
+            }}>
+              <input
+                value={name}
+                className={`${styles.nameinput} darkinput`}
+                onChange={e => setName(e.target.value)}
+                placeholder="name"
+                required
+              />
+              <button className="iconbutton2">
+                <CheckIcon />
+              </button>
+            </form>
           }
-          <form onSubmit={e => {
-            e.preventDefault();
-            addUser();
-          }}>
-            <input
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              className="darkinput"
-              required
-            />
-            <button className="iconbutton2">
-              <AddIcon />
-            </button>
-          </form>
-          <button
-            className={`${styles.delbutton} iconbutton2`}
-            onClick={deleteGroup}
-          >
-            <DeleteIcon />
-          </button>
+          {
+            tab === 1 &&
+            <div>
+              {
+                group.usernames.map((username, i) =>
+                  <div key={i}>{username}</div>
+                )
+              }
+              <form onSubmit={e => {
+                e.preventDefault();
+                addUser();
+              }}>
+                <input
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  className="darkinput"
+                  required
+                />
+                <button className="iconbutton2">
+                  <AddIcon />
+                </button>
+              </form>
+            </div>
+          }
         </div>
       </Modal>
     </>
