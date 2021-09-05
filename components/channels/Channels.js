@@ -5,6 +5,8 @@ import Widget from '../widgets/Widget.js';
 import Modal from '@material-ui/core/Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
+import BuildIcon from '@material-ui/icons/Build';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import firebase from 'firebase/app';
@@ -168,6 +170,7 @@ export default function Channels(props) {
             className={styles.addbtn}
             onClick={() => setChannelModalOpen(true)}
           >
+            <ChatBubbleIcon />
             <AddIcon />
           </button>
         </div>
@@ -223,6 +226,7 @@ export default function Channels(props) {
             className={styles.addbtn}
             onClick={() => setWidgetModalOpen(true)}
           >
+            <BuildIcon />
             <AddIcon />
           </button>
         </div>

@@ -34,14 +34,18 @@
   color: var(--gray0);
   border: 0;
   width: 180px;
+  display: flex;
+  align-items: center;
 }
 
 .selectbtn {
   cursor: pointer;
   position: relative;
-  display: flex;
-  align-items: center;
   padding: 2px 0 2px 5px;
+}
+
+.addbtn {
+  justify-content: center;
 }
 
 .selectbtn:hover, .addbtn:hover {
