@@ -40,10 +40,11 @@ export default function Group(props) {
 
   // deletes group
   async function deleteGroup() {
-    if (window.confirm('Really delete group?')) {
-      setCurrGroup('home');
-      await groupRef.delete();
-    }
+    // confirm delete
+    if (!window.confirm(`Delete ${group.name}?`)) return;
+    // delete group
+    setCurrGroup('home');
+    await groupRef.delete();
   }
 
   // updates group

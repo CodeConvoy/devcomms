@@ -29,11 +29,12 @@ export default function Todo(props) {
 
   // deletes todo
   async function deleteTodo() {
-    if (window.confirm('Really delete todo?')) {
-      setModalOpen(false);
-      await deleteOrder(order);
-      await todoRef.delete();
-    }
+    // confirm delete
+    if (!window.confirm(`Delete ${title}?`)) return;
+    // delete todo
+    setModalOpen(false);
+    await deleteOrder(order);
+    await todoRef.delete();
   }
 
   // updates todo

@@ -30,10 +30,15 @@ export default function Message(props) {
 
   // deletes message
   async function deleteMessage() {
-    if (window.confirm('Really delete message?')) {
-      setModalOpen(false);
-      await messageRef.delete();
-    }
+    // get message representation
+    const messageShort = message.type === 'text' ?
+    `${message.text.slice(0, 50)}${message.text.length > 50 ? '...' : ''}` :
+    message.filename;
+    // confirm delete
+    if (!window.confirm(`Delete "${messageShort}"?`)) return;
+    // delete message
+    setModalOpen(false);
+    await messageRef.delete();
   }
 
   // updates message in firebase
@@ -119,15 +124,17 @@ export default function Message(props) {
               e.preventDefault();
               updateMessage();
             }}>
-              <input
-                value={newText}
-                onChange={e => setNewText(e.target.value)}
-                className={`${styles.textinput} darkinput`}
-                required
-              />
-              <button className={`${styles.checkbutton} iconbutton2`}>
-                <CheckIcon />
-              </button>
+              <div className="input-button">
+                <input
+                  value={newText}
+                  onChange={e => setNewText(e.target.value)}
+                  className={`${styles.textinput} darkinput`}
+                  required
+                />
+                <button className={`${styles.checkbutton} iconbutton2`}>
+                  <CheckIcon />
+                </button>
+              </div>
             </form>
           }
           <button className="iconbutton2" onClick={deleteMessage}>
