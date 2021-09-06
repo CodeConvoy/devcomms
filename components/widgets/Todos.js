@@ -8,6 +8,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import firebase from 'firebase/app';
 import { useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import newDateString from '../../util/newDateString.js';
 
 import styles from '../../styles/components/widgets/Todos.module.css';
 
@@ -18,8 +19,7 @@ export default function Todos(props) {
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [due, setDue] = useState(undefined);
-  const [isDue, setIsDue] = useState(null);
+  const [due, setDue] = useState(null);
 
   // retrieve todos reference
   const groupsRef = firebase.firestore().collection('groups');
@@ -153,15 +153,11 @@ export default function Todos(props) {
               id="todos-isdue"
               type="checkbox"
               className={styles.duecheck}
-              checked={isDue}
-              onChange={e => {
-                const newIsDue = e.target.checked;
-                setIsDue(newIsDue);
-                setDue(newIsDue ? new Date() : null);
-              }}
+              checked={!!due}
+              onChange={e => setDue(e.target.checked ? newDateString() : null)}
             />
             {
-              isDue &&
+              due &&
               <input
                 className={`${styles.dateinput} darkinput`}
                 type="date"

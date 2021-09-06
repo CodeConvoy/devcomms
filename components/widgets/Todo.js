@@ -4,6 +4,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 
 import { useEffect, useState } from 'react';
+import newDateString from '../../util/newDateString.js';
 
 import styles from '../../styles/components/widgets/Todo.module.css';
 
@@ -20,7 +21,6 @@ export default function Todo(props) {
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
   const [newDue, setNewDue] = useState(due ? due.replaceAll('/', '-') : null);
-  const [isDue, setIsDue] = useState(!!due);
 
   const todoRef = todosRef.doc(id);
 
@@ -52,7 +52,6 @@ export default function Todo(props) {
     setNewTitle(title);
     setNewDescription(description);
     setNewDue(due ? due.replaceAll('/', '-') : null);
-    setIsDue(!!due);
   }
 
   useEffect(() => {
@@ -134,15 +133,11 @@ export default function Todo(props) {
               id="todos-isdue"
               type="checkbox"
               className={styles.duecheck}
-              checked={isDue}
-              onChange={e => {
-                const newIsDue = e.target.checked;
-                setIsDue(newIsDue);
-                setNewDue(newIsDue ? new Date() : null);
-              }}
+              checked={!!newDue}
+              onChange={e => setNewDue(e.target.checked ? newDateString() : null)}
             />
             {
-              isDue &&
+              newDue &&
               <input
                 className={`${styles.dateinput} darkinput`}
                 type="date"
