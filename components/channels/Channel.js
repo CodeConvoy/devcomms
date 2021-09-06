@@ -62,16 +62,18 @@ export default function Channel(props) {
             e.preventDefault();
             updateChannel();
           }}>
-            <input
-              value={name}
-              className={`${styles.nameinput} darkinput`}
-              onChange={e => setName(e.target.value)}
-              placeholder="name"
-              required
-            />
-            <button className="iconbutton2">
-              <CheckIcon />
-            </button>
+            <div className="input-button">
+              <input
+                value={name}
+                className="darkinput"
+                onChange={e => setName(e.target.value)}
+                placeholder="name"
+                required
+              />
+              <button className="iconbutton2">
+                <CheckIcon />
+              </button>
+            </div>
           </form>
           <button
             className={`iconbutton2 ${styles.delbutton}`}
