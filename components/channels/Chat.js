@@ -14,6 +14,9 @@ import styles from '../../styles/components/channels/Chat.module.css';
 // delay in seconds before a new header
 const headerOffset = 60 * 5;
 
+// messages to be loaded in at a time
+const messageChunk = 50;
+
 export default function Chat(props) {
   const { messagesRef, currentUser } = props;
 
@@ -21,12 +24,15 @@ export default function Chat(props) {
   const [file, setFile] = useState(undefined);
 
   const messagesEnd = useRef();
+  const container = useRef();
 
   const uid = firebase.auth().currentUser.uid;
 
   // retrieve channel messages
-  const messagesQuery = messagesRef.orderBy('sent').limitToLast(100);
-  const [messages] = useCollectionData(messagesQuery, { idField: 'id' });
+  const [messageCount, setMessageCount] = useState(messageChunk);
+  const messagesQuery = messagesRef.orderBy('sent').limitToLast(messageCount);
+  const [messagesRaw] = useCollectionData(messagesQuery, { idField: 'id' });
+  const [messages, setMessages] = useState(undefined);
 
   // creates new message doc in firebase
   async function sendMessage() {
@@ -64,20 +70,33 @@ export default function Chat(props) {
     });
   }
 
+  // if container scrolled to top, load more messages
+  function handleScroll(e) {
+    const scrollY = container.current.scrollTop;
+    if (scrollY === 0 && messageCount <= messages.length) {
+      setMessageCount(messageCount + messageChunk);
+    }
+  }
+
   // scroll to end of messages
-  function scroll() {
+  function scrollToEnd() {
     if (messagesEnd.current) messagesEnd.current.scrollIntoView();
   }
 
   // scroll page when messages update
-  useEffect(scroll, [messages]);
+  useEffect(scrollToEnd, [messages]);
+
+  // set messages if valid
+  useEffect(() => {
+    if (messagesRaw) setMessages(messagesRaw);
+  }, [messagesRaw]);
 
   // return if loading
   if (!messages) return <Loading />;
 
   return (
     <div className={styles.container}>
-      <div className={styles.messages}>
+      <div className={styles.messages} ref={container} onScroll={handleScroll}>
         {
           messages.map((message, i) =>
             <Message
