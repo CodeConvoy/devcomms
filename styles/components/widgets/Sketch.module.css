@@ -10,3 +10,7 @@
 .container > button {
   margin: 10px 5px;
 }
+
+.container > button.selected {
+  color: #000;
+}

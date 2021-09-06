@@ -3,6 +3,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import BrushIcon from '@material-ui/icons/Brush';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+import GestureIcon from '@material-ui/icons/Gesture';
 
 import firebase from 'firebase/app';
 import { useEffect, useRef, useState } from 'react';
@@ -136,6 +137,14 @@ export default function Sketch(props) {
           onMouseUp={e => { sketching = false; saveCanvas(); }}
           onMouseLeave={e => { sketching = false; saveCanvas(); }}
         />
+        <button
+          className={`${lineColor === 'black' && styles.selected} iconbutton3`}
+          onClick={() => setLineColor(
+            lineColor === 'white' ? 'black' : 'white'
+          )}
+        >
+          <GestureIcon />
+        </button>
         <button className="iconbutton3" onClick={clearCanvas}>
           <DeleteIcon />
         </button>
