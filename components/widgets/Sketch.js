@@ -2,6 +2,7 @@ import Loading from '../Loading.js';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import BrushIcon from '@material-ui/icons/Brush';
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import firebase from 'firebase/app';
 import { useEffect, useRef, useState } from 'react';
@@ -86,7 +87,25 @@ export default function Sketch(props) {
         setLoaded(true);
       }
       image.src = sketch;
-    } else setLoaded(true);
+    } else {
+      // fill with white
+      ctx.rect(0, 0, width, height);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+      setLoaded(true);
+    }
+  }
+
+  // clears canvas
+  function clearCanvas() {
+    // confirm delete
+    if (!window.confirm('Clear canvas?')) return;
+    // fill with white
+    ctx.rect(0, 0, width, height);
+    ctx.fillStyle = 'white';
+    ctx.fill();
+    // save in firebase
+    saveCanvas();
   }
 
   // retrieve canvas context on start
@@ -117,6 +136,9 @@ export default function Sketch(props) {
           onMouseUp={e => { sketching = false; saveCanvas(); }}
           onMouseLeave={e => { sketching = false; saveCanvas(); }}
         />
+        <button className="iconbutton3" onClick={clearCanvas}>
+          <DeleteIcon />
+        </button>
         <button className="iconbutton3" onClick={downloadCanvas}>
           <GetAppIcon />
         </button>
