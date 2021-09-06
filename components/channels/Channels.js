@@ -250,16 +250,18 @@ export default function Channels(props) {
             e.preventDefault();
             createChannel();
           }}>
-            <input
-              placeholder="name"
-              className={`${styles.nameinput} darkinput`}
-              value={name}
-              onChange={e => setName(e.target.value)}
-              required
-            />
-            <button className="iconbutton2">
-              <AddIcon />
-            </button>
+            <div className="input-button">
+              <input
+                placeholder="name"
+                className="darkinput"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required
+              />
+              <button className="iconbutton2">
+                <AddIcon />
+              </button>
+            </div>
           </form>
         </div>
       </Modal>
@@ -273,13 +275,6 @@ export default function Channels(props) {
             e.preventDefault();
             createWidget();
           }}>
-            <input
-              placeholder="name"
-              className={`${styles.nameinput} darkinput`}
-              value={name}
-              onChange={e => setName(e.target.value)}
-              required
-            />
             <select
               className={styles.typeinput}
               value={type}
@@ -289,9 +284,18 @@ export default function Channels(props) {
               <option value="notes">Notes</option>
               <option value="todos">Todos</option>
             </select>
-            <button className="iconbutton2">
-              <AddIcon />
-            </button>
+            <div className="input-button">
+              <input
+                placeholder="name"
+                className="darkinput"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required
+              />
+              <button className="iconbutton2">
+                <AddIcon />
+              </button>
+            </div>
           </form>
         </div>
       </Modal>
