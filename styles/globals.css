@@ -118,6 +118,15 @@ select {
   color: var(--gray0);
 }
 
+.input-button {
+  display: flex;
+  align-items: center;
+}
+
+.input-button > button {
+  margin-left: 5px;
+}
+
 :root {
   --dark0: #202225;
   --dark1: #282a2e;

@@ -26,14 +26,6 @@
   background: var(--dark0);
 }
 
-.nameinput {
-  margin-bottom: 10px;
-}
-
-.delbutton {
-  margin-top: 10px;
-}
-
 .member {
   display: flex;
   align-items: center;
@@ -50,6 +42,7 @@
   justify-content: center;
   color: var(--gray2);
   border: 0;
+  margin-left: 2px;
 }
 
 .member > button:hover {

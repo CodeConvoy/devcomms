@@ -33,6 +33,8 @@ export default function Group(props) {
   // resets modal
   function resetModal() {
     setName(group.name);
+    setUsername('');
+    setFoundUsers(undefined);
     setTab(0);
   }
 
@@ -140,9 +142,10 @@ export default function Group(props) {
               e.preventDefault();
               updateGroup();
             }}>
+              <div className="input-button">
               <input
                 value={name}
-                className={`${styles.nameinput} darkinput`}
+                className="darkinput"
                 onChange={e => setName(e.target.value)}
                 placeholder="name"
                 required
@@ -150,6 +153,7 @@ export default function Group(props) {
               <button className="iconbutton2">
                 <CheckIcon />
               </button>
+              </div>
             </form>
           }
           {
