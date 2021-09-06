@@ -18,7 +18,7 @@ const today = new Date(nowYear, nowMonth, nowDay).setHours(0, 0, 0, 0);
 const yesterday = new Date(nowYear, nowMonth, nowDay - 1).setHours(0, 0, 0, 0);
 
 export default function Message(props) {
-  const { showHeader, messagesRef, scroll, message } = props;
+  const { showHeader, messagesRef, scrollToEnd, message } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
   const [newText, setNewText] = useState(message.text);
@@ -91,7 +91,7 @@ export default function Message(props) {
                 src={props.message.url}
                 className={styles.image}
                 alt={props.message.filename}
-                onLoad={scroll}
+                onLoad={scrollToEnd}
               /> :
               props.message.filename
             }

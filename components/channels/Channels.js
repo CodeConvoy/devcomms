@@ -152,6 +152,7 @@ export default function Channels(props) {
                               }
                               onClick={() => setCurrChannel(channel)}
                               channel={channel}
+                              setCurrChannel={setCurrChannel}
                               type="text"
                               docRef={channelsRef.doc(channel.id)}
                               key={channel.id}
@@ -208,6 +209,7 @@ export default function Channels(props) {
                                 currWidget?.id === widget.id ? undefined : widget
                               )}
                               channel={widget}
+                              setCurrChannel={setCurrChannel}
                               type={widget.type}
                               docRef={widgetsRef.doc(widget.id)}
                               key={widget.id}

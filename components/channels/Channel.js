@@ -9,7 +9,7 @@ import getIcon from '../../util/getIcon.js';
 import styles from '../../styles/components/channels/Channel.module.css';
 
 export default function Channel(props) {
-  const { channel, type, className, onClick, docRef } = props;
+  const { channel, setCurrChannel, type, className, onClick, docRef } = props;
 
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState(channel.name);
@@ -24,6 +24,7 @@ export default function Channel(props) {
   async function deleteChannel() {
     if (window.confirm('Really delete channel?')) {
       setModalOpen(false);
+      setCurrChannel(undefined);
       await docRef.delete();
     }
   }

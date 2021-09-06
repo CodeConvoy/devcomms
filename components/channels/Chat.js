@@ -107,7 +107,7 @@ export default function Chat(props) {
               }
               message={message}
               messagesRef={messagesRef}
-              scroll={scroll}
+              scrollToEnd={scrollToEnd}
               key={message.id}
             />
           )
