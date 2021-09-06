@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -76,7 +77,9 @@ export default function Message(props) {
         {
           message.type === 'text' ?
           <span>
-            {message.text}
+            <ReactMarkdown className={styles.markdown}>
+              {message.text}
+            </ReactMarkdown>
             {message.edited && <span className={styles.edited}> (edited)</span>}
           </span> :
           <a href={props.message.url} target="_blank" rel="noreferrer noopener">

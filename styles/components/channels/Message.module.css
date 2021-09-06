@@ -50,6 +50,10 @@
   background: var(--dark2);
 }
 
+.markdown * {
+  margin: 0;
+}
+
 .edited {
   color: var(--gray2);
   font-size: 12px;
