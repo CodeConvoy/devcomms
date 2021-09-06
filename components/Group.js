@@ -88,6 +88,13 @@ export default function Group(props) {
     });
   }
 
+  // returns abbreviated version of given name
+  function abbreviateName(name) {
+    const words = name.split(' ').filter(w => w); // split name by spaces
+    const letters = words.map(word => word[0]); // get word letters
+    return letters.join('').toUpperCase(); // return letters to uppercase
+  }
+
   return (
     <>
       <div
@@ -98,7 +105,7 @@ export default function Group(props) {
         onClick={() => setCurrGroup(group.id)}
         key={group.id}
       >
-        <div>{group.name}</div>
+        <div>{abbreviateName(group.name)}</div>
         {
           uid === group.creator &&
           <button onClick={e => {

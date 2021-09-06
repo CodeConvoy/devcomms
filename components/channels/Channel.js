@@ -42,6 +42,7 @@ export default function Channel(props) {
       >
         {getIcon(type)}
         <span>{channel.name}</span>
+        <span className={styles.flexfill} />
         <button
           className={styles.editbutton}
           onClick={e => {

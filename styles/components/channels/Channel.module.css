@@ -1,6 +1,4 @@
 .editbutton {
-  position: absolute;
-  right: 0;
   border: 0;
   width: 24px;
   height: 24px;
@@ -18,6 +16,10 @@
 
 .container > button:hover {
   background: var(--dark0);
+}
+
+.flexfill {
+  flex-grow: 1;
 }
 
 .delbutton {
