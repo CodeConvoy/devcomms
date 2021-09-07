@@ -2,6 +2,8 @@ import Loading from '../components/Loading.js';
 import Background from '../components/Background.js';
 import Router from 'next/router';
 import Link from 'next/link';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -16,24 +18,29 @@ export default function SignUp(props) {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [username, setUsername] = useState('');
+
   const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
 
   // attempts to sign up user
   async function signUp() {
-    setError('');
+    setIsError(false);
     // verify password confirmation
     if (password !== confirmPassword) {
       setError("Passwords must match.");
+      setIsError(true);
       return;
     }
     // verify username chars
     if (!/^[A-Za-z0-9_]+$/.test(username)) {
       setError("Username can only contain alphanumeric characters and underscore.");
+      setIsError(true);
       return;
     }
     // verify username length
     if (username.length < 2 || username.length > 16) {
       setError("Username must be between 2 and 16 characters.");
+      setIsError(true);
       return;
     }
     // verify username availability
@@ -41,6 +48,8 @@ export default function SignUp(props) {
     const usernameDoc = await usernameRef.get();
     if (usernameDoc.exists) {
       setError("Username is taken. Please try another.");
+      setIsError(true);
+      return;
     }
     // create user account
     try {
@@ -48,6 +57,7 @@ export default function SignUp(props) {
     // fail to create user
     } catch (e) {
       setError(getError(e));
+      setIsError(true);
       return;
     };
     // create user documents
@@ -55,6 +65,11 @@ export default function SignUp(props) {
     const userRef = firebase.firestore().collection('users').doc(uid);
     await userRef.set({ username });
     await usernameRef.set({ username, uid, joined: new Date() });
+  }
+
+  // on error closed
+  function onCloseError(event, reason) {
+    if (reason !== 'clickaway') setIsError(false);
   }
 
   // listen for user auth
@@ -119,11 +134,24 @@ export default function SignUp(props) {
           />
           <button className="bluebutton">Sign Up</button>
         </form>
-        {error && <p>{error}</p>}
         <hr />
         <Link href="/signin">
           <a>Have an account? Sign in</a>
         </Link>
+        <Snackbar
+          open={isError}
+          autoHideDuration={6000}
+          onClose={onCloseError}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={onCloseError}
+            severity="error"
+          >
+            {error}
+          </MuiAlert>
+        </Snackbar>
       </div>
     </div>
   );
