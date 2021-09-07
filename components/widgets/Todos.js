@@ -3,6 +3,7 @@ import Loading from '../Loading.js';
 import Modal from '@material-ui/core/Modal';
 import AddIcon from '@material-ui/icons/Add';
 import ListIcon from '@material-ui/icons/List';
+import Tooltip from '@material-ui/core/Tooltip';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import firebase from 'firebase/app';
@@ -124,9 +125,11 @@ export default function Todos(props) {
           }
         </Droppable>
       </DragDropContext>
-      <button className="iconbutton3" onClick={() => setModalOpen(true)}>
-        <AddIcon />
-      </button>
+      <Tooltip title="New Todo" arrow>
+        <button className="iconbutton3" onClick={() => setModalOpen(true)}>
+          <AddIcon />
+        </button>
+      </Tooltip>
       <Modal
         open={modalOpen}
         onClose={resetModal}

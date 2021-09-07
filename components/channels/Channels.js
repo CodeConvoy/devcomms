@@ -7,6 +7,7 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
 import BuildIcon from '@material-ui/icons/Build';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import Tooltip from '@material-ui/core/Tooltip';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import firebase from 'firebase/app';
@@ -167,13 +168,15 @@ export default function Channels(props) {
               }
             </Droppable>
           </DragDropContext>
-          <button
-            className={styles.addbtn}
-            onClick={() => setChannelModalOpen(true)}
-          >
-            <ChatBubbleIcon />
-            <AddIcon />
-          </button>
+          <Tooltip title="New Channel" arrow>
+            <button
+              className={styles.addbtn}
+              onClick={() => setChannelModalOpen(true)}
+            >
+              <ChatBubbleIcon />
+              <AddIcon />
+            </button>
+          </Tooltip>
         </div>
         <span className={styles.divider} />
         <div className={styles.selectors}>
@@ -224,13 +227,15 @@ export default function Channels(props) {
               }
             </Droppable>
           </DragDropContext>
-          <button
-            className={styles.addbtn}
-            onClick={() => setWidgetModalOpen(true)}
-          >
-            <BuildIcon />
-            <AddIcon />
-          </button>
+          <Tooltip title="New Widget" arrow>
+            <button
+              className={styles.addbtn}
+              onClick={() => setWidgetModalOpen(true)}
+            >
+              <BuildIcon />
+              <AddIcon />
+            </button>
+          </Tooltip>
         </div>
       </div>
       {

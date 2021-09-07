@@ -1,6 +1,7 @@
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Image from 'next/image';
 import Link from 'next/link';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import firebase from 'firebase/app';
 
@@ -17,12 +18,14 @@ export default function Header(props) {
       <p>Signed in as{' '}
         <span className={styles.username}>@{currentUser.username}</span>
       </p>
-      <button
-        onClick={() => firebase.auth().signOut()}
-        className="iconbutton"
-      >
-        <ExitToAppIcon />
-      </button>
+      <Tooltip title="Sign Out" arrow>
+        <button
+          onClick={() => firebase.auth().signOut()}
+          className="iconbutton"
+        >
+          <ExitToAppIcon />
+        </button>
+      </Tooltip>
     </div>
   );
 }

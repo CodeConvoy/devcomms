@@ -7,6 +7,7 @@ import Channels from '../components/channels/Channels.js';
 import Modal from '@material-ui/core/Modal';
 import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import firebase from 'firebase/app';
 import { useEffect, useState } from 'react';
@@ -79,9 +80,11 @@ export default function Home(props) {
               />
             )
           }
-          <div onClick={() => setModalOpen(true)}>
-            <AddIcon />
-          </div>
+          <Tooltip title="New Group" arrow>
+            <div onClick={() => setModalOpen(true)}>
+              <AddIcon />
+            </div>
+          </Tooltip>
         </div>
         {
           currGroup === 'home' ?
