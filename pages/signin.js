@@ -2,6 +2,8 @@ import Loading from '../components/Loading.js';
 import Background from '../components/Background.js';
 import Router from 'next/router';
 import Link from 'next/link';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -14,18 +16,26 @@ export default function SignIn(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
 
   // attempts to sign in user
   async function signIn() {
-    setError('');
+    setIsError(false);
     // try to sign in with email and password
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
     // handle sign in error
     } catch (e) {
       setError(getError(e));
+      setIsError(true);
     }
+  }
+
+  // on error closed
+  function onCloseError(event, reason) {
+    if (reason !== 'clickaway') setIsError(false);
   }
 
   // listen for user auth
@@ -70,7 +80,6 @@ export default function SignIn(props) {
           />
           <button className="bluebutton">Sign In</button>
         </form>
-        {error && <p>{error}</p>}
         <hr />
         <div className={styles.links}>
           <Link href="/signup">
@@ -80,6 +89,20 @@ export default function SignIn(props) {
             <a>Forgot password?</a>
           </Link>
         </div>
+        <Snackbar
+          open={isError}
+          autoHideDuration={6000}
+          onClose={onCloseError}
+        >
+          <MuiAlert
+            elevation={6}
+            variant="filled"
+            onClose={onCloseError}
+            severity="error"
+          >
+            {error}
+          </MuiAlert>
+        </Snackbar>
       </div>
     </div>
   );
