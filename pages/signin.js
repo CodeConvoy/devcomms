@@ -37,9 +37,9 @@ export default function SignIn(props) {
   if (currentUser) return <Loading />;
 
   return (
-    <div className={styles.container}>
+    <div className="page-container">
       <Background />
-      <div className={styles.center}>
+      <div className="page-center">
         <h1>Sign In</h1>
         <hr />
         <form onSubmit={e => {

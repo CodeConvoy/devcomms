@@ -1,38 +1,3 @@
-.container {
-  min-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.center {
-  max-width: 600px;
-  margin: 40px;
-  background: #efefef;
-  padding: 20px 40px;
-  background: var(--dark1);
-  color: var(--gray0);
-  border-radius: 10px;
-}
-
-.center > h1 {
-  margin: 0;
-  text-align: center;
-}
-
-.center > form {
-  display: flex;
-  flex-direction: column;
-}
-
-.center > form > label {
-  margin-top: 10px;
-}
-
-.center > form > button {
-  margin: 10px auto;
-}
-
 .links {
   display: flex;
   flex-direction: column;

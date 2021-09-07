@@ -66,9 +66,9 @@ export default function SignUp(props) {
   if (currentUser) return <Loading />;
 
   return (
-    <div className={styles.container}>
+    <div className="page-container">
       <Background />
-      <div className={styles.center}>
+      <div className="page-center">
         <h1>Sign Up</h1>
         <hr />
         <form onSubmit={e => {
@@ -120,6 +120,7 @@ export default function SignUp(props) {
           <button className="bluebutton">Sign Up</button>
         </form>
         {error && <p>{error}</p>}
+        <hr />
         <Link href="/signin">
           <a>Have an account? Sign in</a>
         </Link>

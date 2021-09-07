@@ -33,9 +33,9 @@ export default function Reset(props) {
   }, [currentUser]);
 
   return (
-    <div className={styles.container}>
+    <div className="page-container">
       <Background />
-      <div className={styles.center}>
+      <div className="page-center">
         <h1>Reset Password</h1>
         <hr />
         <form onSubmit={e => {
