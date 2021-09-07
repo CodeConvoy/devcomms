@@ -13,16 +13,23 @@
   background: var(--dark1);
   color: var(--gray0);
   border-radius: 10px;
+  text-align: center;
 }
 
 .center > h1 {
   margin: 0;
-  text-align: center;
 }
 
 .center > form {
   display: flex;
   flex-direction: column;
+  width: 154px;
+  margin: 0 auto;
+}
+
+.center label {
+  text-align: left;
+  margin-top: 10px;
 }
 
 .center > form > button {

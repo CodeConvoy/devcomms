@@ -71,9 +71,15 @@ export default function SignIn(props) {
           <button className="bluebutton">Sign In</button>
         </form>
         {error && <p>{error}</p>}
-        <Link href="/signup">
-          <a>No account? Sign up</a>
-        </Link>
+        <hr />
+        <div className={styles.links}>
+          <Link href="/signup">
+            <a>No account? Sign up</a>
+          </Link>
+          <Link href="/reset">
+            <a>Forgot password?</a>
+          </Link>
+        </div>
       </div>
     </div>
   );

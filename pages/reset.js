@@ -1,5 +1,6 @@
 import Background from '../components/Background.js';
 import Router from 'next/router';
+import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -35,7 +36,8 @@ export default function Reset(props) {
     <div className={styles.container}>
       <Background />
       <div className={styles.center}>
-        <h1>Reset<br />Password</h1>
+        <h1>Reset Password</h1>
+        <hr />
         <form onSubmit={e => {
           e.preventDefault();
           resetPassword();
@@ -49,10 +51,14 @@ export default function Reset(props) {
             onChange={e => setEmail(e.target.value)}
             required
           />
-          <button className="bluebutton">Reset Password</button>
+          <button className="bluebutton">Request</button>
         </form>
         {error && <p>{error}</p>}
         {success && <p>{success}</p>}
+        <hr />
+        <Link href="/signin">
+          <a>Back to sign in</a>
+        </Link>
       </div>
     </div>
   );
