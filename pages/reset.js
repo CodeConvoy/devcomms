@@ -1,3 +1,4 @@
+import Background from '../components/Background.js';
 import Router from 'next/router';
 
 import { useEffect, useState } from 'react';
@@ -31,9 +32,10 @@ export default function Reset(props) {
   }, [currentUser]);
 
   return (
-    <div>
-      <div>
-        <h1>Reset Password</h1>
+    <div className={styles.container}>
+      <Background />
+      <div className={styles.center}>
+        <h1>Reset<br />Password</h1>
         <form onSubmit={e => {
           e.preventDefault();
           resetPassword();
@@ -41,12 +43,13 @@ export default function Reset(props) {
           <label htmlFor="reset-email">Email</label>
           <input
             id="reset-email"
+            className="darkinput"
             placeholder="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
           />
-          <button>Reset Password</button>
+          <button className="bluebutton">Reset Password</button>
         </form>
         {error && <p>{error}</p>}
         {success && <p>{success}</p>}
