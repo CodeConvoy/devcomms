@@ -2,6 +2,7 @@ import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
+import ListIcon from '@material-ui/icons/List';
 
 import { useEffect, useState } from 'react';
 import newDateString from '../../util/newDateString.js';
@@ -109,7 +110,7 @@ export default function Todo(props) {
         onClose={() => setModalOpen(false)}
       >
         <div className="modal">
-          <h1>Editing Todo</h1>
+          <h1>Editing<ListIcon />{title}</h1>
           <form onSubmit={e => {
             e.preventDefault();
             updateTodo();

@@ -123,7 +123,7 @@ export default function Group(props) {
         onClose={() => setModalOpen(false)}
       >
         <div className="modal">
-          <h1>Editing {group.name}</h1>
+          <h1>Editing<GroupIcon /><span>{group.name}</span></h1>
           <div className={styles.select}>
             <button
               className={`${tab === 0 && styles.selected} iconbutton2`}

@@ -43,6 +43,8 @@ select {
 .modal {
   text-align: center;
   background: var(--dark4);
+  max-width: 400px;
+  overflow: hidden;
   color: #000;
   position: absolute;
   top: 50%;
@@ -56,6 +58,19 @@ select {
 
 .modal h1 {
   margin: 0 0 10px 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+.modal h1 > svg {
+  font-size: 32px;
+  margin-left: 8px;
+}
+
+.modal h1 > span {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .modal form {
