@@ -12,6 +12,25 @@ export default function Reset(props) {
 
   return (
     <div>
+      <div>
+        <h1>Reset Password</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          resetPassword();
+        }}>
+          <label htmlFor="reset-email">Email</label>
+          <input
+            id="reset-email"
+            placeholder="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+          />
+          <button>Reset Password</button>
+        </form>
+        {error && <p>{error}</p>}
+        {success && <p>{success}</p>}
+      </div>
     </div>
   );
 }
