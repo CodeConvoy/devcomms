@@ -3,6 +3,7 @@ import Chat from './Chat.js';
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
 import Modal from '@material-ui/core/Modal';
+import SearchIcon from '@material-ui/icons/Search';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -45,6 +46,21 @@ export default function Homescreen(props) {
   // resets modal
   function resetModal() {
     setUsername('');
+    setFoundUsers(undefined);
+  }
+
+  // searches users with given username
+  async function searchUsers() {
+    // clear found users
+    setFoundUsers(undefined);
+    // query users
+    const usersQuery = usernamesRef
+    .where('username', '>=', username)
+    .where('username', '<', `${username}~`)
+    .limit(10);
+    const users = await usersQuery.get();
+    // set found users
+    setFoundUsers(users.docs.map(doc => doc.data()));
   }
 
   // return if loading
@@ -85,18 +101,20 @@ export default function Homescreen(props) {
           <h1>Add Friend</h1>
           <form onSubmit={e => {
             e.preventDefault();
-            addFriend();
+            searchUsers();
           }}>
-            <input
-              placeholder="username"
-              className="darkinput"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              required
-            />
-            <button className="iconbutton2">
-              <AddIcon />
-            </button>
+            <div className="input-button">
+              <input
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                className={`${styles.usernameinput} darkinput`}
+                placeholder="username"
+                required
+              />
+              <button className="iconbutton2">
+                <SearchIcon />
+              </button>
+            </div>
           </form>
         </div>
       </Modal>
