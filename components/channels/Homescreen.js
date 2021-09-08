@@ -94,7 +94,7 @@ export default function Homescreen(props) {
                   e.stopPropagation();
                   removeFriend(user);
                 }}>
-                  <ClearIcon />
+                  <ClearIcon fontSize="small" />
                 </button>
               </Tooltip>
             </div>
@@ -123,11 +123,11 @@ export default function Homescreen(props) {
             e.preventDefault();
             searchUsers();
           }}>
-            <div className="input-button">
+            <div className={`${styles.usernameinput} input-button`}>
               <input
                 value={username}
                 onChange={e => setUsername(e.target.value)}
-                className={`${styles.usernameinput} darkinput`}
+                className="darkinput"
                 placeholder="username"
                 required
               />

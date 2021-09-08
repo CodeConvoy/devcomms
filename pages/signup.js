@@ -63,7 +63,7 @@ export default function SignUp(props) {
     // create user documents
     const uid = firebase.auth().currentUser.uid;
     const userRef = firebase.firestore().collection('users').doc(uid);
-    await userRef.set({ username });
+    await userRef.set({ username, friends: [] });
     await usernameRef.set({ username, uid, joined: new Date() });
   }
 
