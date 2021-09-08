@@ -11,7 +11,7 @@
   background: var(--dark3);
 }
 
-.users > button {
+.users > div {
   margin: 5px;
   width: 60px;
   flex: 0 0 60px;
@@ -19,18 +19,50 @@
   background: var(--dark1);
   border-radius: 30px;
   color: var(--gray0);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.users > button:hover {
+.users > div:hover {
   background: var(--dark2);
 }
 
-.users > button.selected {
-  border: 2px solid var(--gray2);
+.users > div.selected {
+  /* outline: 2px solid var(--gray2); */
+  box-shadow: 0 0 0 2px var(--gray2);
   background: var(--dark2);
 }
 
-.users > button > div {
+.users > div > div {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.users > div > button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: var(--dark1);
+  border-radius: 50%;
+  border: 0;
+  color: var(--gray0);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  opacity: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: 0.25s;
+}
+
+.users > div:hover > button {
+  opacity: 1;
+}
+
+.users > div > button:hover {
+  background: var(--dark4);
 }
