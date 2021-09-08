@@ -3,6 +3,7 @@ import Message from './Message.js';
 import Loading from '../Loading.js';
 import PublishIcon from '@material-ui/icons/Publish';
 import SendIcon from '@material-ui/icons/Send';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { useEffect, useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -144,7 +145,7 @@ export default function Chat(props) {
         {
           file ?
           <div className="modal">
-            <h1>Send File</h1>
+            <h1 className={styles.modaltitle}>Upload File</h1>
             <p>{file.name} ({file.type})</p>
             <div>
               {
@@ -157,9 +158,11 @@ export default function Chat(props) {
                 />
               }
             </div>
-            <button className="iconbutton2" onClick={sendFile}>
-              <SendIcon />
-            </button>
+            <Tooltip title="Send" arrow>
+              <button className="iconbutton2" onClick={sendFile}>
+                <SendIcon />
+              </button>
+            </Tooltip>
           </div> :
           <div>Loading file...</div>
         }

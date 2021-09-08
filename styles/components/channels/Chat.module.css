@@ -70,3 +70,8 @@
   max-height: 200px;
   margin-bottom: 10px;
 }
+
+.modaltitle {
+  display: inline-block!important;
+  margin: 0!important;
+}

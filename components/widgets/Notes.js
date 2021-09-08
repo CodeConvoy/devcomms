@@ -45,7 +45,7 @@ export default function Notes(props) {
   return (
     <div className={styles.container}>
       <h1><DescriptionIcon fontSize="large" /> <span>{widget.name}</span></h1>
-      <textarea value={text} onChange={e => setText(e.target.value)} />
+      <textarea value={text} onChange={e => setText(e.target.value)} rows={16} />
     </div>
   );
 }
