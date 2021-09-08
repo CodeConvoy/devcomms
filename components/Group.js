@@ -99,26 +99,28 @@ export default function Group(props) {
 
   return (
     <>
-      <div
-        className={
-          currGroup === group.id ?
-          `${styles.container} ${selectStyle}` : styles.container
-        }
-        onClick={() => setCurrGroup(group.id)}
-        key={group.id}
-      >
-        <div>{abbreviateName(group.name)}</div>
-        {
-          uid === group.creator &&
-          <button onClick={e => {
-            resetModal();
-            e.stopPropagation();
-            setModalOpen(true);
-          }}>
-            <SettingsIcon fontSize="small" />
-          </button>
-        }
-      </div>
+      <Tooltip title={group.name} arrow>
+        <div
+          className={
+            currGroup === group.id ?
+            `${styles.container} ${selectStyle}` : styles.container
+          }
+          onClick={() => setCurrGroup(group.id)}
+          key={group.id}
+        >
+          <div>{abbreviateName(group.name)}</div>
+          {
+            uid === group.creator &&
+            <button onClick={e => {
+              resetModal();
+              e.stopPropagation();
+              setModalOpen(true);
+            }}>
+              <SettingsIcon fontSize="small" />
+            </button>
+          }
+        </div>
+      </Tooltip>
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -182,9 +184,11 @@ export default function Group(props) {
                     {user.username}
                     {
                       user.uid !== group.creator &&
-                      <button onClick={() => removeUser(user)}>
-                        <ClearIcon fontSize="small" />
-                      </button>
+                      <Tooltip title="Remove" arrow>
+                        <button onClick={() => removeUser(user)}>
+                          <ClearIcon fontSize="small" />
+                        </button>
+                      </Tooltip>
                     }
                   </div>
                 )
@@ -216,9 +220,11 @@ export default function Group(props) {
                       {user.username}
                       {
                         !group.members.includes(user.uid) &&
-                        <button onClick={() => addUser(user)}>
-                          <AddIcon />
-                        </button>
+                        <Tooltip title="Add" arrow>
+                          <button onClick={() => addUser(user)}>
+                            <AddIcon />
+                          </button>
+                        </Tooltip>
                       }
                     </div>
                   )
