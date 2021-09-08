@@ -2,6 +2,7 @@ import Modal from '@material-ui/core/Modal';
 import SettingsIcon from '@material-ui/icons/Settings';
 import CheckIcon from '@material-ui/icons/Check';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { useState } from 'react';
 import getIcon from '../../util/getIcon.js';
@@ -78,12 +79,14 @@ export default function Channel(props) {
               </button>
             </div>
           </form>
-          <button
-            className={`iconbutton2 ${styles.delbutton}`}
-            onClick={deleteChannel}
-          >
-            <DeleteIcon />
-          </button>
+          <Tooltip title="Delete" arrow>
+            <button
+              className={`iconbutton2 ${styles.delbutton}`}
+              onClick={deleteChannel}
+            >
+              <DeleteIcon />
+            </button>
+          </Tooltip>
         </div>
       </Modal>
     </>

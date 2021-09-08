@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import GroupIcon from '@material-ui/icons/Group';
 import ClearIcon from '@material-ui/icons/Clear';
 import SearchIcon from '@material-ui/icons/Search';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { useState } from 'react';
 
@@ -125,24 +126,30 @@ export default function Group(props) {
         <div className="modal">
           <h1>Editing<GroupIcon /><span>{group.name}</span></h1>
           <div className={styles.select}>
-            <button
-              className={`${tab === 0 && styles.selected} iconbutton2`}
-              onClick={() => setTab(0)}
-            >
-              <EditIcon />
-            </button>
-            <button
-              className={`${tab === 1 && styles.selected} iconbutton2`}
-              onClick={() => setTab(1)}
-            >
-              <GroupIcon />
-            </button>
-            <button
-              className="iconbutton2"
-              onClick={deleteGroup}
-            >
-              <DeleteIcon />
-            </button>
+            <Tooltip title="Edit" arrow>
+              <button
+                className={`${tab === 0 && styles.selected} iconbutton2`}
+                onClick={() => setTab(0)}
+              >
+                <EditIcon />
+              </button>
+            </Tooltip>
+            <Tooltip title="Members" arrow>
+              <button
+                className={`${tab === 1 && styles.selected} iconbutton2`}
+                onClick={() => setTab(1)}
+              >
+                <GroupIcon />
+              </button>
+            </Tooltip>
+            <Tooltip title="Delete Group" arrow>
+              <button
+                className="iconbutton2"
+                onClick={deleteGroup}
+              >
+                <DeleteIcon />
+              </button>
+            </Tooltip>
           </div>
           {
             tab === 0 &&
@@ -158,9 +165,11 @@ export default function Group(props) {
                 placeholder="name"
                 required
               />
-              <button className="iconbutton2">
-                <CheckIcon />
-              </button>
+              <Tooltip title="Save Changes" arrow>
+                <button className="iconbutton2">
+                  <CheckIcon />
+                </button>
+              </Tooltip>
               </div>
             </form>
           }

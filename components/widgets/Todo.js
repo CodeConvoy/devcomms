@@ -3,6 +3,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
 import ListIcon from '@material-ui/icons/List';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { useEffect, useState } from 'react';
 import newDateString from '../../util/newDateString.js';
@@ -147,16 +148,20 @@ export default function Todo(props) {
                 required
               />
             }
-            <button className="iconbutton2">
-              <CheckIcon />
-            </button>
+            <Tooltip title="Save Changes" arrow>
+              <button className="iconbutton2">
+                <CheckIcon />
+              </button>
+            </Tooltip>
           </form>
-          <button
-            className={`iconbutton2 ${styles.delbutton}`}
-            onClick={deleteTodo}
-          >
-            <DeleteIcon />
-          </button>
+          <Tooltip title="Delete Todo" arrow>
+            <button
+              className={`iconbutton2 ${styles.delbutton}`}
+              onClick={deleteTodo}
+            >
+              <DeleteIcon />
+            </button>
+          </Tooltip>
         </div>
       </Modal>
     </div>
