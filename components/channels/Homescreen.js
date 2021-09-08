@@ -17,6 +17,7 @@ export default function Homescreen(props) {
   const [currUser, setCurrUser] = useState(undefined);
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState('');
+  const [foundUsers, setFoundUsers] = useState(undefined);
 
   // get user data
   const uid = firebase.auth().currentUser.uid;
@@ -26,7 +27,6 @@ export default function Homescreen(props) {
   // get users data
   const usernamesRef = firebase.firestore().collection('usernames');
   const chatsRef = firebase.firestore().collection('chats');
-  const [users] = useCollectionData(usernamesRef);
 
   // returns message ref based on current user
   function getMessagesRef() {
@@ -36,10 +36,12 @@ export default function Homescreen(props) {
     return chatsRef.doc(chatId).collection('messages');
   }
 
-  // adds friend in firebase
-  async function addFriend() {
+  // adds user as friend
+  async function addFriend(user) {
     await userRef.update({
-      friends: firebase.firestore.FieldValue.arrayUnion(username)
+      friends: firebase.firestore.FieldValue.arrayUnion({
+        username: user.username, uid: user.uid
+      })
     });
   }
 
@@ -64,13 +66,13 @@ export default function Homescreen(props) {
   }
 
   // return if loading
-  if (!users) return <Loading />;
+  if (!currentUser.friends) return <Loading />;
 
   return (
     <div className={styles.container}>
       <div className={styles.users}>
         {
-          users.map(user =>
+          currentUser.friends.map(user =>
             <button
               className={currUser?.uid === user.uid ? styles.selected : undefined}
               onClick={() => setCurrUser(user)}
@@ -116,6 +118,24 @@ export default function Homescreen(props) {
               </button>
             </div>
           </form>
+          {
+            foundUsers &&
+            (
+              !foundUsers.length ?
+              <div>No users found</div> :
+              foundUsers.map(user =>
+                <div className={styles.member} key={user.uid}>
+                  {user.username}
+                  {
+                    !currentUser.friends.some(f => f.uid === user.uid) &&
+                    <button onClick={() => addFriend(user)}>
+                      <AddIcon />
+                    </button>
+                  }
+                </div>
+              )
+            )
+          }
         </div>
       </Modal>
     </div>
