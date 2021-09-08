@@ -74,12 +74,14 @@ export default function Channel(props) {
                 placeholder="name"
                 required
               />
-              <button className="iconbutton2">
-                <CheckIcon />
-              </button>
+              <Tooltip title="Save Changes" arrow>
+                <button className="iconbutton2">
+                  <CheckIcon />
+                </button>
+              </Tooltip>
             </div>
           </form>
-          <Tooltip title="Delete" arrow>
+          <Tooltip title="Delete Channel" arrow>
             <button
               className={`iconbutton2 ${styles.delbutton}`}
               onClick={deleteChannel}

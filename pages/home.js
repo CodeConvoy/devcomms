@@ -63,12 +63,14 @@ export default function Home(props) {
       <Header currentUser={currentUser} />
       <div className={styles.page}>
         <div className={styles.groups}>
-          <div
-            className={currGroup === 'home' ? styles.selected : undefined}
-            onClick={() => setCurrGroup('home')}
-          >
-            <HomeIcon />
-          </div>
+          <Tooltip title="Home" arrow>
+            <div
+              className={currGroup === 'home' ? styles.selected : undefined}
+              onClick={() => setCurrGroup('home')}
+            >
+              <HomeIcon />
+            </div>
+          </Tooltip>
           {
             groups.map(group =>
               <Group

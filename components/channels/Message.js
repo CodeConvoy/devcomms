@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -131,15 +132,19 @@ export default function Message(props) {
                   className={`${styles.textinput} darkinput`}
                   required
                 />
-                <button className={`${styles.checkbutton} iconbutton2`}>
-                  <CheckIcon />
-                </button>
+                <Tooltip title="Save Changes" arrow>
+                  <button className={`${styles.checkbutton} iconbutton2`}>
+                    <CheckIcon />
+                  </button>
+                </Tooltip>
               </div>
             </form>
           }
-          <button className="iconbutton2" onClick={deleteMessage}>
-            <DeleteIcon />
-          </button>
+          <Tooltip title="Delete Message" arrow>
+            <button className="iconbutton2" onClick={deleteMessage}>
+              <DeleteIcon />
+            </button>
+          </Tooltip>
         </div>
       </Modal>
     </>

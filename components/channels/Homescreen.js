@@ -146,9 +146,11 @@ export default function Homescreen(props) {
                   {user.username}
                   {
                     !currentUser.friends.some(f => f.uid === user.uid) &&
-                    <button onClick={() => addFriend(user)}>
-                      <AddIcon />
-                    </button>
+                    <Tooltip title="Add" arrow>
+                      <button onClick={() => addFriend(user)}>
+                        <AddIcon />
+                      </button>
+                    </Tooltip>
                   }
                 </div>
               )
