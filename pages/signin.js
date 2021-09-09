@@ -1,10 +1,15 @@
+import Loading from '../components/Loading.js';
 import Background from '../components/Background.js';
+import Router from 'next/router';
 
 import firebase from 'firebase/app';
+import { useEffect } from 'react';
 
 import styles from '../styles/pages/SignIn.module.css';
 
-export default function SignIn() {
+export default function SignIn(props) {
+  const { currentUser } = props;
+
   // creates user doc if not existing
   async function createUserDoc() {
     // get user doc
@@ -23,6 +28,14 @@ export default function SignIn() {
     await firebase.auth().signInWithPopup(provider);
     await createUserDoc();
   }
+
+  // listen for user auth
+  useEffect(() => {
+    if (currentUser) Router.push('/home');
+  }, [currentUser]);
+
+  // return if loading
+  if (currentUser) return <Loading />;
 
   return (
     <div className="page-container">
