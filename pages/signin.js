@@ -1,4 +1,8 @@
+import Background from '../components/Background.js';
+
 import firebase from 'firebase/app';
+
+import styles from '../styles/pages/SignIn.module.css';
 
 export default function SignIn() {
   async function signInWithGitHub() {
@@ -7,9 +11,18 @@ export default function SignIn() {
   }
 
   return (
-    <div>
-      <h1>Sign In</h1>
-      <button onClick={signInWithGitHub}>Sign in with GitHub</button>
+    <div className="page-container">
+      <Background />
+      <div className="page-center">
+        <h1>Sign In</h1>
+        <hr />
+        <button
+          onClick={signInWithGitHub}
+          className="bluebutton"
+        >
+          Sign in with GitHub
+        </button>
+      </div>
     </div>
   );
 }
