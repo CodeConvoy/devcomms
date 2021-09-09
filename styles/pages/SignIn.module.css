@@ -1,9 +1,0 @@
-.links {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.links > a {
-  margin: 5px 0;
-}

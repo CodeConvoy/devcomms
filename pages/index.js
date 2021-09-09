@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import getIcon from '../util/getIcon.js';
 import firebase from 'firebase/app';
+import signInWithGitHub from '../util/signInWithGitHub.js';
 
 import styles from '../styles/pages/Index.module.css';
 
@@ -54,14 +55,9 @@ export default function Index() {
           <Link href="/home">
             <a className={styles.biglink}>Home</a>
           </Link> :
-          <>
-            <Link href="/signin">
-              <a className={styles.biglink}>Sign In</a>
-            </Link>
-            <Link href="/signup">
-              <a className={styles.biglink}>Sign Up</a>
-            </Link>
-          </>
+          <button className="bluebutton" onClick={signInWithGitHub}>
+            Sign in with GitHub
+          </button>
         }
       </div>
     </div>
