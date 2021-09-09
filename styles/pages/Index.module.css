@@ -15,12 +15,21 @@
   border-radius: 10px;
 }
 
-.center > div:first-of-type {
-  margin: -10px 0!important;
+.links {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
 }
 
-.center > h1 {
-  margin: 0;
+.links > a {
+  color: var(--gray0);
+  margin-left: 5px;
+  transition: 0s;
+}
+
+.links > a:hover {
+  color: var(--blue0);
 }
 
 .center > p {

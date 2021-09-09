@@ -1,6 +1,7 @@
 import GitHubIcon from '@material-ui/icons/GitHub';
-import GroupIcon from '@material-ui/icons/Group';
+import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import AddIcon from '@material-ui/icons/Add';
+import PersonIcon from '@material-ui/icons/Person';
 import Background from '../components/Background.js';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,6 +17,32 @@ export default function Index() {
   return (
     <div className={styles.container}>
       <Background />
+      <p className={styles.copyright}>
+        &copy; Devcomms {new Date().getFullYear()}
+      </p>
+      <div className={styles.links}>
+        <a
+          href="https://github.com/codeconvoy/devcomms"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GitHubIcon fontSize="large" />
+        </a>
+        <a
+          href="https://codeconvoy.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LocalShippingIcon fontSize="large" />
+        </a>
+        <a
+          href="https://csaye.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <PersonIcon fontSize="large" />
+        </a>
+      </div>
       <div className={styles.center}>
         <Image src="/img/logo.png" width="64" height="64" alt="logo" />
         <h1>Devcomms</h1>
