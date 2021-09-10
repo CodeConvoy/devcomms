@@ -2,6 +2,10 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
 import AddIcon from '@material-ui/icons/Add';
 import PersonIcon from '@material-ui/icons/Person';
+import ChatIcon from '@material-ui/icons/Chat';
+import SyncIcon from '@material-ui/icons/Sync';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Background from '../components/Background.js';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -104,34 +108,21 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <p>Instead of having one tool for chatting, one tool for arranging
-        notes, and one tool for setting goals, you can do all of that and more
-        with Devcomms. No longer will you have to struggle to coordinate across
-        several apps.</p>
-        <hr />
-        <p>
-          Devcomms is 100% free and open source.<br />
-          Have an issue? Want to contribute? Find our GitHub here:<br />
-          <a
-            href="https://github.com/codeconvoy/devcomms"
-            className={styles.githublink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <GitHubIcon />
-            Devcomms GitHub
-          </a>
-        </p>
-        <hr />
-        {
-          firebase.auth().currentUser ?
-          <Link href="/home">
-            <a className={styles.biglink}>Home</a>
-          </Link> :
-          <button className="bluebutton" onClick={signInWithGitHub}>
-            Sign in with GitHub
-          </button>
-        }
+        <div className={styles.bottom}>
+          <p>
+            Devcomms is built by developers, for developers.<br />
+            Have an issue? Want to contribute? Find our GitHub here:<br />
+            <a
+              href="https://github.com/codeconvoy/devcomms"
+              className={`blueurl ${styles.githublink}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GitHubIcon />
+              Devcomms GitHub
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
