@@ -63,17 +63,17 @@ export default function SignUp(props) {
   if (!authed || currentUser) return <Loading />;
 
   return (
-    <div className="page-container">
+    <div className={styles.container}>
       <Background />
-      <div className="page-center">
-        <h1>Create User</h1>
+      <div className={styles.center}>
+        <h1>New User</h1>
         <hr />
         <form onSubmit={e => {
           e.preventDefault();
           createUser();
         }}>
           <label>
-            Username
+            Username<br />
             <input
               id="signup-username"
               className="darkinput"
@@ -84,7 +84,7 @@ export default function SignUp(props) {
               required
             />
           </label>
-          <button className="bluebutton">Create User</button>
+          <button className="bluebutton">Create</button>
         </form>
         <Snackbar
           open={isError}

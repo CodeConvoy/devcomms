@@ -1,0 +1,39 @@
+.container {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.center {
+  margin: 40px;
+  background: #efefef;
+  padding: 20px 40px;
+  background: var(--dark1);
+  color: var(--gray0);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.center > h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+.center > hr {
+  margin: 5px 0;
+}
+
+.center > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.center > form > label {
+  text-align: left;
+  margin-top: 5px;
+}
+
+.center > form > button {
+  margin: 15px auto 0 auto;
+}

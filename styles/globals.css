@@ -154,44 +154,6 @@ hr {
   margin-left: 5px;
 }
 
-.page-container {
-  min-height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-center {
-  max-width: 600px;
-  margin: 40px;
-  background: #efefef;
-  padding: 20px 40px;
-  background: var(--dark1);
-  color: var(--gray0);
-  border-radius: 10px;
-  text-align: center;
-}
-
-.page-center > h1 {
-  margin: 0;
-}
-
-.page-center > form {
-  display: flex;
-  flex-direction: column;
-  width: 154px;
-  margin: 0 auto;
-}
-
-.page-center label {
-  text-align: left;
-  margin-top: 10px;
-}
-
-.page-center > form > button {
-  margin: 10px auto;
-}
-
 .carousel-caption {
   position: static!important;
   padding: 15px 20px 25px 20px!important;
