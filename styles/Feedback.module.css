@@ -1,0 +1,42 @@
+.feedbackbtn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--gray0);
+  color: #111;
+  box-shadow: 0 0 10px var(--dark0);
+  transition: 0.25s;
+}
+
+.feedbackbtn:hover {
+  transform: scale(1.1);
+}
+
+.form {
+  text-align: left;
+}
+
+.form label {
+  margin-top: 5px;
+}
+
+.form label:first-of-type {
+  margin-top: 0;
+}
+
+.form input {
+  width: 300px;
+}
+
+.form textarea {
+  width: 300px;
+  resize: none;
+}
+
+.form button {
+  margin-top: 10px;
+}
