@@ -2,6 +2,7 @@ import Router from 'next/router';
 import Loading from '../components/Loading.js';
 import Header from '../components/Header.js';
 import Group from '../components/Group.js';
+import Feedback from '../components/Feedback.js';
 import Homescreen from '../components/channels/Homescreen.js';
 import Channels from '../components/channels/Channels.js';
 import Modal from '@material-ui/core/Modal';
@@ -60,6 +61,7 @@ export default function Home(props) {
 
   return (
     <div className={styles.container}>
+      <Feedback />
       <Header currentUser={currentUser} />
       <div className={styles.page}>
         <div className={styles.groups}>
