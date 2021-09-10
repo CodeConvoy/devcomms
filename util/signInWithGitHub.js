@@ -13,6 +13,26 @@ async function getUsername() {
     if (!username) {
       alert("Please enter a username.");
     }
+    // verify username chars
+    else if (!/^[A-Za-z0-9_]+$/.test(username)) {
+      alert("Username can only contain alphanumeric characters and underscore.");
+      username = undefined;
+    }
+    // verify username length
+    else if (username.length < 2 || username.length > 16) {
+      alert("Username must be between 2 and 16 characters.");
+      username = undefined;
+    }
+    // verify username availability
+    else {
+      const usernamesRef = firebase.firestore().collection('usernames');
+      const usernameRef = usernamesRef.doc(username);
+      const usernameDoc = await usernameRef.get();
+      if (usernameDoc.exists) {
+        alert("Username is taken. Please try another.");
+        username = undefined;
+      }
+    }
   }
   return username;
 }
