@@ -110,7 +110,7 @@ export default function Todo(props) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>Editing<ListIcon />{title}</h1>
           <form onSubmit={e => {
             e.preventDefault();

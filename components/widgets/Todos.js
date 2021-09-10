@@ -126,7 +126,10 @@ export default function Todos(props) {
         </Droppable>
       </DragDropContext>
       <Tooltip title="New Todo" arrow>
-        <button className="iconbutton3" onClick={() => setModalOpen(true)}>
+        <button
+          className={`iconbutton3 ${styles.addbtn}`}
+          onClick={() => setModalOpen(true)}
+        >
           <AddIcon />
         </button>
       </Tooltip>
@@ -134,7 +137,7 @@ export default function Todos(props) {
         open={modalOpen}
         onClose={resetModal}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>New Todo</h1>
           <form onSubmit={createTodo}>
             <input
