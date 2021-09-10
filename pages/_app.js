@@ -10,6 +10,7 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { firebaseConfig } from '../util/firebaseConfig.js';
 import { useEffect, useState } from 'react';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
 
 // initialize firebase

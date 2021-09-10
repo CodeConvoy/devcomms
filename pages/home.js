@@ -52,7 +52,7 @@ export default function Home(props) {
 
   // listen for user auth
   useEffect(() => {
-    if (!currentUser) Router.push('/signin');
+    if (!currentUser) Router.push('/');
   }, [currentUser]);
 
   // return if loading
