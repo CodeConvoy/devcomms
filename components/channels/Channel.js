@@ -60,7 +60,7 @@ export default function Channel(props) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>Editing{getIcon(type)}<span>{channel.name}</span></h1>
           <form onSubmit={e => {
             e.preventDefault();

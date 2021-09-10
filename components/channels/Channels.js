@@ -251,7 +251,7 @@ export default function Channels(props) {
         open={channelModalOpen}
         onClose={resetModal}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>New Channel</h1>
           <form onSubmit={e => {
             e.preventDefault();
@@ -276,7 +276,7 @@ export default function Channels(props) {
         open={widgetModalOpen}
         onClose={resetModal}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>New Widget</h1>
           <form onSubmit={e => {
             e.preventDefault();
