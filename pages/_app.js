@@ -6,7 +6,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useDocumentData } from 'react-firebase-hooks/firestore';
+import { useDocument } from 'react-firebase-hooks/firestore';
 import { firebaseConfig } from '../util/firebaseConfig.js';
 import { useEffect, useState } from 'react';
 
@@ -23,13 +23,17 @@ function ComponentAuthed(props) {
 
   // get current user
   const uid = firebase.auth().currentUser.uid;
-  const userDoc = firebase.firestore().collection('users').doc(uid);
-  const [userData] = useDocumentData(userDoc);
+  const userRef = firebase.firestore().collection('users').doc(uid);
+  const [userDoc] = useDocument(userRef);
 
   return (
-    userData ?
-    <Component currentUser={userData} {...pageProps} /> :
-    <Loading />
+    userDoc === undefined ?
+    <Loading /> :
+    <Component
+      authed={true}
+      currentUser={userDoc.exists ? userDoc.data() : null}
+      {...pageProps}
+    />
   );
 }
 
@@ -77,7 +81,7 @@ export default function App(props) {
         <Loading /> :
         authed ?
         <ComponentAuthed Component={Component} pageProps={pageProps} /> :
-        <Component currentUser={null} {...pageProps} />
+        <Component authed={false} currentUser={null} {...pageProps} />
       }
     </>
   );
