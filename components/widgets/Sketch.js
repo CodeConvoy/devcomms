@@ -138,26 +138,28 @@ export default function Sketch(props) {
           onMouseUp={e => { sketching = false; saveCanvas(); }}
           onMouseLeave={e => { sketching = false; saveCanvas(); }}
         />
-        <Tooltip title="Color" arrow>
-          <button
-            className={`${lineColor === 'black' && styles.selected} iconbutton3`}
-            onClick={() => setLineColor(
-              lineColor === 'white' ? 'black' : 'white'
-            )}
-          >
-            <GestureIcon />
-          </button>
-        </Tooltip>
-        <Tooltip title="Clear" arrow>
-          <button className="iconbutton3" onClick={clearCanvas}>
-            <DeleteIcon />
-          </button>
-        </Tooltip>
-        <Tooltip title="Download" arrow>
-          <button className="iconbutton3" onClick={downloadCanvas}>
-            <GetAppIcon />
-          </button>
-        </Tooltip>
+        <div className={styles.buttons}>
+          <Tooltip title="Color" arrow>
+            <button
+              className={`${lineColor === 'black' && styles.selected} iconbutton3`}
+              onClick={() => setLineColor(
+                lineColor === 'white' ? 'black' : 'white'
+              )}
+            >
+              <GestureIcon />
+            </button>
+          </Tooltip>
+          <Tooltip title="Clear" arrow>
+            <button className="iconbutton3" onClick={clearCanvas}>
+              <DeleteIcon />
+            </button>
+          </Tooltip>
+          <Tooltip title="Download" arrow>
+            <button className="iconbutton3" onClick={downloadCanvas}>
+              <GetAppIcon />
+            </button>
+          </Tooltip>
+        </div>
       </div>
     </>
   );
