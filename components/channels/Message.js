@@ -86,7 +86,7 @@ export default function Message(props) {
             <ReactMarkdown className={styles.markdown}>
               {message.text}
             </ReactMarkdown>
-            {message.edited && <span className={styles.edited}> (edited)</span>}
+            {message.edited && <span className={styles.edited}>(edited)</span>}
           </span> :
           <a href={props.message.url} target="_blank" rel="noreferrer noopener">
             {
