@@ -1,3 +1,6 @@
+import Loading from '../components/Loading.js';
+import Background from '../components/Background.js';
+import Router from 'next/router';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -50,8 +53,18 @@ export default function SignUp(props) {
     if (reason !== 'clickaway') setIsError(false);
   }
 
+  // listen for user auth
+  useEffect(() => {
+    if (currentUser) Router.push('/home');
+    else if (!authed) Router.push('/');
+  }, [authed, currentUser]);
+
+  // return if loading
+  if (!authed || currentUser) return <Loading />;
+
   return (
     <div className="page-container">
+      <Background />
       <div className="page-center">
         <h1>Create User</h1>
         <hr />

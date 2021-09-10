@@ -17,7 +17,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import styles from '../styles/pages/Home.module.css';
 
 export default function Home(props) {
-  const { currentUser } = props;
+  const { authed, currentUser } = props;
 
   const [name, setName] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
@@ -53,8 +53,9 @@ export default function Home(props) {
 
   // listen for user auth
   useEffect(() => {
-    if (!currentUser) Router.push('/');
-  }, [currentUser]);
+    if (!authed) Router.push('/');
+    else if (!currentUser) Router.push('/setup');
+  }, [authed, currentUser]);
 
   // return if loading
   if (!currentUser || !groups) return <Loading />;

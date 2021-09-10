@@ -17,7 +17,9 @@ import signInWithGitHub from '../util/signInWithGitHub.js';
 
 import styles from '../styles/pages/Index.module.css';
 
-export default function Index() {
+export default function Index(props) {
+  const { authed, currentUser } = props;
+
   return (
     <div className={styles.container}>
       <Background />
@@ -97,7 +99,7 @@ export default function Index() {
             <p><LockOpenIcon />100% open source and developer-focused, forever.</p>
             <div className={styles.link}>
               {
-                firebase.auth().currentUser ?
+                authed ?
                 <Link href="/home">
                   <a className={styles.biglink}>Home</a>
                 </Link> :
