@@ -53,8 +53,8 @@
   margin: 10px;
 }
 
-.iconlist > svg {
-  margin: 0 2px;
+.carousel {
+  flex: 0 0 500px;
 }
 
 .githublink {

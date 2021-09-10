@@ -63,7 +63,7 @@ export default function Index() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://via.placeholder.com/600x400"
+                  src="https://via.placeholder.com/600x350"
                   alt="First slide"
                 />
                 <Carousel.Caption>
@@ -74,7 +74,7 @@ export default function Index() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://via.placeholder.com/600x400"
+                  src="https://via.placeholder.com/600x350"
                   alt="Second slide"
                 />
                 <Carousel.Caption>
@@ -85,12 +85,12 @@ export default function Index() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://via.placeholder.com/600x400"
+                  src="https://via.placeholder.com/600x350"
                   alt="Third slide"
                 />
                 <Carousel.Caption>
                   <h3>Third slide label</h3>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                  <p>Praesent commodo cursus magna, vel scelerisque nisl.</p>
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
