@@ -144,7 +144,7 @@ export default function Chat(props) {
       >
         {
           file ?
-          <div className="modal">
+          <div className="muimodal">
             <h1 className={styles.modaltitle}>Upload File</h1>
             <p>{file.name} ({file.type})</p>
             <div>
@@ -159,7 +159,10 @@ export default function Chat(props) {
               }
             </div>
             <Tooltip title="Send" arrow>
-              <button className="iconbutton2" onClick={sendFile}>
+              <button
+                className={`iconbutton2 ${styles.sendfilebtn}`}
+                onClick={sendFile}
+              >
                 <SendIcon />
               </button>
             </Tooltip>

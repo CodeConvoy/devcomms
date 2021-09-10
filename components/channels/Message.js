@@ -117,7 +117,7 @@ export default function Message(props) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>Editing Message</h1>
           {
             message.type === 'text' &&
@@ -129,11 +129,11 @@ export default function Message(props) {
                 <input
                   value={newText}
                   onChange={e => setNewText(e.target.value)}
-                  className={`${styles.textinput} darkinput`}
+                  className="darkinput"
                   required
                 />
                 <Tooltip title="Save Changes" arrow>
-                  <button className={`${styles.checkbutton} iconbutton2`}>
+                  <button className="iconbutton2">
                     <CheckIcon />
                   </button>
                 </Tooltip>
@@ -141,7 +141,10 @@ export default function Message(props) {
             </form>
           }
           <Tooltip title="Delete Message" arrow>
-            <button className="iconbutton2" onClick={deleteMessage}>
+            <button
+              className={`iconbutton2 ${styles.delbutton}`}
+              onClick={deleteMessage}
+            >
               <DeleteIcon />
             </button>
           </Tooltip>
