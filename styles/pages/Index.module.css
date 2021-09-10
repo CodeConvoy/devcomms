@@ -3,16 +3,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
 }
 
-.center {
-  max-width: 500px;
-  margin: 40px;
-  background: var(--dark1);
+.copyright {
   color: var(--gray0);
-  padding: 20px 40px;
-  border-radius: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
 }
 
 .links {
@@ -32,25 +30,60 @@
   color: var(--blue0);
 }
 
-.center > p {
-  margin: 0;
-  line-height: 22px;
+.links > a:first-of-type > svg {
+  padding: 4px;
 }
 
-.center > hr {
-  margin: 15px 0;
+.center {
+  width: 820px;
+  margin: 40px;
+  background: var(--dark1);
+  color: var(--gray0);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px #111;
+}
+
+.center .top {
+  display: flex;
+}
+
+.center .overview {
+  padding: 20px 40px;
+}
+
+.center .overview > p {
+  display: flex;
+}
+
+.center .overview > p > svg {
+  margin-right: 5px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  margin-bottom: 15px;
 }
 
 .title > div {
-  margin-left: 10px!important;
+  margin-right: 10px!important;
+  flex-shrink: 0;
 }
 
-.center > a {
-  margin-right: 10px;
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.iconlist {
-  margin: 10px;
+.center .bottom {
+  background: var(--dark0);
+  overflow: auto;
+  padding: 10px 10px 0 10px;
+  text-align: center;
 }
 
 .carousel {
@@ -60,8 +93,8 @@
 .githublink {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 5px;
+  width: fit-content;
+  margin: 5px auto;
 }
 
 .githublink > svg {
@@ -75,9 +108,10 @@
   border-radius: 10px;
   color: var(--gray0);
   font-weight: bold;
+  transition: 0.25s;
 }
 
 .biglink:hover {
-  background: var(--blue1);
   color: var(--gray0);
+  transform: scale(1.1);
 }
