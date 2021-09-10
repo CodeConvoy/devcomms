@@ -99,22 +99,24 @@ export default function Home(props) {
           open={modalOpen}
           onClose={resetModal}
         >
-          <div className="modal">
+          <div className="muimodal">
             <h1>New Group</h1>
             <form onSubmit={e => {
               e.preventDefault();
               createGroup();
             }}>
-              <input
-                placeholder="name"
-                className={`${styles.nameinput} darkinput`}
-                value={name}
-                onChange={e => setName(e.target.value)}
-                required
-              />
-              <button className="iconbutton2">
-                <AddIcon />
-              </button>
+              <div className="input-button">
+                <input
+                  placeholder="name"
+                  className="darkinput"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required
+                />
+                <button className="iconbutton2">
+                  <AddIcon />
+                </button>
+              </div>
             </form>
           </div>
         </Modal>
