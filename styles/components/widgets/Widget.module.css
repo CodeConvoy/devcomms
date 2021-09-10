@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
 }
 
 .container > div > h1 > svg {

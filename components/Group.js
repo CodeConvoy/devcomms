@@ -125,7 +125,7 @@ export default function Group(props) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>Editing<GroupIcon /><span>{group.name}</span></h1>
           <div className={styles.select}>
             <Tooltip title="Edit" arrow>

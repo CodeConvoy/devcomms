@@ -117,7 +117,7 @@ export default function Homescreen(props) {
         open={modalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <div className="modal">
+        <div className="muimodal">
           <h1>Add Friend</h1>
           <form onSubmit={e => {
             e.preventDefault();

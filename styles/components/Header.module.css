@@ -8,6 +8,7 @@
 
 .container > h1 {
   margin: 0 0 0 10px;
+  font-weight: 800;
 }
 
 .container > div {
@@ -23,7 +24,7 @@
 }
 
 .container > p {
-  margin-right: 10px;
+  margin: 0 10px 0 0;
 }
 
 .container > button {
