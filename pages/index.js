@@ -54,34 +54,34 @@ export default function Index() {
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://via.placeholder.com/600x350"
-                  alt="First slide"
+                  src="/img/screen1.png"
+                  alt="screen1.png"
                 />
                 <Carousel.Caption>
-                  <h3>First slide label</h3>
-                  <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                  <h3>Coordinate</h3>
+                  <p>Organize and manage developer teams with ease.</p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://via.placeholder.com/600x350"
-                  alt="Second slide"
+                  src="/img/screen2.png"
+                  alt="screen2.png"
                 />
                 <Carousel.Caption>
-                  <h3>Second slide label</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                  <h3>Communicate</h3>
+                  <p>Feature-rich text chat with group and direct messaging.</p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
                 <img
                   className="d-block w-100"
-                  src="https://via.placeholder.com/600x350"
-                  alt="Third slide"
+                  src="/img/screen3.png"
+                  alt="screen3.png"
                 />
                 <Carousel.Caption>
-                  <h3>Third slide label</h3>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl.</p>
+                  <h3>Customize</h3>
+                  <p>Precisely format your groups, channels, and widgets.</p>
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
