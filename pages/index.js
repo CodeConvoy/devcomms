@@ -44,20 +44,7 @@ export default function Index() {
         </a>
       </div>
       <div className={styles.center}>
-        <Image src="/img/logo.png" width="64" height="64" alt="logo" />
-        <h1>Devcomms</h1>
-        <p>Team communication and coordination all in one place.</p>
-        <hr />
-        <p>Devcomms is an open source, developer-focused team communication and
-        coordination tool aiming to simplify and streamline group development.
-        </p>
-        <div className={styles.iconlist}>
-          <GroupIcon />
-          {getIcon('text')}
-          {getIcon('sketch')}
-          {getIcon('notes')}
-          {getIcon('todos')}
-          <AddIcon />
+        <div className={styles.top}>
           <div className={styles.carousel}>
             <Carousel>
               <Carousel.Item>
@@ -94,6 +81,27 @@ export default function Index() {
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
+          </div>
+          <div className={styles.overview}>
+            <h1 className={styles.title}>
+              <Image src="/img/logo.png" width="48" height="48" alt="logo" />
+              Devcomms
+            </h1>
+            <p><ChatIcon />Communicate and coordinate with your team.</p>
+            <p><FileCopyIcon />Manage notes, todos, and sketches all in one place.</p>
+            <p><SyncIcon />Keep everyone in sync with real-time widgets.</p>
+            <p><LockOpenIcon />100% open source and developer-focused, forever.</p>
+            <div className={styles.link}>
+              {
+                firebase.auth().currentUser ?
+                <Link href="/home">
+                  <a className={styles.biglink}>Home</a>
+                </Link> :
+                <button className="bluebutton" onClick={signInWithGitHub}>
+                  Sign in with GitHub
+                </button>
+              }
+            </div>
           </div>
         </div>
         <p>Instead of having one tool for chatting, one tool for arranging
