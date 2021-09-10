@@ -57,7 +57,20 @@ export default function App(props) {
         <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="canonical" href="https://devcomms.io/" />
+        <link rel="canonical" href="https://devcomms.io" />
+        {/* og meta */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Devcomms" />
+        <meta property="og:title" content="Text chat with built-in developer widgets." />
+        <meta property="og:image" content="https://devcomms.io/img/screen1.png" />
+        <meta property="og:description" content="Devcomms is an open source communication tool built by developers, for developers." />
+        <meta property="og:url" content="https://devcomms.io" />
+        {/* twitter meta */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:creator" content="@CodeConvoyOrg" />
+        <meta name="twitter:title" content="Text chat with built-in developer widgets." />
+        <meta name="twitter:description" content="Devcomms is an open source communication tool built by developers, for developers." />
+        <meta name="twitter:image" content="https://devcomms.io/img/screen1.png" />
       </Head>
       {
         authed === undefined ?
