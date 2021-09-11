@@ -15,13 +15,13 @@ export default function Modal(props) {
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
-        className: "backdrop",
+        className: styles.backdrop,
         timeout: 100
       }}
     >
       <Fade in={open} timeout={100}>
-        <div className="muimodal">
-          <button className="close" onClick={onClose}>
+        <div className={styles.modal}>
+          <button className={styles.close} onClick={onClose}>
             <ClearIcon />
           </button>
           {props.children}
