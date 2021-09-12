@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import Modal from '../Modal';
@@ -80,29 +81,12 @@ export default function Message(props) {
         </span>
       }
       <div className={styles.container}>
+      <div className={styles.gutter}>
         {
-          message.type === 'text' ?
-          <span>
-            <ReactMarkdown className={styles.markdown}>
-              {message.text}
-            </ReactMarkdown>
-            {message.edited && <span className={styles.edited}>(edited)</span>}
-          </span> :
-          <a href={props.message.url} target="_blank" rel="noreferrer noopener">
-            {
-              message.type === 'image' ?
-              // using an img element here because of unknown size
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={props.message.url}
-                className={styles.image}
-                alt={props.message.filename}
-                onLoad={scrollToEnd}
-              /> :
-              props.message.filename
-            }
-          </a>
+          showHeader &&
+          <Image src={sender.photo} width="40" height="40" alt="avatar" />
         }
+      </div>
         {
           uid === message.sender &&
           <Tooltip title="Edit" arrow>
