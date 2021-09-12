@@ -12,9 +12,14 @@ export default function Header(props) {
 
   return (
     <div className={styles.container}>
-      <Image src="/img/logo.png" width="48" height="48" alt="logo" />
+      <div className={styles.logo}>
+        <Image src="/img/logo.png" width="48" height="48" alt="logo" />
+      </div>
       <h1>Devcomms</h1>
       <span className={styles.flexfill} />
+      <div className={styles.avatar}>
+        <Image src={currentUser.photo} width="40" height="40" alt="avatar" />
+      </div>
       <div className={styles.username}>@{currentUser.username}</div>
       <Tooltip title="Sign Out" arrow>
         <button

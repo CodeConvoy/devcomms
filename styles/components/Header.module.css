@@ -12,8 +12,9 @@
   font-size: 36px;
 }
 
-.container > div:first-of-type {
-  margin-left: 10px!important;
+.logo {
+  margin-left: 10px;
+  display: flex;
   flex: 0 0 48px;
 }
 
@@ -21,8 +22,10 @@
   flex-grow: 1;
 }
 
-.container > a {
-  margin-right: 20px;
+.avatar {
+  display: flex;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .username {
