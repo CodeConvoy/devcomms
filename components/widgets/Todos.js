@@ -1,6 +1,6 @@
 import Todo from './Todo.js';
 import Loading from '../Loading.js';
-import Modal from '@material-ui/core/Modal';
+import Modal from '../Modal';
 import AddIcon from '@material-ui/icons/Add';
 import ListIcon from '@material-ui/icons/List';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -35,7 +35,7 @@ export default function Todos(props) {
 
   // creates a new todo
   async function createTodo() {
-    resetModal();
+    setModalOpen(false);
     await todosRef.add({
       title: title,
       description: description,
@@ -75,7 +75,6 @@ export default function Todos(props) {
     setTitle('');
     setDescription('');
     setDue(null);
-    setModalOpen(false);
   }
 
   // splices todo at given order
@@ -128,55 +127,56 @@ export default function Todos(props) {
       <Tooltip title="New Todo" arrow>
         <button
           className={`iconbutton3 ${styles.addbtn}`}
-          onClick={() => setModalOpen(true)}
+          onClick={() => {
+            resetModal();
+            setModalOpen(true);
+          }}
         >
           <AddIcon />
         </button>
       </Tooltip>
-      <Modal
-        open={modalOpen}
-        onClose={resetModal}
-      >
-        <div className="muimodal">
-          <h1>New Todo</h1>
-          <form onSubmit={createTodo}>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <h1>New Todo</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          createTodo();
+        }}>
+          <input
+            value={title}
+            className="darkinput"
+            onChange={e => setTitle(e.target.value)}
+            placeholder="title"
+            required
+          />
+          <input
+            value={description}
+            className={`${styles.descinput} darkinput`}
+            onChange={e => setDescription(e.target.value)}
+            placeholder="description"
+            required
+          />
+          <label htmlFor="todos-isdue">Due date?</label>
+          <input
+            id="todos-isdue"
+            type="checkbox"
+            className={styles.duecheck}
+            checked={!!due}
+            onChange={e => setDue(e.target.checked ? newDateString() : null)}
+          />
+          {
+            due &&
             <input
-              value={title}
-              className="darkinput"
-              onChange={e => setTitle(e.target.value)}
-              placeholder="title"
+              className={`${styles.dateinput} darkinput`}
+              type="date"
+              value={due}
+              onChange={e => setDue(e.target.value)}
               required
             />
-            <input
-              value={description}
-              className={`${styles.descinput} darkinput`}
-              onChange={e => setDescription(e.target.value)}
-              placeholder="description"
-              required
-            />
-            <label htmlFor="todos-isdue">Due date?</label>
-            <input
-              id="todos-isdue"
-              type="checkbox"
-              className={styles.duecheck}
-              checked={!!due}
-              onChange={e => setDue(e.target.checked ? newDateString() : null)}
-            />
-            {
-              due &&
-              <input
-                className={`${styles.dateinput} darkinput`}
-                type="date"
-                value={due}
-                onChange={e => setDue(e.target.value)}
-                required
-              />
-            }
-            <button className="iconbutton2">
-              <AddIcon />
-            </button>
-          </form>
-        </div>
+          }
+          <button className="iconbutton2">
+            <AddIcon />
+          </button>
+        </form>
       </Modal>
     </div>
   );
