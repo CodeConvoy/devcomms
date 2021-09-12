@@ -1,13 +1,32 @@
-.header {
-  display: inline-block;
-  padding: 2px;
-  margin-top: 10px;
-  color: var(--gray0);
-  font-weight: bold;
+.container {
+  display: flex;
 }
 
-.header:first-of-type {
+.head {
+  margin-top: 15px;
+}
+
+.head:first-of-type {
   margin-top: 0;
+}
+
+.gutter {
+  width: 48px;
+}
+
+.gutter > div {
+  border-radius: 50%;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.header {
+  display: inline-block;
+  padding-bottom: 3px;
+  color: var(--gray0);
+  font-weight: bold;
 }
 
 .datetime {
@@ -16,19 +35,19 @@
   font-weight: normal;
 }
 
-.container {
+.content {
   position: relative;
   padding: 2px;
   border-radius: 5px;
   color: var(--gray0);
 }
 
-.container > span {
+.content > span {
   display: flex;
   align-items: flex-end;
 }
 
-.container > button {
+.content > button {
   border-radius: 5px;
   width: 22px;
   height: 22px;
@@ -41,18 +60,18 @@
   opacity: 0;
 }
 
-.container:hover {
+.content:hover {
   background: var(--dark3);
 }
 
-.container:hover > button {
+.content:hover > button {
   opacity: 1;
   align-items: center;
   justify-content: center;
   color: var(--gray0);
 }
 
-.container > button:hover {
+.content > button:hover {
   background: var(--dark2);
 }
 
@@ -67,7 +86,6 @@
 }
 
 .image {
-  margin: 0 0 -3px 0;
   max-width: 200px;
   max-height: 200px;
 }
