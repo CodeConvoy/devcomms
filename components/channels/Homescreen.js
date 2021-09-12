@@ -1,10 +1,10 @@
 import Loading from '../Loading.js';
 import Chat from './Chat.js';
+import Modal from '../Modal';
+import User from './User.js';
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
-import Modal from '../Modal';
 import SearchIcon from '@material-ui/icons/Search';
-import ClearIcon from '@material-ui/icons/Clear';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -41,14 +41,14 @@ export default function Homescreen(props) {
   async function addFriend(user) {
     await userRef.update({
       friends: firebase.firestore.FieldValue.arrayUnion({
-        username: user.username, uid: user.uid
+        username: user.username, uid: user.uid, photo: user.photo
       })
     });
   }
 
   // removes user as friend
   async function removeFriend(user) {
-    if (!window.confirm(`Remove @${user.username} as friend?`)) return;
+    if (!window.confirm(`Remove @${user.username} as a friend?`)) return;
     if (currUser?.uid === user.uid) setCurrUser(undefined);
     await userRef.update({
       friends: firebase.firestore.FieldValue.arrayRemove(user)
@@ -83,21 +83,14 @@ export default function Homescreen(props) {
       <div className={styles.users}>
         {
           currentUser.friends.map(user =>
-            <div
-              className={currUser?.uid === user.uid ? styles.selected : undefined}
-              onClick={() => setCurrUser(user)}
+            <User
+              user={user}
+              currUser={currUser}
+              setCurrUser={setCurrUser}
+              styles={styles}
+              removeFriend={removeFriend}
               key={user.uid}
-            >
-              <div>{user.username}</div>
-              <Tooltip title="Remove Friend" arrow>
-                <button className={styles.removebutton} onClick={e => {
-                  e.stopPropagation();
-                  removeFriend(user);
-                }}>
-                  <ClearIcon fontSize="small" />
-                </button>
-              </Tooltip>
-            </div>
+            />
           )
         }
         <Tooltip title="Add Friend" arrow>
