@@ -1,4 +1,5 @@
 import Modal from './Modal';
+import Loading from './Loading';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
@@ -22,7 +23,7 @@ export default function Group(props) {
   const [tab, setTab] = useState(0);
   const [name, setName] = useState(group.name);
   const [username, setUsername] = useState('');
-  const [foundUsers, setFoundUsers] = useState(undefined);
+  const [foundUsers, setFoundUsers] = useState(null);
 
   const uid = firebase.auth().currentUser.uid;
   const usernamesRef = firebase.firestore().collection('usernames');
@@ -35,7 +36,7 @@ export default function Group(props) {
   function resetModal() {
     setName(group.name);
     setUsername('');
-    setFoundUsers(undefined);
+    setFoundUsers(null);
     setTab(0);
   }
 
@@ -202,11 +203,16 @@ export default function Group(props) {
                   placeholder="username"
                   required
                 />
-                <button className="iconbutton2">
-                  <SearchIcon />
-                </button>
+                <Tooltip title="Search" arrow>
+                  <button className="iconbutton2">
+                    <SearchIcon />
+                  </button>
+                </Tooltip>
               </div>
             </form>
+            {
+              foundUsers === undefined && <Loading />
+            }
             {
               foundUsers &&
               (

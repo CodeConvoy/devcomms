@@ -18,7 +18,7 @@ export default function Homescreen(props) {
   const [currUser, setCurrUser] = useState(undefined);
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState('');
-  const [foundUsers, setFoundUsers] = useState(undefined);
+  const [foundUsers, setFoundUsers] = useState(null);
 
   // get user data
   const uid = firebase.auth().currentUser.uid;
@@ -58,7 +58,7 @@ export default function Homescreen(props) {
   // resets modal
   function resetModal() {
     setUsername('');
-    setFoundUsers(undefined);
+    setFoundUsers(null);
   }
 
   // searches users with given username
@@ -127,11 +127,16 @@ export default function Homescreen(props) {
               placeholder="username"
               required
             />
-            <button className="iconbutton2">
-              <SearchIcon />
-            </button>
+            <Tooltip title="Search" arrow>
+              <button className="iconbutton2">
+                <SearchIcon />
+              </button>
+            </Tooltip>
           </div>
         </form>
+        {
+          foundUsers === undefined && <Loading />
+        }
         {
           foundUsers &&
           (
