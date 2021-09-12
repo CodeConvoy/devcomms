@@ -6,11 +6,20 @@
   </a>
 </p>
 
-**Devcomms is an open source communication tool by developers, for developers.**
+**Devcomms is an open source communication tool built by developers, for developers.**
 
 Instead of having to coordinate across many different tools, your team can chat, arrange notes, set goals, and more with Devcomms.
 
 Try it here: [devcomms.io](https://devcomms.io)
+
+## Features:
+
+- **Groups.** Create customized groups for any topic and manage your group members.
+- **Channels and widgets.** Organize your team with text channels and helpful widget tools.
+- **Feature-rich chat.** Send messages and files. Customize messages with markdown.<br />
+- **Sketching.** Plan and express ideas to your team with real-time synchronized sketch widgets.<br />
+- **Todo lists.** Keep your team on track with scheduled and prioritized todo lists.<br />
+- *+ more!*
 
 ## Contributing
 
