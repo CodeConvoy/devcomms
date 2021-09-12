@@ -35,41 +35,6 @@
   background: var(--dark2);
 }
 
-.users > div.selected {
-  box-shadow: 0 0 0 2px var(--gray2);
-  background: var(--dark2);
-}
-
-.users > div > div {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.users > div > button {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: var(--dark1);
-  border-radius: 50%;
-  border: 0;
-  color: var(--gray0);
-  width: 20px;
-  height: 20px;
-  display: flex;
-  opacity: 0;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-}
-
-.users > div:hover > button {
-  opacity: 1;
-}
-
-.users > div > button:hover {
-  background: var(--dark4);
-}
-
 .member {
   display: flex;
   align-items: center;
