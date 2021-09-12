@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
-import Modal from '@material-ui/core/Modal';
+import Modal from '../Modal';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
@@ -113,42 +113,37 @@ export default function Message(props) {
           </button>
         }
       </div>
-      <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-      >
-        <div className="muimodal">
-          <h1>Editing Message</h1>
-          {
-            message.type === 'text' &&
-            <form onSubmit={e => {
-              e.preventDefault();
-              updateMessage();
-            }}>
-              <div className="input-button">
-                <input
-                  value={newText}
-                  onChange={e => setNewText(e.target.value)}
-                  className="darkinput"
-                  required
-                />
-                <Tooltip title="Save Changes" arrow>
-                  <button className="iconbutton2">
-                    <CheckIcon />
-                  </button>
-                </Tooltip>
-              </div>
-            </form>
-          }
-          <Tooltip title="Delete Message" arrow>
-            <button
-              className={`iconbutton2 ${styles.delbutton}`}
-              onClick={deleteMessage}
-            >
-              <DeleteIcon />
-            </button>
-          </Tooltip>
-        </div>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <h1>Editing Message</h1>
+        {
+          message.type === 'text' &&
+          <form onSubmit={e => {
+            e.preventDefault();
+            updateMessage();
+          }}>
+            <div className="input-button">
+              <input
+                value={newText}
+                onChange={e => setNewText(e.target.value)}
+                className="darkinput"
+                required
+              />
+              <Tooltip title="Save Changes" arrow>
+                <button className="iconbutton2">
+                  <CheckIcon />
+                </button>
+              </Tooltip>
+            </div>
+          </form>
+        }
+        <Tooltip title="Delete Message" arrow>
+          <button
+            className={`iconbutton2 ${styles.delbutton}`}
+            onClick={deleteMessage}
+          >
+            <DeleteIcon />
+          </button>
+        </Tooltip>
       </Modal>
     </>
   );

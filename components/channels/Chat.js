@@ -1,4 +1,4 @@
-import Modal from '@material-ui/core/Modal';
+import Modal from '../Modal';
 import Message from './Message.js';
 import Loading from '../Loading.js';
 import PublishIcon from '@material-ui/icons/Publish';
@@ -138,13 +138,10 @@ export default function Chat(props) {
           <SendIcon />
         </button>
       </form>
-      <Modal
-        open={!!file}
-        onClose={() => setFile(undefined)}
-      >
+      <Modal open={!!file} onClose={() => setFile(undefined)}>
         {
           file ?
-          <div className="muimodal">
+          <>
             <h1 className={styles.modaltitle}>Upload File</h1>
             <p>{file.name} ({file.type})</p>
             <div>
@@ -166,8 +163,8 @@ export default function Chat(props) {
                 <SendIcon />
               </button>
             </Tooltip>
-          </div> :
-          <div>Loading file...</div>
+          </> :
+          <>Loading file...</>
         }
       </Modal>
     </div>
