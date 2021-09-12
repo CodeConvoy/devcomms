@@ -35,9 +35,10 @@
   position: absolute;
   right: 0;
   top: 0;
-  display: none;
+  display: flex;
   background: transparent;
   border: 0;
+  opacity: 0;
 }
 
 .container:hover {
@@ -45,7 +46,7 @@
 }
 
 .container:hover > button {
-  display: flex;
+  opacity: 1;
   align-items: center;
   justify-content: center;
   color: var(--gray0);

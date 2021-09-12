@@ -16,12 +16,13 @@
   background: transparent;
   align-items: center;
   justify-content: center;
-  display: none;
+  display: flex;
   border-radius: 12px;
+  opacity: 0;
 }
 
 .container:hover > button {
-  display: flex;
+  opacity: 1;
 }
 
 .container > button:hover {
