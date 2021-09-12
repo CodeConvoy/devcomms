@@ -79,6 +79,11 @@
   margin: 0;
 }
 
+.markdown hr {
+  border: 1px solid var(--gray0);
+  width: 400px;
+}
+
 .edited {
   color: var(--gray2);
   font-size: 12px;
@@ -86,8 +91,8 @@
 }
 
 .image {
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 400px;
+  max-height: 300px;
 }
 
 .textinput {
