@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -7,24 +8,26 @@ export default function User(props) {
   const { user, currUser, setCurrUser, removeFriend } = props;
 
   return (
-    <div
-      className={
-        currUser?.uid === user.uid ?
-        `${styles.container} ${styles.selected}` :
-        styles.container
-      }
-      onClick={() => setCurrUser(user)}
-      key={user.uid}
-    >
-      <div>{user.username}</div>
-      <Tooltip title="Remove Friend" arrow>
-        <button onClick={e => {
-          e.stopPropagation();
-          removeFriend(user);
-        }}>
-          <ClearIcon fontSize="small" />
-        </button>
-      </Tooltip>
-    </div>
+    <Tooltip title={user.username} arrow>
+      <div
+        className={
+          currUser?.uid === user.uid ?
+          `${styles.container} ${styles.selected}` :
+          styles.container
+        }
+        onClick={() => setCurrUser(user)}
+        key={user.uid}
+      >
+        <Image src={user.photo} width="60" height="60" alt="avatar" />
+        <Tooltip title="Remove Friend" arrow>
+          <button onClick={e => {
+            e.stopPropagation();
+            removeFriend(user);
+          }}>
+            <ClearIcon fontSize="small" />
+          </button>
+        </Tooltip>
+      </div>
+    </Tooltip>
   );
 }

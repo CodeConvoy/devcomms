@@ -1,11 +1,13 @@
 .selected {
-  box-shadow: 0 0 0 2px var(--gray2);
-  background: var(--dark2);
+  box-shadow: 0 0 5px var(--gray0);
 }
 
 .container > div {
-  overflow: hidden;
-  text-overflow: ellipsis;
+  border-radius: 50%;
+}
+
+.container > div * {
+  border-radius: 50%;
 }
 
 .container > button {
