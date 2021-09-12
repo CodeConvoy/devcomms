@@ -119,9 +119,11 @@ export default function Chat(props) {
         e.preventDefault();
         sendMessage();
       }}>
-        <label htmlFor="fileinput" className={styles.filebutton}>
-          <PublishIcon />
-        </label>
+        <Tooltip title="Upload File" arrow>
+          <label htmlFor="fileinput" className={styles.filebutton}>
+            <PublishIcon />
+          </label>
+        </Tooltip>
         <input
           type="file"
           id="fileinput"
@@ -134,9 +136,11 @@ export default function Chat(props) {
           onChange={e => setText(e.target.value)}
           required
         />
-        <button className={styles.sendbutton}>
-          <SendIcon />
-        </button>
+        <Tooltip title="Send" arrow>
+          <button className={styles.sendbutton}>
+            <SendIcon />
+          </button>
+        </Tooltip>
       </form>
       <Modal open={!!file} onClose={() => setFile(undefined)}>
         {

@@ -105,12 +105,14 @@ export default function Message(props) {
         }
         {
           uid === message.sender &&
-          <button onClick={() => {
-            resetModal();
-            setModalOpen(true);
-          }}>
-            <EditIcon fontSize="small" />
-          </button>
+          <Tooltip title="Edit" arrow>
+            <button onClick={() => {
+              resetModal();
+              setModalOpen(true);
+            }}>
+              <EditIcon fontSize="small" />
+            </button>
+          </Tooltip>
         }
       </div>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
