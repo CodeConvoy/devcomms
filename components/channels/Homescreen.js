@@ -2,7 +2,7 @@ import Loading from '../Loading.js';
 import Chat from './Chat.js';
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
-import Modal from '@material-ui/core/Modal';
+import Modal from '../Modal';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -113,50 +113,45 @@ export default function Homescreen(props) {
         currUser &&
         <Chat messagesRef={getMessagesRef()} currentUser={currentUser} />
       }
-      <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-      >
-        <div className="muimodal">
-          <h1>Add Friend</h1>
-          <form onSubmit={e => {
-            e.preventDefault();
-            searchUsers();
-          }}>
-            <div className={`${styles.usernameinput} input-button`}>
-              <input
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                className="darkinput"
-                placeholder="username"
-                required
-              />
-              <button className="iconbutton2">
-                <SearchIcon />
-              </button>
-            </div>
-          </form>
-          {
-            foundUsers &&
-            (
-              !foundUsers.length ?
-              <div>No users found</div> :
-              foundUsers.map(user =>
-                <div className={styles.member} key={user.uid}>
-                  {user.username}
-                  {
-                    !currentUser.friends.some(f => f.uid === user.uid) &&
-                    <Tooltip title="Add" arrow>
-                      <button onClick={() => addFriend(user)}>
-                        <AddIcon />
-                      </button>
-                    </Tooltip>
-                  }
-                </div>
-              )
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <h1>Add Friend</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          searchUsers();
+        }}>
+          <div className={`${styles.usernameinput} input-button`}>
+            <input
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              className="darkinput"
+              placeholder="username"
+              required
+            />
+            <button className="iconbutton2">
+              <SearchIcon />
+            </button>
+          </div>
+        </form>
+        {
+          foundUsers &&
+          (
+            !foundUsers.length ?
+            <div>No users found</div> :
+            foundUsers.map(user =>
+              <div className={styles.member} key={user.uid}>
+                {user.username}
+                {
+                  !currentUser.friends.some(f => f.uid === user.uid) &&
+                  <Tooltip title="Add" arrow>
+                    <button onClick={() => addFriend(user)}>
+                      <AddIcon />
+                    </button>
+                  </Tooltip>
+                }
+              </div>
             )
-          }
-        </div>
+          )
+        }
       </Modal>
     </div>
   );

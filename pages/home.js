@@ -5,7 +5,7 @@ import Group from '../components/Group.js';
 import Feedback from '../components/Feedback.js';
 import Homescreen from '../components/channels/Homescreen.js';
 import Channels from '../components/channels/Channels.js';
-import Modal from '@material-ui/core/Modal';
+import Modal from '../components/Modal.js';
 import AddIcon from '@material-ui/icons/Add';
 import HomeIcon from '@material-ui/icons/Home';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -34,7 +34,7 @@ export default function Home(props) {
 
   // creates new group doc in firebase
   async function createGroup() {
-    resetModal();
+    setModalOpen(false);
     const docRef = await groupsRef.add({
       name: name,
       creator: uid,
@@ -48,7 +48,6 @@ export default function Home(props) {
   // resets modal
   function resetModal() {
     setName('');
-    setModalOpen(false);
   }
 
   // listen for user auth
@@ -86,7 +85,10 @@ export default function Home(props) {
             )
           }
           <Tooltip title="New Group" arrow>
-            <div onClick={() => setModalOpen(true)}>
+            <div onClick={() => {
+              resetModal();
+              setModalOpen(true);
+            }}>
               <AddIcon />
             </div>
           </Tooltip>
@@ -98,30 +100,25 @@ export default function Home(props) {
           <Channels group={currGroup} currentUser={currentUser} /> :
           <span className={styles.filler} />
         }
-        <Modal
-          open={modalOpen}
-          onClose={resetModal}
-        >
-          <div className="muimodal">
-            <h1>New Group</h1>
-            <form onSubmit={e => {
-              e.preventDefault();
-              createGroup();
-            }}>
-              <div className="input-button">
-                <input
-                  placeholder="name"
-                  className="darkinput"
-                  value={name}
-                  onChange={e => setName(e.target.value)}
-                  required
-                />
-                <button className="iconbutton2">
-                  <AddIcon />
-                </button>
-              </div>
-            </form>
-          </div>
+        <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+          <h1>New Group</h1>
+          <form onSubmit={e => {
+            e.preventDefault();
+            createGroup();
+          }}>
+            <div className="input-button">
+              <input
+                placeholder="name"
+                className="darkinput"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required
+              />
+              <button className="iconbutton2">
+                <AddIcon />
+              </button>
+            </div>
+          </form>
         </Modal>
       </div>
     </div>
