@@ -42,10 +42,10 @@ export default function SignUp(props) {
       return;
     }
     // create user documents
-    const uid = firebase.auth().currentUser.uid;
+    const { uid, photoURL } = firebase.auth().currentUser;
     const userRef = firebase.firestore().collection('users').doc(uid);
-    await userRef.set({ username, friends: [] });
-    await usernameRef.set({ username, uid });
+    await userRef.set({ photo: photoURL, username, friends: [] });
+    await usernameRef.set({ photo: photoURL, username, uid });
   }
 
   // on error closed
