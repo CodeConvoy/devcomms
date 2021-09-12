@@ -21,6 +21,7 @@ const yesterday = new Date(nowYear, nowMonth, nowDay - 1).setHours(0, 0, 0, 0);
 
 export default function Message(props) {
   const { showHeader, messagesRef, scrollToEnd, message } = props;
+  const { sender } = message;
 
   const [modalOpen, setModalOpen] = useState(false);
   const [newText, setNewText] = useState(message.text);
@@ -69,35 +70,62 @@ export default function Message(props) {
   }
 
   return (
-    <>
-      {
-        showHeader &&
-        <span className={styles.header}>
-          @{message.username}
-          {' '}
-          <span className={styles.datetime}>
-            {getDateTimeString(message.sent.toDate())}
-          </span>
-        </span>
-      }
-      <div className={styles.container}>
+    <div className={
+      showHeader ? `${styles.head} ${styles.container}` : styles.container
+    }>
       <div className={styles.gutter}>
         {
           showHeader &&
           <Image src={sender.photo} width="40" height="40" alt="avatar" />
         }
       </div>
+      <div className={styles.main}>
         {
-          uid === message.sender &&
-          <Tooltip title="Edit" arrow>
-            <button onClick={() => {
-              resetModal();
-              setModalOpen(true);
-            }}>
-              <EditIcon fontSize="small" />
-            </button>
-          </Tooltip>
+          showHeader &&
+          <span className={styles.header}>
+            @{sender.username}
+            {' '}
+            <span className={styles.datetime}>
+              {getDateTimeString(message.sent.toDate())}
+            </span>
+          </span>
         }
+        <div className={styles.content}>
+          {
+            message.type === 'text' ?
+            <span>
+              <ReactMarkdown className={styles.markdown}>
+                {message.text}
+              </ReactMarkdown>
+              {message.edited && <span className={styles.edited}>(edited)</span>}
+            </span> :
+            <a href={props.message.url} target="_blank" rel="noreferrer noopener">
+              {
+                message.type === 'image' ?
+                // using an img element here because of unknown size
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={props.message.url}
+                  className={styles.image}
+                  alt={props.message.filename}
+                  onLoad={scrollToEnd}
+                /> :
+                props.message.filename
+              }
+            </a>
+          }
+          {
+            uid === sender.uid &&
+            <Tooltip title="Edit" arrow>
+              <button onClick={() => {
+                resetModal();
+                setModalOpen(true);
+              }}>
+                <EditIcon fontSize="small" />
+              </button>
+            </Tooltip>
+          }
+        </div>
       </div>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         <h1>Editing Message</h1>
@@ -131,6 +159,6 @@ export default function Message(props) {
           </button>
         </Tooltip>
       </Modal>
-    </>
+    </div>
   );
 }
