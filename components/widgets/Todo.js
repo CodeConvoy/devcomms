@@ -100,14 +100,16 @@ export default function Todo(props) {
           </p>
         </>
       }
-      <button className="iconbutton3" onClick={() => {
-        resetModal();
-        setModalOpen(true);
-      }}>
-        <EditIcon fontSize="small" />
-      </button>
+      <Tooltip title="Edit" arrow>
+        <button className="iconbutton3" onClick={() => {
+          resetModal();
+          setModalOpen(true);
+        }}>
+          <EditIcon fontSize="small" />
+        </button>
+      </Tooltip>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <h1>Editing<ListIcon />{title}</h1>
+        <h1>Editing<ListIcon /><span>{title}</span></h1>
         <form onSubmit={e => {
           e.preventDefault();
           updateTodo();
@@ -126,14 +128,15 @@ export default function Todo(props) {
             placeholder="description"
             required
           />
-          <label htmlFor="todos-isdue">Due date?</label>
-          <input
-            id="todos-isdue"
-            type="checkbox"
-            className={styles.duecheck}
-            checked={!!newDue}
-            onChange={e => setNewDue(e.target.checked ? newDateString() : null)}
-          />
+          <label>
+            Due date?
+            <input
+              type="checkbox"
+              className={styles.duecheck}
+              checked={!!newDue}
+              onChange={e => setNewDue(e.target.checked ? newDateString() : null)}
+            />
+          </label>
           {
             newDue &&
             <input

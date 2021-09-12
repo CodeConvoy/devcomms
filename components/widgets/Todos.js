@@ -155,14 +155,15 @@ export default function Todos(props) {
             placeholder="description"
             required
           />
-          <label htmlFor="todos-isdue">Due date?</label>
-          <input
-            id="todos-isdue"
-            type="checkbox"
-            className={styles.duecheck}
-            checked={!!due}
-            onChange={e => setDue(e.target.checked ? newDateString() : null)}
-          />
+          <label>
+            Due date?
+            <input
+              type="checkbox"
+              className={styles.duecheck}
+              checked={!!due}
+              onChange={e => setDue(e.target.checked ? newDateString() : null)}
+            />
+          </label>
           {
             due &&
             <input
