@@ -1,6 +1,7 @@
 .container {
   min-height: 100%;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: center;
 }
@@ -36,7 +37,7 @@
 
 .center {
   width: 820px;
-  margin: 40px;
+  margin: 40px 40px 60px 40px;
   background: var(--dark1);
   color: var(--gray0);
   border-radius: 10px;
@@ -114,4 +115,19 @@
 .biglink:hover {
   color: var(--gray0);
   transform: scale(1.1);
+}
+
+@media (max-width: 900px) {
+  .center .top {
+    flex-direction: column;
+  }
+  .carousel {
+    flex: 0 0 0;
+  }
+  .carousel p {
+    font-size: 14px;
+  }
+  .center .overview > p {
+    justify-content: center;
+  }
 }
