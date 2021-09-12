@@ -1,4 +1,4 @@
-import Modal from '@material-ui/core/Modal';
+import Modal from './Modal';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check';
@@ -50,7 +50,6 @@ export default function Group(props) {
 
   // updates group
   async function updateGroup() {
-    resetModal();
     setModalOpen(false);
     await groupRef.update({ name });
   }
@@ -121,118 +120,113 @@ export default function Group(props) {
           }
         </div>
       </Tooltip>
-      <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-      >
-        <div className="muimodal">
-          <h1>Editing<GroupIcon /><span>{group.name}</span></h1>
-          <div className={styles.select}>
-            <Tooltip title="Edit" arrow>
-              <button
-                className={`${tab === 0 && styles.selected} iconbutton2`}
-                onClick={() => setTab(0)}
-              >
-                <EditIcon />
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <h1>Editing<GroupIcon /><span>{group.name}</span></h1>
+        <div className={styles.select}>
+          <Tooltip title="Edit" arrow>
+            <button
+              className={`${tab === 0 && styles.selected} iconbutton2`}
+              onClick={() => setTab(0)}
+            >
+              <EditIcon />
+            </button>
+          </Tooltip>
+          <Tooltip title="Members" arrow>
+            <button
+              className={`${tab === 1 && styles.selected} iconbutton2`}
+              onClick={() => setTab(1)}
+            >
+              <GroupIcon />
+            </button>
+          </Tooltip>
+          <Tooltip title="Delete Group" arrow>
+            <button
+              className="iconbutton2"
+              onClick={deleteGroup}
+            >
+              <DeleteIcon />
+            </button>
+          </Tooltip>
+        </div>
+        {
+          tab === 0 &&
+          <form onSubmit={e => {
+            e.preventDefault();
+            updateGroup();
+          }}>
+            <div className="input-button">
+            <input
+              value={name}
+              className="darkinput"
+              onChange={e => setName(e.target.value)}
+              placeholder="name"
+              required
+            />
+            <Tooltip title="Save Changes" arrow>
+              <button className="iconbutton2">
+                <CheckIcon />
               </button>
             </Tooltip>
-            <Tooltip title="Members" arrow>
-              <button
-                className={`${tab === 1 && styles.selected} iconbutton2`}
-                onClick={() => setTab(1)}
-              >
-                <GroupIcon />
-              </button>
-            </Tooltip>
-            <Tooltip title="Delete Group" arrow>
-              <button
-                className="iconbutton2"
-                onClick={deleteGroup}
-              >
-                <DeleteIcon />
-              </button>
-            </Tooltip>
-          </div>
-          {
-            tab === 0 &&
+            </div>
+          </form>
+        }
+        {
+          tab === 1 &&
+          <div>
+            {
+              group.users.map((user, i) =>
+                <div className={styles.member} key={i}>
+                  {user.username}
+                  {
+                    user.uid !== group.creator &&
+                    <Tooltip title="Remove" arrow>
+                      <button onClick={() => removeUser(user)}>
+                        <ClearIcon fontSize="small" />
+                      </button>
+                    </Tooltip>
+                  }
+                </div>
+              )
+            }
             <form onSubmit={e => {
               e.preventDefault();
-              updateGroup();
+              searchUsers();
             }}>
               <div className="input-button">
-              <input
-                value={name}
-                className="darkinput"
-                onChange={e => setName(e.target.value)}
-                placeholder="name"
-                required
-              />
-              <Tooltip title="Save Changes" arrow>
+                <input
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  className={`${styles.usernameinput} darkinput`}
+                  placeholder="username"
+                  required
+                />
                 <button className="iconbutton2">
-                  <CheckIcon />
+                  <SearchIcon />
                 </button>
-              </Tooltip>
               </div>
             </form>
-          }
-          {
-            tab === 1 &&
-            <div>
-              {
-                group.users.map((user, i) =>
-                  <div className={styles.member} key={i}>
+            {
+              foundUsers &&
+              (
+                !foundUsers.length ?
+                <div>No users found</div> :
+                foundUsers.map(user =>
+                  <div className={styles.member} key={user.uid}>
                     {user.username}
                     {
-                      user.uid !== group.creator &&
-                      <Tooltip title="Remove" arrow>
-                        <button onClick={() => removeUser(user)}>
-                          <ClearIcon fontSize="small" />
+                      !group.members.includes(user.uid) &&
+                      <Tooltip title="Add" arrow>
+                        <button onClick={() => addUser(user)}>
+                          <AddIcon />
                         </button>
                       </Tooltip>
                     }
                   </div>
                 )
-              }
-              <form onSubmit={e => {
-                e.preventDefault();
-                searchUsers();
-              }}>
-                <div className="input-button">
-                  <input
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                    className={`${styles.usernameinput} darkinput`}
-                    placeholder="username"
-                    required
-                  />
-                  <button className="iconbutton2">
-                    <SearchIcon />
-                  </button>
-                </div>
-              </form>
-              {
-                foundUsers &&
-                (
-                  !foundUsers.length ?
-                  <div>No users found</div> :
-                  foundUsers.map(user =>
-                    <div className={styles.member} key={user.uid}>
-                      {user.username}
-                      {
-                        !group.members.includes(user.uid) &&
-                        <Tooltip title="Add" arrow>
-                          <button onClick={() => addUser(user)}>
-                            <AddIcon />
-                          </button>
-                        </Tooltip>
-                      }
-                    </div>
-                  )
-                )
-              }
-            </div>
-          }
-        </div>
+              )
+            }
+          </div>
+        }
       </Modal>
     </>
   );
