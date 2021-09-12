@@ -1,4 +1,4 @@
-import Modal from '@material-ui/core/Modal';
+import Modal from '../Modal.js';
 import SettingsIcon from '@material-ui/icons/Settings';
 import CheckIcon from '@material-ui/icons/Check';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -56,40 +56,35 @@ export default function Channel(props) {
           <SettingsIcon />
         </button>
       </div>
-      <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
-      >
-        <div className="muimodal">
-          <h1>Editing{getIcon(type)}<span>{channel.name}</span></h1>
-          <form onSubmit={e => {
-            e.preventDefault();
-            updateChannel();
-          }}>
-            <div className="input-button">
-              <input
-                value={name}
-                className="darkinput"
-                onChange={e => setName(e.target.value)}
-                placeholder="name"
-                required
-              />
-              <Tooltip title="Save Changes" arrow>
-                <button className="iconbutton2">
-                  <CheckIcon />
-                </button>
-              </Tooltip>
-            </div>
-          </form>
-          <Tooltip title="Delete Channel" arrow>
-            <button
-              className={`iconbutton2 ${styles.delbutton}`}
-              onClick={deleteChannel}
-            >
-              <DeleteIcon />
-            </button>
-          </Tooltip>
-        </div>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <h1>Editing{getIcon(type)}<span>{channel.name}</span></h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          updateChannel();
+        }}>
+          <div className="input-button">
+            <input
+              value={name}
+              className="darkinput"
+              onChange={e => setName(e.target.value)}
+              placeholder="name"
+              required
+            />
+            <Tooltip title="Save Changes" arrow>
+              <button className="iconbutton2">
+                <CheckIcon />
+              </button>
+            </Tooltip>
+          </div>
+        </form>
+        <Tooltip title="Delete Channel" arrow>
+          <button
+            className={`iconbutton2 ${styles.delbutton}`}
+            onClick={deleteChannel}
+          >
+            <DeleteIcon />
+          </button>
+        </Tooltip>
       </Modal>
     </>
   );

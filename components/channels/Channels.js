@@ -2,7 +2,7 @@ import Loading from '../Loading.js';
 import Chat from './Chat.js';
 import Channel from './Channel.js';
 import Widget from '../widgets/Widget.js';
-import Modal from '@material-ui/core/Modal';
+import Modal from '../Modal';
 import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
 import BuildIcon from '@material-ui/icons/Build';
@@ -41,7 +41,7 @@ export default function Channels(props) {
   // creates new channel doc in firebase
   async function createChannel() {
     const channel = { name };
-    resetModal();
+    setChannelModalOpen(false);
     const docRef = await channelsRef.add({ order: channels.length, ...channel });
     setCurrChannel({ id: docRef.id, ...channel });
   }
@@ -49,7 +49,7 @@ export default function Channels(props) {
   // creates new widget doc in firebase
   async function createWidget() {
     const widget = { name, type };
-    resetModal();
+    setWidgetModalOpen(false);
     const docRef = await widgetsRef.add({ order: widgets.length, ...widget });
     setCurrWidget({ id: docRef.id, ...widget });
   }
@@ -59,12 +59,10 @@ export default function Channels(props) {
     return channelsRef.doc(currChannel.id).collection('messages');
   }
 
-  // resets modal
-  function resetModal() {
+  // resets modals
+  function resetModals() {
     setName('');
     setType('sketch');
-    setChannelModalOpen(false);
-    setWidgetModalOpen(false);
   }
 
   // updates channel orders in firebase
@@ -171,7 +169,10 @@ export default function Channels(props) {
           <Tooltip title="New Channel" arrow>
             <button
               className={styles.addbtn}
-              onClick={() => setChannelModalOpen(true)}
+              onClick={() => {
+                resetModals();
+                setChannelModalOpen(true);
+              }}
             >
               <ChatBubbleIcon />
               <AddIcon />
@@ -206,7 +207,8 @@ export default function Channels(props) {
                             <Channel
                               className={
                                 currWidget?.id === widget.id ?
-                                `${styles.selectbtn} ${styles.selected}` : styles.selectbtn
+                                `${styles.selectbtn} ${styles.selected}` :
+                                styles.selectbtn
                               }
                               onClick={() => setCurrWidget(
                                 currWidget?.id === widget.id ? undefined : widget
@@ -230,7 +232,10 @@ export default function Channels(props) {
           <Tooltip title="New Widget" arrow>
             <button
               className={styles.addbtn}
-              onClick={() => setWidgetModalOpen(true)}
+              onClick={() => {
+                resetModals();
+                setWidgetModalOpen(true);
+              }}
             >
               <BuildIcon />
               <AddIcon />
@@ -247,64 +252,54 @@ export default function Channels(props) {
         currWidget &&
         <Widget group={group} widget={currWidget} />
       }
-      <Modal
-        open={channelModalOpen}
-        onClose={resetModal}
-      >
-        <div className="muimodal">
-          <h1>New Channel</h1>
-          <form onSubmit={e => {
-            e.preventDefault();
-            createChannel();
-          }}>
-            <div className="input-button">
-              <input
-                placeholder="name"
-                className="darkinput"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                required
-              />
-              <button className="iconbutton2">
-                <AddIcon />
-              </button>
-            </div>
-          </form>
-        </div>
+      <Modal open={channelModalOpen} onClose={() => setChannelModalOpen(false)}>
+        <h1>New Channel</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          createChannel();
+        }}>
+          <div className="input-button">
+            <input
+              placeholder="name"
+              className="darkinput"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+            />
+            <button className="iconbutton2">
+              <AddIcon />
+            </button>
+          </div>
+        </form>
       </Modal>
-      <Modal
-        open={widgetModalOpen}
-        onClose={resetModal}
-      >
-        <div className="muimodal">
-          <h1>New Widget</h1>
-          <form onSubmit={e => {
-            e.preventDefault();
-            createWidget();
-          }}>
-            <select
-              className={styles.typeinput}
-              value={type}
-              onChange={e => setType(e.target.value)}
-            >
-              <option value="sketch">Sketch</option>
-              <option value="notes">Notes</option>
-              <option value="todos">Todos</option>
-            </select>
-            <div className="input-button">
-              <input
-                placeholder="name"
-                className="darkinput"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                required
-              />
-              <button className="iconbutton2">
-                <AddIcon />
-              </button>
-            </div>
-          </form>
-        </div>
+      <Modal open={widgetModalOpen} onClose={() => setWidgetModalOpen(false)}>
+        <h1>New Widget</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          createWidget();
+        }}>
+          <select
+            className={styles.typeinput}
+            value={type}
+            onChange={e => setType(e.target.value)}
+          >
+            <option value="sketch">Sketch</option>
+            <option value="notes">Notes</option>
+            <option value="todos">Todos</option>
+          </select>
+          <div className="input-button">
+            <input
+              placeholder="name"
+              className="darkinput"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+            />
+            <button className="iconbutton2">
+              <AddIcon />
+            </button>
+          </div>
+        </form>
       </Modal>
     </>
   );
