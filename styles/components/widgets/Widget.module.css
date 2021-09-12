@@ -1,5 +1,6 @@
 .container {
-  flex: 0 0 300px;
+  min-width: 300px;
+  max-width: 300px;
   background: var(--dark3);
   color: var(--gray0);
   overflow: scroll;
@@ -11,6 +12,7 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  font-size: 36px;
 }
 
 .container > div > h1 > svg {

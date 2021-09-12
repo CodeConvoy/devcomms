@@ -9,6 +9,7 @@
 .page {
   display: flex;
   height: calc(100% - 60px);
+  min-width: 100%;
 }
 
 .groups {
