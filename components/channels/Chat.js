@@ -43,8 +43,7 @@ export default function Chat(props) {
     await messagesRef.add({
       text: text,
       type: 'text',
-      sender: uid,
-      username: currentUser.username,
+      sender: { uid, username: currentUser.username, photo: currentUser.photo },
       sent: new Date()
     });
   }
@@ -65,8 +64,7 @@ export default function Chat(props) {
       url: url,
       type: file.type.startsWith('image/') ? 'image' : 'file',
       filename: file.name,
-      sender: uid,
-      username: currentUser.username,
+      sender: { uid, username: currentUser.username, photo: currentUser.photo },
       sent: new Date()
     });
   }
@@ -103,7 +101,7 @@ export default function Chat(props) {
             <Message
               showHeader={
                 i === 0 ||
-                message.sender !== messages[i - 1].sender ||
+                message.sender.uid !== messages[i - 1].sender.uid ||
                 message.sent - messages[i - 1].sent > headerOffset
               }
               message={message}
@@ -120,16 +118,15 @@ export default function Chat(props) {
         sendMessage();
       }}>
         <Tooltip title="Upload File" arrow>
-          <label htmlFor="fileinput" className={styles.filebutton}>
+          <label className={styles.filebutton}>
             <PublishIcon />
+            <input
+              type="file"
+              onChange={e => setFile(e.target.files[0])}
+              className={styles.fileinput}
+            />
           </label>
         </Tooltip>
-        <input
-          type="file"
-          id="fileinput"
-          onChange={e => setFile(e.target.files[0])}
-          className={styles.fileinput}
-        />
         <input
           className={styles.textinput}
           value={text}
