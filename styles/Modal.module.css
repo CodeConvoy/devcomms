@@ -29,12 +29,12 @@
   justify-content: center;
   border-radius: 50%;
   border: 2px solid var(--dark0);
-  background: var(--dark3);
+  background: var(--dark4);
   color: var(--gray0);
 }
 
 .modal .close:hover {
-  background: var(--dark4);
+  background: var(--dark3);
 }
 
 .modal h1 {

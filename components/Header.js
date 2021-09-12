@@ -15,9 +15,7 @@ export default function Header(props) {
       <Image src="/img/logo.png" width="48" height="48" alt="logo" />
       <h1>Devcomms</h1>
       <span className={styles.flexfill} />
-      <p>Signed in as{' '}
-        <span className={styles.username}>@{currentUser.username}</span>
-      </p>
+      <div className={styles.username}>@{currentUser.username}</div>
       <Tooltip title="Sign Out" arrow>
         <button
           onClick={() => firebase.auth().signOut()}
