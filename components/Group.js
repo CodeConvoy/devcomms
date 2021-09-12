@@ -110,13 +110,15 @@ export default function Group(props) {
           <div>{abbreviateName(group.name)}</div>
           {
             uid === group.creator &&
-            <button onClick={e => {
-              resetModal();
-              e.stopPropagation();
-              setModalOpen(true);
-            }}>
-              <SettingsIcon fontSize="small" />
-            </button>
+            <Tooltip title="Edit Group" arrow>
+              <button onClick={e => {
+                resetModal();
+                e.stopPropagation();
+                setModalOpen(true);
+              }}>
+                <SettingsIcon fontSize="small" />
+              </button>
+            </Tooltip>
           }
         </div>
       </Tooltip>

@@ -13,9 +13,11 @@ export default function Feedback() {
 
   return (
     <>
-      <button className={styles.feedbackbtn} onClick={() => setModalOpen(true)}>
-        <ChatBubbleIcon />
-      </button>
+      <Tooltip title="Contact" arrow>
+        <button className={styles.feedbackbtn} onClick={() => setModalOpen(true)}>
+          <ChatBubbleIcon />
+        </button>
+      </Tooltip>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         <h1>Contact Us</h1>
         <p>Feel free to send us feedback, bug reports, or ideas. We would love
