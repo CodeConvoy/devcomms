@@ -43,9 +43,6 @@
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 0 20px #111;
-}
-
-.center .top {
   display: flex;
 }
 
@@ -83,12 +80,19 @@
 .center .bottom {
   background: var(--dark0);
   overflow: auto;
-  padding: 10px 10px 0 10px;
+  padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
 .carousel {
   flex: 0 0 500px;
+  display: flex;
+  flex-direction: column;
 }
 
 .githublink {
@@ -118,14 +122,11 @@
 }
 
 @media (max-width: 900px) {
-  .center .top {
+  .center {
     flex-direction: column;
   }
   .carousel {
     flex: 0 0 0;
-  }
-  .carousel p {
-    font-size: 14px;
   }
   .center .overview > p {
     justify-content: center;

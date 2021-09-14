@@ -112,18 +112,8 @@ hr {
   margin-left: 5px;
 }
 
-.carousel-caption {
-  position: static!important;
-  padding: 15px 20px 25px 20px!important;
-  background: var(--dark2);
-}
-
-.carousel-caption h3 {
-  font-weight: bold;
-}
-
 .carousel-indicators {
-  margin-bottom: 10px!important;
+  margin-bottom: 10px;
 }
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
