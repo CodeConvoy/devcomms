@@ -50,44 +50,6 @@ export default function Index(props) {
         </a>
       </div>
       <div className={styles.center}>
-        <div className={styles.top}>
-          <div className={styles.carousel}>
-            <Carousel>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="/img/screen1.png"
-                  alt="screen1.png"
-                />
-                <Carousel.Caption>
-                  <h3>Coordinate</h3>
-                  <p>Organize and manage developer teams with ease.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="/img/screen2.png"
-                  alt="screen2.png"
-                />
-                <Carousel.Caption>
-                  <h3>Communicate</h3>
-                  <p>Feature-rich text chat with group and direct messaging.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  className="d-block w-100"
-                  src="/img/screen3.png"
-                  alt="screen3.png"
-                />
-                <Carousel.Caption>
-                  <h3>Customize</h3>
-                  <p>Precisely format your groups, channels, and widgets.</p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            </Carousel>
-          </div>
           <div className={styles.overview}>
             <h1 className={styles.title}>
               <Image src="/img/logo.png" width="48" height="48" alt="logo" />
@@ -114,6 +76,30 @@ export default function Index(props) {
           <p>
             Devcomms is built by developers, for developers.<br />
             Have an issue? Want to contribute? Find our GitHub here:<br />
+        <div className={styles.carousel}>
+          <Carousel>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src="/img/screen1.png"
+                alt="screen1.png"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src="/img/screen2.png"
+                alt="screen2.png"
+              />
+            </Carousel.Item>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src="/img/screen3.png"
+                alt="screen3.png"
+              />
+            </Carousel.Item>
+          </Carousel>
             <a
               href="https://github.com/codeconvoy/devcomms"
               className={`blueurl ${styles.githublink}`}
@@ -123,7 +109,8 @@ export default function Index(props) {
               <GitHubIcon />
               Devcomms GitHub
             </a>
-          </p>
+          </div>
+        </div>
         </div>
       </div>
     </div>
