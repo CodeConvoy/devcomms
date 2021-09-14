@@ -50,32 +50,6 @@ export default function Index(props) {
         </a>
       </div>
       <div className={styles.center}>
-          <div className={styles.overview}>
-            <h1 className={styles.title}>
-              <Image src="/img/logo.png" width="48" height="48" alt="logo" />
-              Devcomms
-            </h1>
-            <p><ChatIcon />Communicate and coordinate with your team.</p>
-            <p><FileCopyIcon />Manage notes, todos, and sketches all in one place.</p>
-            <p><SyncIcon />Keep everyone in sync with real-time widgets.</p>
-            <p><LockOpenIcon />100% open source and developer-focused, forever.</p>
-            <div className={styles.link}>
-              {
-                authed ?
-                <Link href="/home">
-                  <a className={styles.biglink}>Home</a>
-                </Link> :
-                <button className="bluebutton" onClick={signInWithGitHub}>
-                  Sign in with GitHub
-                </button>
-              }
-            </div>
-          </div>
-        </div>
-        <div className={styles.bottom}>
-          <p>
-            Devcomms is built by developers, for developers.<br />
-            Have an issue? Want to contribute? Find our GitHub here:<br />
         <div className={styles.carousel}>
           <Carousel>
             <Carousel.Item>
@@ -100,6 +74,9 @@ export default function Index(props) {
               />
             </Carousel.Item>
           </Carousel>
+          <div className={styles.bottom}>
+            <span>Devcomms is built by developers, for developers.</span>
+            <span>Have an issue? Want to contribute? Find our GitHub here:</span>
             <a
               href="https://github.com/codeconvoy/devcomms"
               className={`blueurl ${styles.githublink}`}
@@ -111,6 +88,26 @@ export default function Index(props) {
             </a>
           </div>
         </div>
+        <div className={styles.overview}>
+          <h1 className={styles.title}>
+            <Image src="/img/logo.png" width="48" height="48" alt="logo" />
+            Devcomms
+          </h1>
+          <p><ChatIcon />Communicate and coordinate with your team.</p>
+          <p><FileCopyIcon />Manage notes, todos, and sketches all in one place.</p>
+          <p><SyncIcon />Keep everyone in sync with real-time widgets.</p>
+          <p><LockOpenIcon />100% open source and developer-focused, forever.</p>
+          <div className={styles.link}>
+            {
+              authed ?
+              <Link href="/home">
+                <a className={styles.biglink}>Home</a>
+              </Link> :
+              <button className="bluebutton" onClick={signInWithGitHub}>
+                Sign in with GitHub
+              </button>
+            }
+          </div>
         </div>
       </div>
     </div>
