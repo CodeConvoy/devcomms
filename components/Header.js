@@ -4,11 +4,31 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import firebase from 'firebase/app';
+import { v4 as uuid } from 'uuid';
 
 import styles from '../styles/components/Header.module.css';
 
 export default function Header(props) {
   const { currentUser } = props;
+
+  const uid = firebase.auth().currentUser.uid;
+
+  // uploads and sets avatar
+  async function setAvatar(file) {
+    // if no file, return
+    if (!file) return;
+    // put file in storage and get url
+    const filePath = `avatars/${uuid()}`;
+    const fileRef = firebase.storage().ref(filePath);
+    const snapshot = await fileRef.put(file);
+    const url = await snapshot.ref.getDownloadURL();
+    // update user docs
+    const userRef = firebase.firestore().collection('users').doc(uid);
+    const usernameRef = firebase.firestore().collection('usernames')
+    .doc(currentUser.username.toLowerCase());
+    userRef.update({ photo: url });
+    usernameRef.update({ photo: url });
+  }
 
   return (
     <div className={styles.container}>
