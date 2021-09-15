@@ -44,6 +44,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .container > button {

@@ -34,11 +34,13 @@ export default function Header(props) {
     const snapshot = await fileRef.put(file);
     const url = await snapshot.ref.getDownloadURL();
     // update user docs
-    const userRef = firebase.firestore().collection('users').doc(uid);
-    const usernameRef = firebase.firestore().collection('usernames')
-    .doc(currentUser.username.toLowerCase());
     userRef.update({ photo: url });
     usernameRef.update({ photo: url });
+  }
+
+  // resets modal
+  function resetModal() {
+    setUsername(currentUser.username);
   }
 
   // updates username in firebase
@@ -74,7 +76,14 @@ export default function Header(props) {
           />
         </label>
       </Tooltip>
-      <div className={styles.username}>@{currentUser.username}</div>
+      <Tooltip title="Change Username" arrow>
+        <div className={styles.username} onClick={() => {
+          resetModal();
+          setModalOpen(true);
+        }}>
+          @{currentUser.username}
+        </div>
+      </Tooltip>
       <Tooltip title="Sign Out" arrow>
         <button
           onClick={() => firebase.auth().signOut()}
