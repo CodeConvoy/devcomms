@@ -34,7 +34,9 @@ export default function SignUp(props) {
       return;
     }
     // verify username availability
-    const usernameRef = firebase.firestore().collection('usernames').doc(username);
+    const usernameLower = username.toLowerCase();
+    const usernamesRef = firebase.firestore().collection('usernames');
+    const usernameRef = usernamesRef.doc(usernameLower);
     const usernameDoc = await usernameRef.get();
     if (usernameDoc.exists) {
       setError("Username is taken. Please try another.");
@@ -45,7 +47,7 @@ export default function SignUp(props) {
     const { uid, photoURL } = firebase.auth().currentUser;
     const userRef = firebase.firestore().collection('users').doc(uid);
     await userRef.set({ photo: photoURL, username, friends: [] });
-    await usernameRef.set({ photo: photoURL, username, uid });
+    await usernameRef.set({ uid, username, usernameLower, photo: photoURL });
   }
 
   // on error closed

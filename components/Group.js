@@ -61,8 +61,8 @@ export default function Group(props) {
     setFoundUsers(undefined);
     // query users
     const usersQuery = usernamesRef
-    .where('username', '>=', username)
-    .where('username', '<', `${username}~`)
+    .where('usernameLower', '>=', username.toLowerCase())
+    .where('usernameLower', '<', `${username.toLowerCase()}~`)
     .limit(10);
     const users = await usersQuery.get();
     // set found users
