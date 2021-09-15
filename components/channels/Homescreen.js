@@ -5,6 +5,7 @@ import User from './User.js';
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
 import SearchIcon from '@material-ui/icons/Search';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 
 import firebase from 'firebase/app';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
@@ -105,8 +106,12 @@ export default function Homescreen(props) {
         </Tooltip>
       </div>
       {
-        currUser &&
-        <Chat messagesRef={getMessagesRef()} currentUser={currentUser} />
+        currUser ?
+        <Chat messagesRef={getMessagesRef()} currentUser={currentUser} /> :
+        <div className={styles.filler}>
+          <PersonOutlineIcon fontSize="large" />
+          <h1>No friends yet</h1>
+        </div>
       }
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         <h1>Add Friend</h1>
