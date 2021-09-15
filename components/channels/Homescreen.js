@@ -15,7 +15,9 @@ import styles from '../../styles/components/channels/Homescreen.module.css';
 export default function Homescreen(props) {
   const { currentUser } = props;
 
-  const [currUser, setCurrUser] = useState(undefined);
+  const [currUser, setCurrUser] = useState(
+    currentUser?.friends?.length ? currentUser.friends[0] : undefined
+  );
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState('');
   const [foundUsers, setFoundUsers] = useState(null);

@@ -113,6 +113,13 @@ export default function Channels(props) {
     setCurrWidget(undefined);
   }, [group]);
 
+  // select default channel on start
+  useEffect(() => {
+    if (channels?.length && currChannel === undefined) {
+      setCurrChannel(channels[0]);
+    }
+  }, [channels])
+
   // return if loading
   if (!channels || !widgets) return <Loading />;
 
