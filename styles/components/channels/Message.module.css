@@ -14,8 +14,9 @@
   width: 48px;
 }
 
-.gutter > div {
+.gutter > img {
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .main {

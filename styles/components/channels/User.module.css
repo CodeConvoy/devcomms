@@ -1,13 +1,10 @@
 .selected {
-  box-shadow: 0 0 5px var(--gray0);
+  box-shadow: 0 0 0 2px var(--dark3), 0 0 0 4px var(--gray0);
 }
 
-.container > div {
+.container > img {
   border-radius: 50%;
-}
-
-.container > div * {
-  border-radius: 50%;
+  object-fit: cover;
 }
 
 .container > button {
