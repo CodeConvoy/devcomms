@@ -50,7 +50,19 @@ export default function Header(props) {
 
   // updates username in firebase
   async function updateUsername() {
-    setModalOpen(false);
+    setIsError(false);
+    // verify username chars
+    if (!/^[A-Za-z0-9_]+$/.test(username)) {
+      setError("Username can only contain alphanumeric characters and underscore.");
+      setIsError(true);
+      return;
+    }
+    // verify username length
+    if (username.length < 2 || username.length > 16) {
+      setError("Username must be between 2 and 16 characters.");
+      setIsError(true);
+      return;
+    }
     const usernameLower = username.toLowerCase();
     userRef.update({ username, usernameLower });
     usernamesRef.doc(usernameLower).set({
@@ -58,6 +70,11 @@ export default function Header(props) {
       username, usernameLower
     });
     usernameRef.delete();
+  }
+
+  // on error closed
+  function onCloseError(event, reason) {
+    if (reason !== 'clickaway') setIsError(false);
   }
 
   return (
