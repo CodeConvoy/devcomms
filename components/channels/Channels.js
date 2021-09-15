@@ -7,6 +7,7 @@ import WidgetsIcon from '@material-ui/icons/Widgets';
 import AddIcon from '@material-ui/icons/Add';
 import BuildIcon from '@material-ui/icons/Build';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import Tooltip from '@material-ui/core/Tooltip';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
@@ -253,7 +254,10 @@ export default function Channels(props) {
       {
         currChannel ?
         <Chat messagesRef={getMessagesRef()} currentUser={currentUser} /> :
-        <span className={styles.filler} />
+        <div className={styles.filler}>
+          <ChatBubbleOutlineIcon fontSize="large" />
+          <h1>No channels yet</h1>
+        </div>
       }
       {
         currWidget &&

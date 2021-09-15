@@ -16,6 +16,19 @@
 
 .filler {
   flex-grow: 1;
+  color: var(--gray0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+}
+
+.filler > h1 {
+  margin-bottom: 2px;
+}
+
+.filler > svg {
+  margin-right: 5px;
 }
 
 .selectcontainer {
