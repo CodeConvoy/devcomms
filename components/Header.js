@@ -63,13 +63,23 @@ export default function Header(props) {
       setIsError(true);
       return;
     }
+    // verify username availability
     const usernameLower = username.toLowerCase();
+    const newUsernameRef = usernamesRef.doc(usernameLower);
+    const newUsernameDoc = await newUsernameRef.get();
+    if (newUsernameDoc.exists) {
+      setError("Username is taken. Please try another.");
+      setIsError(true);
+      return;
+    }
+    // update user docs
+    setModalOpen(false);
     userRef.update({ username, usernameLower });
-    usernamesRef.doc(usernameLower).set({
+    usernameRef.delete();
+    newUsernameRef.set({
       uid, photo: currentUser.photo,
       username, usernameLower
     });
-    usernameRef.delete();
   }
 
   // on error closed
