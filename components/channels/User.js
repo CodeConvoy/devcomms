@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Tooltip from '@material-ui/core/Tooltip';
 import ClearIcon from '@material-ui/icons/Clear';
 
@@ -18,7 +17,11 @@ export default function User(props) {
         onClick={() => setCurrUser(user)}
         key={user.uid}
       >
-        <Image src={user.photo} width="60" height="60" alt="avatar" />
+        {
+          // next image component has issues with firebase storage
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={user.photo} width="60" height="60" alt="avatar" />
+        }
         <Tooltip title="Remove Friend" arrow>
           <button onClick={e => {
             e.stopPropagation();

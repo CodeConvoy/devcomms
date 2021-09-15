@@ -4,7 +4,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import firebase from 'firebase/app';
-import { v4 as uuid } from 'uuid';
 
 import styles from '../styles/components/Header.module.css';
 
@@ -18,7 +17,7 @@ export default function Header(props) {
     // if no file, return
     if (!file) return;
     // put file in storage and get url
-    const filePath = `avatars/${uuid()}`;
+    const filePath = `avatars/${uid}`;
     const fileRef = firebase.storage().ref(filePath);
     const snapshot = await fileRef.put(file);
     const url = await snapshot.ref.getDownloadURL();
@@ -39,7 +38,11 @@ export default function Header(props) {
       <span className={styles.flexfill} />
       <Tooltip title="Change Avatar" arrow>
         <label className={styles.avatar}>
-          <Image src={currentUser.photo} width="40" height="40" alt="avatar" />
+          {
+            // next image component has issues with firebase storage
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={currentUser.photo} width="40" height="40" alt="avatar" />
+          }
           <input
             type="file"
             onChange={e => setAvatar(e.target.files[0])}

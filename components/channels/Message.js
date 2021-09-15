@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import Modal from '../Modal';
@@ -76,7 +75,9 @@ export default function Message(props) {
       <div className={styles.gutter}>
         {
           showHeader &&
-          <Image src={sender.photo} width="40" height="40" alt="avatar" />
+          // next image component has issues with firebase storage
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={sender.photo} width="40" height="40" alt="avatar" />
         }
       </div>
       <div className={styles.main}>
