@@ -4,6 +4,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CheckIcon from '@material-ui/icons/Check';
 import Tooltip from '@material-ui/core/Tooltip';
 import Modal from './Modal';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import firebase from 'firebase/app';
 import { v4 as uuid } from 'uuid';
@@ -16,6 +18,9 @@ export default function Header(props) {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState(currentUser.username);
+
+  const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
 
   // get user doc references
   const uid = firebase.auth().currentUser.uid;
@@ -112,6 +117,20 @@ export default function Header(props) {
           </div>
         </form>
       </Modal>
+      <Snackbar
+        open={isError}
+        autoHideDuration={6000}
+        onClose={onCloseError}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={onCloseError}
+          severity="error"
+        >
+          {error}
+        </MuiAlert>
+      </Snackbar>
     </div>
   );
 }
