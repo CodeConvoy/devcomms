@@ -1,15 +1,21 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import CheckIcon from '@material-ui/icons/Check';
 import Tooltip from '@material-ui/core/Tooltip';
+import Modal from './Modal';
 
 import firebase from 'firebase/app';
 import { v4 as uuid } from 'uuid';
+import { useState } from 'react';
 
 import styles from '../styles/components/Header.module.css';
 
 export default function Header(props) {
   const { currentUser } = props;
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [username, setUsername] = useState(currentUser.username);
 
   const uid = firebase.auth().currentUser.uid;
 
@@ -60,6 +66,26 @@ export default function Header(props) {
           <ExitToAppIcon />
         </button>
       </Tooltip>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <h1>Change Username</h1>
+        <form onSubmit={e => {
+          e.preventDefault();
+          updateUsername();
+        }}>
+          <div className="input-button">
+            <input
+              placeholder="username"
+              className="darkinput"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+            />
+            <button className="iconbutton2">
+              <CheckIcon />
+            </button>
+          </div>
+        </form>
+      </Modal>
     </div>
   );
 }
