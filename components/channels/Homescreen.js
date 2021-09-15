@@ -42,11 +42,13 @@ export default function Homescreen(props) {
 
   // adds user as friend
   async function addFriend(user) {
+    const friend = {
+      username: user.username, uid: user.uid, photo: user.photo
+    };
     await userRef.update({
-      friends: firebase.firestore.FieldValue.arrayUnion({
-        username: user.username, uid: user.uid, photo: user.photo
-      })
+      friends: firebase.firestore.FieldValue.arrayUnion(friend)
     });
+    setCurrUser(friend);
   }
 
   // removes user as friend

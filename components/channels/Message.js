@@ -8,6 +8,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
+import remarkGfm from 'remark-gfm';
 
 import styles from '../../styles/components/channels/Message.module.css';
 
@@ -95,7 +96,11 @@ export default function Message(props) {
           {
             message.type === 'text' ?
             <span>
-              <ReactMarkdown className={styles.markdown}>
+              <ReactMarkdown
+                className={styles.markdown}
+                remarkPlugins={[remarkGfm]}
+                linkTarget="_blank"
+              >
                 {message.text}
               </ReactMarkdown>
               {message.edited && <span className={styles.edited}>(edited)</span>}
