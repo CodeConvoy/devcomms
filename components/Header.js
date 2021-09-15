@@ -17,7 +17,12 @@ export default function Header(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState(currentUser.username);
 
+  // get user doc references
   const uid = firebase.auth().currentUser.uid;
+  const usersRef = firebase.firestore().collection('users');
+  const userRef = usersRef.doc(uid);
+  const usernamesRef = firebase.firestore().collection('usernames');
+  const usernameRef = usernamesRef.doc(currentUser.username.toLowerCase());
 
   // uploads and sets avatar
   async function setAvatar(file) {
@@ -34,6 +39,18 @@ export default function Header(props) {
     .doc(currentUser.username.toLowerCase());
     userRef.update({ photo: url });
     usernameRef.update({ photo: url });
+  }
+
+  // updates username in firebase
+  async function updateUsername() {
+    setModalOpen(false);
+    const usernameLower = username.toLowerCase();
+    userRef.update({ username, usernameLower });
+    usernamesRef.doc(usernameLower).set({
+      uid, photo: currentUser.photo,
+      username, usernameLower
+    });
+    usernameRef.delete();
   }
 
   return (
