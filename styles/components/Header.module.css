@@ -26,10 +26,15 @@
   height: 40px;
   width: 40px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .avatar * {
   border-radius: 50%;
+}
+
+.fileinput {
+  display: none;
 }
 
 .username {

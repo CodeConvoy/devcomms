@@ -17,9 +17,16 @@ export default function Header(props) {
       </div>
       <h1>Devcomms</h1>
       <span className={styles.flexfill} />
-      <div className={styles.avatar}>
-        <Image src={currentUser.photo} width="40" height="40" alt="avatar" />
-      </div>
+      <Tooltip title="Change Avatar" arrow>
+        <label className={styles.avatar}>
+          <Image src={currentUser.photo} width="40" height="40" alt="avatar" />
+          <input
+            type="file"
+            onChange={e => setAvatar(e.target.files[0])}
+            className={styles.fileinput}
+          />
+        </label>
+      </Tooltip>
       <div className={styles.username}>@{currentUser.username}</div>
       <Tooltip title="Sign Out" arrow>
         <button
