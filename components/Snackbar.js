@@ -2,26 +2,26 @@ import BaseSnackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 export default function Snackbar(props) {
-  const { error, isError, setIsError } = props;
+  const { type, message, open, setOpen } = props;
 
-  // on error closed
-  function onCloseError(event, reason) {
-    if (reason !== 'clickaway') setIsError(false);
+  // on snackbar closed
+  function onClose(event, reason) {
+    if (reason !== 'clickaway') setOpen(false);
   }
 
   return (
     <BaseSnackbar
-      open={isError}
+      open={open}
       autoHideDuration={6000}
-      onClose={onCloseError}
+      onClose={onClose}
     >
       <MuiAlert
         elevation={6}
         variant="filled"
-        onClose={onCloseError}
-        severity="error"
+        onClose={onClose}
+        severity={type}
       >
-        {error}
+        {message}
       </MuiAlert>
     </BaseSnackbar>
   );
