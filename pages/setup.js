@@ -1,8 +1,7 @@
 import Loading from '../components/Loading.js';
 import Background from '../components/Background.js';
 import Router from 'next/router';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from '../components/Snackbar.js';
 
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
@@ -89,19 +88,11 @@ export default function SignUp(props) {
           <button className="bluebutton">Create</button>
         </form>
         <Snackbar
+          type="error"
+          message={error}
           open={isError}
-          autoHideDuration={6000}
-          onClose={onCloseError}
-        >
-          <MuiAlert
-            elevation={6}
-            variant="filled"
-            onClose={onCloseError}
-            severity="error"
-          >
-            {error}
-          </MuiAlert>
-        </Snackbar>
+          setOpen={setIsError}
+        />
       </div>
     </div>
   );

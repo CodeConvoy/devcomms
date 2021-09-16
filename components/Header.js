@@ -4,8 +4,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import CheckIcon from '@material-ui/icons/Check';
 import Tooltip from '@material-ui/core/Tooltip';
 import Modal from './Modal';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from './Snackbar';
 
 import firebase from 'firebase/app';
 import { v4 as uuid } from 'uuid';
@@ -145,19 +144,11 @@ export default function Header(props) {
         </form>
       </Modal>
       <Snackbar
+        type="error"
+        message={error}
         open={isError}
-        autoHideDuration={6000}
-        onClose={onCloseError}
-      >
-        <MuiAlert
-          elevation={6}
-          variant="filled"
-          onClose={onCloseError}
-          severity="error"
-        >
-          {error}
-        </MuiAlert>
-      </Snackbar>
+        setOpen={setIsError}
+      />
     </div>
   );
 }
