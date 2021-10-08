@@ -28,7 +28,7 @@
 }
 
 .links > a:hover {
-  color: var(--blue0);
+  color: var(--blue);
 }
 
 .links > a:first-of-type > svg {
@@ -107,7 +107,7 @@
 }
 
 .biglink {
-  background: var(--blue0);
+  background: var(--blue);
   padding: 10px 20px;
   display: inline-block;
   border-radius: 10px;

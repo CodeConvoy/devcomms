@@ -31,7 +31,7 @@
 }
 
 .datetime {
-  color: var(--gray2);
+  color: var(--darkgray);
   font-size: 12px;
   font-weight: normal;
 }
@@ -77,7 +77,7 @@
 }
 
 .content a {
-  color: var(--blue0);
+  color: var(--blue);
 }
 
 .content a:hover {
@@ -95,7 +95,7 @@
 }
 
 .edited {
-  color: var(--gray2);
+  color: var(--darkgray);
   font-size: 12px;
   margin-left: 3px;
 }

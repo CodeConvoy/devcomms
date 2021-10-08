@@ -19,7 +19,7 @@ a {
 }
 
 .blueurl {
-  color: var(--blue0);
+  color: var(--blue);
   text-decoration: none;
 }
 
@@ -82,7 +82,7 @@ hr {
 }
 
 .bluebutton {
-  background: var(--blue0);
+  background: var(--blue);
   padding: 10px 20px;
   color: var(--gray0);
   border: 0;
@@ -137,10 +137,9 @@ hr {
   --dark4: #40444B;
 
   --gray0: #dcddde;
-  --gray1: #b9bbbe;
-  --gray2: #71777d;
+  --darkgray: #71777d;
 
-  --blue0: #2196f3;
+  --blue: #2196f3;
 
   --red0: #bb0000;
   --red1: #ff0000;
