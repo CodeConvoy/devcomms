@@ -65,6 +65,9 @@ export default function Header(props) {
           />
         </label>
       </Tooltip>
+      <div className={styles.username}>
+        @{currentUser.username}
+      </div>
       <Tooltip title="Sign Out" arrow>
         <button
           onClick={() => firebase.auth().signOut()}
