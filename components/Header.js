@@ -17,6 +17,7 @@ export default function Header(props) {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState(currentUser.username);
+  const [success, setSuccess] = useState(false);
 
   // get user doc references
   const uid = firebase.auth().currentUser.uid;
@@ -30,13 +31,15 @@ export default function Header(props) {
     // if no file, return
     if (!file) return;
     // put file in storage and get url
-    const filePath = `avatars/${uuid()}`;
+    const filePath = `avatars/${uid}`;
     const fileRef = firebase.storage().ref(filePath);
-    const snapshot = await fileRef.put(file);
-    const url = await snapshot.ref.getDownloadURL();
+    await fileRef.put(file);
+    const base = 'https://firebasestorage.googleapis.com';
+    const url = `${base}/v0/b/dev-comms.appspot.com/o/avatars%2F${uid}?alt=media`;
     // update user docs
     userRef.update({ photo: url });
     usernameRef.update({ photo: url });
+    setSuccess(true);
   }
 
   // resets modal
@@ -76,6 +79,12 @@ export default function Header(props) {
           <ExitToAppIcon />
         </button>
       </Tooltip>
+      <Snackbar
+        type="success"
+        message="Photo updated. Refresh to view."
+        open={success}
+        setOpen={setSuccess}
+      />
     </div>
   );
 }
