@@ -19,12 +19,12 @@ a {
 }
 
 .blueurl {
-  color: var(--blue1);
+  color: var(--blue0);
   text-decoration: none;
 }
 
 .blueurl:hover {
-  color: var(--blue0);
+  color: var(--purple);
   text-decoration: underline!important;
 }
 

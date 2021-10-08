@@ -76,6 +76,15 @@
   background: var(--dark2);
 }
 
+.content a {
+  color: var(--blue0);
+}
+
+.content a:hover {
+  color: var(--purple);
+  text-decoration: underline!important;
+}
+
 .markdown * {
   margin: 0;
 }
