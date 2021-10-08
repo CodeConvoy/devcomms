@@ -44,45 +44,6 @@ export default function Header(props) {
     setUsername(currentUser.username);
   }
 
-  // updates username in firebase
-  async function updateUsername() {
-    setIsError(false);
-    // verify username chars
-    if (!/^[A-Za-z0-9_]+$/.test(username)) {
-      setError("Username can only contain alphanumeric characters and underscore.");
-      setIsError(true);
-      return;
-    }
-    // verify username length
-    if (username.length < 2 || username.length > 16) {
-      setError("Username must be between 2 and 16 characters.");
-      setIsError(true);
-      return;
-    }
-    // verify username availability
-    const usernameLower = username.toLowerCase();
-    const newUsernameRef = usernamesRef.doc(usernameLower);
-    const newUsernameDoc = await newUsernameRef.get();
-    if (newUsernameDoc.exists) {
-      setError("Username is taken. Please try another.");
-      setIsError(true);
-      return;
-    }
-    // update user docs
-    setModalOpen(false);
-    userRef.update({ username, usernameLower });
-    usernameRef.delete();
-    newUsernameRef.set({
-      uid, photo: currentUser.photo,
-      username, usernameLower
-    });
-  }
-
-  // on error closed
-  function onCloseError(event, reason) {
-    if (reason !== 'clickaway') setIsError(false);
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
