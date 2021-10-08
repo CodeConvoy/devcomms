@@ -18,9 +18,6 @@ export default function Header(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [username, setUsername] = useState(currentUser.username);
 
-  const [error, setError] = useState('');
-  const [isError, setIsError] = useState(false);
-
   // get user doc references
   const uid = firebase.auth().currentUser.uid;
   const usersRef = firebase.firestore().collection('users');
@@ -107,14 +104,6 @@ export default function Header(props) {
           />
         </label>
       </Tooltip>
-      <Tooltip title="Change Username" arrow>
-        <div className={styles.username} onClick={() => {
-          resetModal();
-          setModalOpen(true);
-        }}>
-          @{currentUser.username}
-        </div>
-      </Tooltip>
       <Tooltip title="Sign Out" arrow>
         <button
           onClick={() => firebase.auth().signOut()}
@@ -123,32 +112,6 @@ export default function Header(props) {
           <ExitToAppIcon />
         </button>
       </Tooltip>
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <h1>Change Username</h1>
-        <form onSubmit={e => {
-          e.preventDefault();
-          updateUsername();
-        }}>
-          <div className="input-button">
-            <input
-              placeholder="username"
-              className="darkinput"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-              required
-            />
-            <button className="iconbutton2">
-              <CheckIcon />
-            </button>
-          </div>
-        </form>
-      </Modal>
-      <Snackbar
-        type="error"
-        message={error}
-        open={isError}
-        setOpen={setIsError}
-      />
     </div>
   );
 }
