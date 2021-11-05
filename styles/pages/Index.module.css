@@ -11,7 +11,15 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  margin: 10px;
+  margin: 16px;
+}
+
+.copyright a {
+  color: var(--gray0)!important;
+}
+
+.copyright a:hover {
+  text-decoration: underline!important;
 }
 
 .links {

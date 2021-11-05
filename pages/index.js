@@ -24,7 +24,9 @@ export default function Index(props) {
     <div className={styles.container}>
       <Background />
       <p className={styles.copyright}>
-        &copy; Devcomms {new Date().getFullYear()}
+        &copy;{' '}
+        <a href="https://codeconvoy.org">CodeConvoy</a>
+        {' '}{new Date().getFullYear()}
       </p>
       <div className={styles.links}>
         <a
