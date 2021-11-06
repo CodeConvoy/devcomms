@@ -24,6 +24,10 @@ Try it here: [devcomms.io](https://devcomms.io)
 
 ## Contributing
 
-Devcomms is open source and open to contributions. It is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Devcomms is open source and free forever. It is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-Clone the project with `git clone https://github.com/codeconvoy/devcomms` and run `npm run dev` to get started.
+To get started, clone the repository and run the server:
+
+1. `git clone https://github.com/codeconvoy/devcomms`
+2. `npm install`
+3. `npm run dev`
