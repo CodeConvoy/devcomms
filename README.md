@@ -1,18 +1,22 @@
-# <img height="32px" src="https://user-images.githubusercontent.com/27871609/120125756-e22b8b80-c16e-11eb-9c1d-4a9cceaa0e6e.png"> Devcomms
+# Devcomms
 
-**Devcomms is an open source communication tool built by developers, for developers.**
+<p>
+  <a href="https://devcomms.io">
+    <img src="https://user-images.githubusercontent.com/27871609/140627359-34c86b29-f728-4bcc-94f4-39b0b6936cfd.png" height="96px">
+  </a>
+</p>
 
-Instead of having to coordinate across many different tools, your team can chat, arrange notes, set goals, and more with Devcomms.
+An open source communication tool built by developers, for developers.
 
-Try it here: [devcomms.io](https://devcomms.io)
+[devcomms.io](https://devcomms.io)
+
+## Features
 
 <p>
   <a href="https://devcomms.io">
     <img width="600px" src="https://user-images.githubusercontent.com/27871609/132908637-4a99fd1e-ecac-4eb8-bc61-e3181b2d1202.png">
   </a>
 </p>
-
-## Features
 
 - **Groups.** Create customized groups for any topic and manage your group members.
 - **Channels and widgets.** Organize your team with text channels and helpful widget tools.
