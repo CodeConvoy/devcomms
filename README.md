@@ -2,7 +2,7 @@
 
 <p>
   <a href="https://devcomms.io">
-    <img src="https://user-images.githubusercontent.com/27871609/140627359-34c86b29-f728-4bcc-94f4-39b0b6936cfd.png" height="96px">
+    <img src="https://user-images.githubusercontent.com/27871609/140674789-85ca175a-8d0d-4105-bafd-ff330cccf6c2.png" height="64px">
   </a>
 </p>
 
