@@ -14,15 +14,19 @@ An open source communication tool built by developers, for developers.
 
 <p>
   <a href="https://devcomms.io">
-    <img width="600px" src="https://user-images.githubusercontent.com/27871609/132908637-4a99fd1e-ecac-4eb8-bc61-e3181b2d1202.png">
+    <img src="https://user-images.githubusercontent.com/27871609/132908637-4a99fd1e-ecac-4eb8-bc61-e3181b2d1202.png" height="256px">
   </a>
 </p>
 
-- **Groups.** Create customized groups for any topic and manage your group members.
-- **Channels and widgets.** Organize your team with text channels and helpful widget tools.
-- **Feature-rich chat.** Send messages and files. Customize messages with markdown.<br />
-- **Sketching.** Plan and express ideas to your team with real-time synchronized sketch widgets.<br />
-- **Todo lists.** Keep your team on track with scheduled and prioritized todo lists.<br />
+👥&nbsp;&nbsp;create customized groups for any topic
+
+🛠&nbsp;&nbsp;organize your team with helpful widget panels
+
+💬&nbsp;&nbsp;send markdown messages and files of any type
+
+✏️&nbsp;&nbsp;plan ideas with real-time synchronized sketch widgets
+
+✔️&nbsp;&nbsp;keep your team on track with scheduled to-do lists
 
 *+ more!*
 
