@@ -1,19 +1,19 @@
 # Devcomms
 
 <p>
-  <a href="https://devcomms.io">
+  <a href="https://devcomms.vercel.app">
     <img src="https://user-images.githubusercontent.com/27871609/140674789-85ca175a-8d0d-4105-bafd-ff330cccf6c2.png" height="64px">
   </a>
 </p>
 
 An open source communication tool built by developers, for developers.
 
-[devcomms.io](https://devcomms.io)
+[devcomms.vercel.app](https://devcomms.vercel.app)
 
 ## Features
 
 <p>
-  <a href="https://devcomms.io">
+  <a href="https://devcomms.vercel.app">
     <img src="https://user-images.githubusercontent.com/27871609/132908637-4a99fd1e-ecac-4eb8-bc61-e3181b2d1202.png" height="256px">
   </a>
 </p>
@@ -28,7 +28,7 @@ An open source communication tool built by developers, for developers.
 
 ✔️&nbsp;&nbsp;keep your team on track with scheduled to-do lists
 
-*+ more!*
+_+ more!_
 
 ## Contributing
 
